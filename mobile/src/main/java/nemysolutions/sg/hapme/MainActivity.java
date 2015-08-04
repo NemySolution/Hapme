@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParsePush;
+import com.parse.SaveCallback;
 import com.thalmic.myo.Arm;
 import com.thalmic.myo.Hub;
 import com.thalmic.myo.XDirection;

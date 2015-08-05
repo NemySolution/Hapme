@@ -23,7 +23,7 @@ import com.thalmic.myo.AbstractDeviceListener;
 import com.thalmic.myo.Myo;
 import com.thalmic.myo.Pose;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -32,6 +32,42 @@ public class MainActivity extends ActionBarActivity {
      */
     private TextView lockView;
     private TextView messageView;
+    private TextView commandView;
+
+    private LinkedList<Pose> capturedPoseList;
+
+    // this method reads the captured pose and return numeric command
+    private int getCommand(LinkedList<Pose> poseLinkedList) {
+        lockView.setText(poseLinkedList.toString());
+        int command = -1;
+        if (poseLinkedList.size() == 1) {
+            if (poseLinkedList.poll() == Pose.FIST) {
+                command = 0;
+            }
+        } else if (poseLinkedList.size() % 2 != 0 || poseLinkedList.isEmpty()) {
+            command = -1;
+        } else {
+            command = 0;
+            for (int i = 0; i < poseLinkedList.size(); i++) {
+                if (i % 2 == 1) {
+                    switch (poseLinkedList.get(i)) {
+                        case WAVE_IN:
+                            command += 1;
+                            break;
+                        case WAVE_OUT:
+                            command += 2;
+                            break;
+                        case FINGERS_SPREAD:
+                            command += 3;
+                            break;
+                    }
+
+                }
+            }
+        }
+        poseLinkedList.clear();
+        return command;
+    }
     /*
         Myo Section End
      */
@@ -41,7 +77,7 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onConnect(Myo myo, long timestamp) {
             messageView.setText("Myo Connected!");
-            messageView.setTextColor(Color.CYAN);
+            messageView.setTextColor(Color.BLUE);
         }
 
         // onDisconnect() is called whenever a Myo has been disconnected.
@@ -93,18 +129,43 @@ public class MainActivity extends ActionBarActivity {
                     break;
                 case DOUBLE_TAP:
                     messageView.setText(getString(R.string.pose_doubletap));
+                    commandView.setText(String.format("Command %d", getCommand(capturedPoseList)));
                     break;
                 case FIST:
                     messageView.setText(getString(R.string.pose_fist));
+                    if (capturedPoseList.peekLast() != Pose.FIST) {
+                        capturedPoseList.offer(pose);
+                        commandView.setText("Captured pose: " + getString(R.string.pose_fist));
+                    } else {
+                        commandView.setText("Pose not captured !");
+                    }
                     break;
                 case WAVE_IN:
                     messageView.setText(getString(R.string.pose_wavein));
+                    if (capturedPoseList.peekLast() == Pose.FIST) {
+                        capturedPoseList.offer(pose);
+                        commandView.setText("Captured pose: " + getString(R.string.pose_wavein));
+                    } else {
+                        commandView.setText("Pose not captured !");
+                    }
                     break;
                 case WAVE_OUT:
                     messageView.setText(getString(R.string.pose_waveout));
+                    if (capturedPoseList.peekLast() == Pose.FIST) {
+                        capturedPoseList.offer(pose);
+                        commandView.setText("Captured pose: " + getString(R.string.pose_waveout));
+                    } else {
+                        commandView.setText("Pose not captured !");
+                    }
                     break;
                 case FINGERS_SPREAD:
                     messageView.setText(getString(R.string.pose_fingersspread));
+                    if (capturedPoseList.peekLast() == Pose.FIST) {
+                        capturedPoseList.offer(pose);
+                        commandView.setText("Captured pose: " + getString(R.string.pose_fingersspread));
+                    } else {
+                        commandView.setText("Pose not captured !");
+                    }
                     break;
             }
 
@@ -136,8 +197,9 @@ public class MainActivity extends ActionBarActivity {
         /*
             Myo Section Start
          */
-        // two text views to view lock state and pose command
+        // three text views to view lock state and pose command
         lockView = (TextView) findViewById(R.id.lock_state);
+        commandView = (TextView) findViewById(R.id.command);
         messageView = (TextView) findViewById(R.id.message);
         messageView.setText("Please connect to a Myo Device");
         messageView.setTextColor(Color.RED);
@@ -157,6 +219,9 @@ public class MainActivity extends ActionBarActivity {
         hub.setSendUsageData(false);
         // Using this policy means Myo will be locked until the user performs the unlock pose. This is the default policy.
         hub.setLockingPolicy(Hub.LockingPolicy.NONE);
+
+        // Initialise pose list to capture pose
+        capturedPoseList = new LinkedList<Pose>();
         /*
             Myo Section End
          */

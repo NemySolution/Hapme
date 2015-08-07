@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +28,7 @@ import com.thalmic.myo.Pose;
 
 import java.util.LinkedList;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     /*
         Myo Section Start
@@ -194,6 +197,49 @@ public class MainActivity extends ActionBarActivity {
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "0RgU1BAusmGZiIkOFDVucZcEtbCHPiJx479CDcKG", "GhyTkHlqG22YziVd7fbP8YNTYK6wbmrcwF99yM5G");
 
+        Button bn1 = (Button) findViewById(R.id.button);
+        Button bn2 = (Button) findViewById(R.id.button2);
+        Button bn3 = (Button) findViewById(R.id.button3);
+        Button bn4 = (Button) findViewById(R.id.button4);
+        Button bn5 = (Button) findViewById(R.id.button5);
+
+        bn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Add.class);
+                startActivity(intent);
+            }
+        });
+
+        bn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Commands.class);
+                startActivity(intent);
+            }
+        });
+        bn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Create.class);
+                startActivity(intent);
+            }
+        });
+        bn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Home.class);
+                startActivity(intent);
+            }
+        });
+        bn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Operation.class);
+                startActivity(intent);
+            }
+        });
+
         /*
             Myo Section Start
          */
@@ -227,35 +273,6 @@ public class MainActivity extends ActionBarActivity {
          */
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.myo_settings) {
-            /*
-                Myo Section Start
-             */
-            // Launch the ScanActivity to scan for Myos to connect to.
-            Intent intent = new Intent(this, ScanActivity.class);
-            startActivity(intent);
-            /*
-                Myo Section End
-             */
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

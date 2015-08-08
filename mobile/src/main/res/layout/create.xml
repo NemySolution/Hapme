@@ -45,8 +45,8 @@
         android:layout_height="wrap_content"
         android:text="Secret Key:"
         android:id="@+id/textView3"
-        android:layout_alignBaseline="@+id/editText"
-        android:layout_alignBottom="@+id/editText"
+        android:layout_alignBaseline="@+id/editText_secretKey"
+        android:layout_alignBottom="@+id/editText_secretKey"
         android:layout_alignEnd="@+id/textView2" />
 
     <Button
@@ -72,7 +72,7 @@
         android:text="List of Command:"
         android:id="@+id/textView4"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/editText_secretKey"
         android:layout_centerHorizontal="true" />
 
     <Button

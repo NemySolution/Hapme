@@ -1,6 +1,6 @@
 package sg.nemysolutions.hapme;
 
-/**************** Create Page ******************/
+/**************** Create operation Page ******************/
 /* This page is to allow Commanders to create
 * an operation*/
 

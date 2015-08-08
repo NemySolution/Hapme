@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Operation"
-        android:id="@+id/btn_createOps"
+        android:id="@+id/bn_Broadcast"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -80,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView_addCmd"
-        android:layout_above="@+id/btn_createOps"
+        android:layout_above="@+id/bn_Broadcast"
         android:smoothScrollbar="false"
         android:layout_alignStart="@+id/listView_addMember"
         android:layout_alignTop="@+id/textView4"
@@ -99,7 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Command"
-        android:id="@+id/btn_addCmd"
+        android:id="@+id/bn_endOps"
         android:layout_alignBottom="@+id/listView_addCmd"
         android:layout_toStartOf="@+id/listView_addCmd"
         android:layout_marginBottom="57dp" />

@@ -6,7 +6,97 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="sg.nemysolutions.hapme.OperationActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Operation Name:"
+    android:id="@+id/textView"
+    android:layout_alignBaseline="@+id/editText_opsName"
+    android:layout_alignBottom="@+id/editText_opsName"
+    android:layout_alignEnd="@+id/textView2" />
+
+
+
+<EditText
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/editText_opsName"
+    android:layout_alignParentTop="true"
+    android:layout_toEndOf="@+id/textView" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Commander Callsign:"
+    android:id="@+id/textView2"
+    android:layout_alignBaseline="@+id/editText_cmdCallsign"
+    android:layout_alignBottom="@+id/editText_cmdCallsign"
+    android:layout_alignParentStart="true" />
+
+<EditText
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/editText_cmdCallsign"
+    android:layout_below="@+id/textView"
+    android:layout_alignStart="@+id/editText_opsName" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="List of Members:"
+    android:id="@+id/textView3"
+    android:layout_marginTop="19dp"
+    android:layout_alignTop="@+id/listView_addMember"
+    android:layout_toStartOf="@+id/listView_addMember" />
+
+    <ListView
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/listView_addMember"
+    android:layout_below="@+id/editText_cmdCallsign"
+    android:layout_alignStart="@+id/editText_cmdCallsign"
+    android:smoothScrollbar="true"
+        android:layout_above="@+id/linearLayout"
+        android:layout_marginBottom="10dp" />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Add Member"
+    android:id="@+id/bn_addMember"
+    android:layout_centerVertical="true"
+    android:layout_toStartOf="@+id/listView_addMember" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="false"
+        android:id="@+id/linearLayout">
+
+        <Button
+            android:layout_width="110dp"
+            android:layout_height="fill_parent"
+            android:text="View Member Location"
+            android:id="@+id/button7"
+            android:layout_below="@+id/listView_addMember"
+            android:layout_alignParentStart="true" />
+
+        <Button
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="END Ops"
+        android:id="@+id/bn_endOps"
+            android:layout_below="@+id/listView_addMember"
+            android:layout_toStartOf="@+id/bn_Broadcast" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="Broadcast Command"
+            android:id="@+id/bn_Broadcast" />
+    </LinearLayout>
 
 </RelativeLayout>

@@ -7,11 +7,14 @@ package sg.nemysolutions.hapme;
 //Key person: Yeekeng and Ming Sheng
 /************************************************/
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +38,8 @@ public class CreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create);
 
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         lw_commands = (ListView) findViewById(R.id.listView_addCmd);
         listView_addCmd = (ListView) findViewById(R.id.listView_addCmd);
 
@@ -49,8 +54,6 @@ public class CreateActivity extends AppCompatActivity {
                 startActivityForResult(intent, 0);
             }
         });
-
-        //listView_addCmd.setOnItemClickListener(onItemClickListener);
 
         Button bn_createOps = (Button) findViewById(R.id.btn_createOps);
 
@@ -83,26 +86,30 @@ public class CreateActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        listView_addCmd.setOnItemClickListener(onItemClickListener);
     }//end of oncreate()
 
-//    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
-//        @Override
-//        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-//                                long arg3) {
-//            AlertDialog.Builder adb=new AlertDialog.Builder(getApplicationContext());
-//            adb.setTitle("Delete?");
-//            adb.setMessage("Are you sure you want to delete " + position);
-//            final int positionToRemove = position;
-//            adb.setNegativeButton("Cancel", null);
-//            adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
-//                public void onClick(DialogInterface dialog, int which) {
-//                    commandList.remove(positionToRemove);
-//                    commandTextList.remove(positionToRemove);
-//                    arrayAdapter.notifyDataSetChanged();
-//                }});
-//            adb.show();
-//        }
-//    };
+    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+                                long arg3) {
+            AlertDialog.Builder adb=new AlertDialog.Builder(CreateActivity.this);
+            final int positionToRemove = position;
+
+            adb.setTitle("Delete?");
+            adb.setMessage("Are you sure you want to delete " + commandTextList.get(position));
+
+            adb.setNegativeButton("Cancel", null);
+            adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    commandList.remove(positionToRemove);
+                    commandTextList.remove(positionToRemove);
+                    arrayAdapter.notifyDataSetChanged();
+                }});
+            adb.show();
+        }
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

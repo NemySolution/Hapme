@@ -16,7 +16,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="add member"
         android:id="@+id/button8"
         android:layout_below="@+id/editText"
         android:layout_alignParentEnd="true" />

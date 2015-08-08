@@ -8,7 +8,7 @@ import com.parse.ParseObject;
 public class ParseUtils {
     public static void registerParse(Context context) {
         // initializing parse library
-        ParseObject.registerSubclass(Command.class);
+        //ParseObject.registerSubclass(Command.class);
 
         // Enable Local Datastore.
         Parse.enableLocalDatastore(context);

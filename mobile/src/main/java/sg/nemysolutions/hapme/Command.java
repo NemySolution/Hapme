@@ -6,45 +6,54 @@ import com.parse.ParseObject;
 import java.io.Serializable;
 import java.util.List;
 
-@ParseClassName("Command")
-public class Command extends ParseObject implements Serializable {
-    public String getCommandID() {
-        return getString("commandID");
+public class Command implements Serializable {
+    private String commandID;
+    private String opsName;
+    private String commandName;
+    private List<String> vibrationSeq;
+    private List<String> gestureSeq;
+
+    public Command() {
+
     }
 
-    public void setCommandID(String value) {
-        put("commandID", value);
+    public String getCommandID() {
+        return commandID;
+    }
+
+    public void setCommandID(String commandID) {
+        this.commandID = commandID;
     }
 
     public String getOpsName() {
-        return getString("opsName");
+        return opsName;
     }
 
-    public void setOpsName(String value) {
-        put("opsName", value);
+    public void setOpsName(String opsName) {
+        this.opsName = opsName;
     }
 
     public String getCommandName() {
-        return getString("commandName");
+        return commandName;
     }
 
-    public void setCommandName(String value) {
-        put("commandName", value);
+    public void setCommandName(String commandName) {
+        this.commandName = commandName;
     }
 
     public List<String> getVibrationSeq() {
-        return getList("vibrationSeq");
+        return vibrationSeq;
     }
 
-    public void setVibrationSeq(List<String> value) {
-        put("vibrationSeq", value);
+    public void setVibrationSeq(List<String> vibrationSeq) {
+        this.vibrationSeq = vibrationSeq;
     }
 
     public List<String> getGestureSeq() {
-        return getList("gestureSeq");
+        return gestureSeq;
     }
 
-    public void setGestureSeq(List<String> value) {
-        put("gestureSeq", value);
+    public void setGestureSeq(List<String> gestureSeq) {
+        this.gestureSeq = gestureSeq;
     }
 }

@@ -126,8 +126,9 @@ public class AddActivity extends AppCompatActivity {
                 cmd.setGestureSeq(gestureList);
                 cmd.setVibrationSeq(gestureList);
 
-                Intent intent = new Intent(AddActivity.this, CreateActivity.class);
-                intent.putExtra("Command", cmd);
+                Intent intent = new Intent();
+                intent.putExtra("command", cmd);
+                setResult(RESULT_OK,intent);
                 finish();
             }
         });

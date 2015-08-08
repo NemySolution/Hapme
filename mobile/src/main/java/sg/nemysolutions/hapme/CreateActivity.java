@@ -11,8 +11,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import java.io.Serializable;
 
 public class CreateActivity extends AppCompatActivity {
 
@@ -30,7 +33,7 @@ public class CreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CreateActivity.this, AddActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -42,11 +45,28 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
     }//end of oncreate()
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        // For Add member result
+        if (requestCode == 0) {
+            if(resultCode == RESULT_OK){
+                //String result=data.getStringExtra("result");
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+
+               Command command = (Command) data.getSerializableExtra("command");
+
+
+            }
+        }
+    }//onActivityResult
 }

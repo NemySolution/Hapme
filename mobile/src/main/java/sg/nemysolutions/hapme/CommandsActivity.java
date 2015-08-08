@@ -18,6 +18,7 @@ import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
@@ -34,13 +35,13 @@ public class CommandsActivity extends AppCompatActivity {
 
         lw = (ListView) findViewById(R.id.lv_commands);
 
-        ParseQuery<Command> query = ParseQuery.getQuery(Command.class);
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
         query.whereEqualTo("opsName", "123");
-        query.findInBackground(new FindCallback<Command>() {
+        query.findInBackground(new FindCallback<ParseObject>() {
             @Override
-            public void done(List<Command> results, ParseException e) {
-                for (Command a : results) {
-                    commandList.add(a.getCommandName());
+            public void done(List<ParseObject> results, ParseException e) {
+                for (ParseObject a : results) {
+                    commandList.add(a.getString("commandName"));
                 }
 
                 setList();

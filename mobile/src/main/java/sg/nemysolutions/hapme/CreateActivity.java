@@ -21,10 +21,11 @@ public class CreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create);
 
-
+        //declare button
         Button bn_addCmd = (Button) findViewById(R.id.bn_addCmd);
         Button bn_addMember = (Button) findViewById(R.id.bn_addMember);
 
+        //add command
         bn_addCmd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,12 +34,19 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
+        //add member
         bn_addMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
-    }
+
+
+
+
+
+
+    }//end of oncreate()
 
 }

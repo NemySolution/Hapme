@@ -96,6 +96,14 @@
             android:name=".JoinActivity"
             android:label="@string/title_activity_join" >
         </activity>
+        <activity
+            android:name=".addMemberName"
+            android:label="@string/title_activity_add_member_name"
+            android:parentActivityName=".CreateActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sg.nemysolutions.hapme.CreateActivity" />
+        </activity>
     </application>
 
 </manifest>

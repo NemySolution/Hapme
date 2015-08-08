@@ -19,10 +19,10 @@
       to match your app's package name + ".permission.C2D_MESSAGE".
     -->
     <permission
-        android:name="com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE"
+        android:name="sg.nemysolutions.hapme.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+    <uses-permission android:name="sg.nemysolutions.hapme.permission.C2D_MESSAGE" />
 
-    <uses-permission android:name="com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" />
     // Required for communicating with the Myo device
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -59,7 +59,7 @@
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
                 <!-- IMPORTANT: Change "com.parse.tutorials.pushnotifications" to match your app's package name. -->
-                <category android:name="com.parse.tutorials.pushnotifications" />
+                <category android:name="sg.nemysolutions.hapme.pushnotifications" />
             </intent-filter>
         </receiver>
         <receiver
@@ -71,6 +71,7 @@
                 <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
         </receiver>
+
         <!-- FOR PUSH SERVICE -->
         <activity
             android:name=".HomeActivity"

@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Command implements Serializable {
+    private String commandID;
     private String opsName;
     private String commandName;
     private List<String> vibrationSeq;
@@ -14,6 +15,14 @@ public class Command implements Serializable {
 
     public Command() {
 
+    }
+
+    public String getCommandID() {
+        return commandID;
+    }
+
+    public void setCommandID(String commandID) {
+        this.commandID = commandID;
     }
 
     public String getOpsName() {

@@ -19,13 +19,15 @@ import android.widget.ListView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommandsActivity extends AppCompatActivity {
-    List<String> commandList  = new ArrayList<String>();
+    List<String> commandTextList  = new ArrayList<String>();
+    List<Command> commandList = new ArrayList<Command>();
     ListView lw = null;
 
     @Override
@@ -36,12 +38,18 @@ public class CommandsActivity extends AppCompatActivity {
         lw = (ListView) findViewById(R.id.lv_commands);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
-        query.whereEqualTo("opsName", "123");
+        query.whereEqualTo("opsName", "opDick");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> results, ParseException e) {
-                for (ParseObject a : results) {
-                    commandList.add(a.getString("commandName"));
+                for (ParseObject c : results) {
+                    commandTextList.add(c.getString("commandName"));
+
+                    Command command = new Command();
+                    command.setOpsName(c.getString("opsName"));
+                    command.setCommandID(c.getObjectId());
+
+                    commandList.add(command);
                 }
 
                 setList();
@@ -52,7 +60,7 @@ public class CommandsActivity extends AppCompatActivity {
     }
 
     private void setList() {
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commandList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commandTextList);
         lw.setAdapter(arrayAdapter);
     }
 
@@ -60,7 +68,12 @@ public class CommandsActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                 long arg3) {
+            Command command = commandList.get(position);
 
+            ParsePush push = new ParsePush();
+            push.setChannel(command.getOpsName());
+            push.setMessage(command.getCommandID());
+            push.sendInBackground();
         }
     };
 }

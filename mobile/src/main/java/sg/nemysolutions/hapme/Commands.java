@@ -2,7 +2,7 @@ package sg.nemysolutions.hapme;
 
 /**************** Commands Page ******************/
 /* This page is to allow users to broadcast a
-* command.*/
+* command.(backup page to broadcast the command*/
 
 //Key person: Nicholas
 /*************************************************/

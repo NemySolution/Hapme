@@ -7,20 +7,25 @@
     tools:context="sg.nemysolutions.hapme.Home">
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Create"
         android:id="@+id/bn_create"
+        android:layout_marginTop="114dp"
+        android:minHeight="80dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="115dp" />
+        android:layout_centerHorizontal="true" />
+
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Join"
         android:id="@+id/bn_join"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/bn_create" />
+        android:layout_below="@+id/bn_create"
+        android:minHeight="80dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>

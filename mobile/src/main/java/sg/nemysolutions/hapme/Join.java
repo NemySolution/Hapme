@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 /**************** MainActivity ******************/
 /* A "login" page for all the users (GC & members)
-* */
+* for members to join an operation*/
 
 //Key person: Yee Keng & Ming Sheng
 /*********************************************/

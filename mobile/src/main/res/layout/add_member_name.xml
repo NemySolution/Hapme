@@ -9,7 +9,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/editText_memberNameAdd"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
@@ -17,7 +17,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="add member"
-        android:id="@+id/button8"
-        android:layout_below="@+id/editText"
+        android:id="@+id/bn_addMember"
+        android:layout_below="@+id/editText_memberNameAdd"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/bn_cancelmem"
+        android:layout_alignBottom="@+id/bn_addMember"
+        android:layout_toStartOf="@+id/bn_addMember" />
 </RelativeLayout>

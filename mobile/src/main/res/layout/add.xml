@@ -68,46 +68,60 @@
         android:layout_toEndOf="@+id/et_gesture2"
         android:layout_below="@+id/et_commandName" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Wave In"
-        android:id="@+id/bn_waveIn"
-        android:layout_marginTop="48dp"
-        android:layout_below="@+id/et_gesture2"
-        android:layout_alignStart="@+id/bn_waveOut" />
+        android:layout_below="@+id/et_gesture1"
+        android:gravity="center"
+        android:padding="0dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/linearLayout2">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Wave Out"
-        android:id="@+id/bn_waveOut"
-        android:layout_below="@+id/bn_waveIn"
-        android:layout_toStartOf="@+id/et_gesture3" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="Wave In"
+            android:id="@+id/bn_waveIn"
+            android:layout_below="@+id/et_gesture2"
+            android:layout_alignStart="@+id/bn_waveOut"
+            android:gravity="center" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Finger Spread"
-        android:id="@+id/bn_fingerSpread"
-        android:layout_below="@+id/bn_waveOut"
-        android:layout_alignStart="@+id/bn_sync" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Wave Out"
+            android:id="@+id/bn_waveOut"
+            android:layout_below="@+id/bn_waveIn"
+            android:layout_toStartOf="@+id/et_gesture3"
+            android:gravity="center" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Clear"
-        android:id="@+id/bn_clear"
-        android:layout_below="@+id/bn_fingerSpread"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="55dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Finger Spread"
+            android:id="@+id/bn_fingerSpread"
+            android:layout_below="@+id/bn_waveOut"
+            android:layout_alignStart="@+id/bn_sync"
+            android:gravity="center" />
+
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Done"
         android:id="@+id/bn_done"
-        android:layout_below="@+id/bn_clear"
-        android:layout_alignStart="@+id/bn_clear" />
+        android:layout_below="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear"
+        android:id="@+id/bn_clear"
+        android:layout_below="@+id/bn_done"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

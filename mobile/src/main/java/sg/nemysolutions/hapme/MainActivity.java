@@ -27,9 +27,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "0RgU1BAusmGZiIkOFDVucZcEtbCHPiJx479CDcKG", "GhyTkHlqG22YziVd7fbP8YNTYK6wbmrcwF99yM5G");
+        // Start Parse
+        ParseUtils.registerParse(MainActivity.this);
 
         Button bn1 = (Button) findViewById(R.id.button);
         Button bn2 = (Button) findViewById(R.id.button2);

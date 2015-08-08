@@ -45,59 +45,63 @@
         android:layout_height="wrap_content"
         android:text="List of Members:"
         android:id="@+id/textView3"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/editText_cmdCallsign"
-        android:layout_toStartOf="@+id/btn_next" />
+        android:layout_marginTop="19dp"
+        android:layout_alignTop="@+id/listView_addMember"
+        android:layout_toStartOf="@+id/listView_addMember" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next"
-        android:id="@+id/btn_next"
+        android:text="Create Operation"
+        android:id="@+id/btn_createOps"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <ListView
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_toEndOf="@+id/textView2"
-        android:layout_alignTop="@+id/textView3"
-        android:id="@+id/linearLayout"
-        android:layout_above="@+id/button7">
+        android:id="@+id/listView_addMember"
+        android:layout_below="@+id/editText_cmdCallsign"
+        android:layout_alignStart="@+id/editText_cmdCallsign"
+        android:smoothScrollbar="true"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@+id/listView_addCmd" />
 
-        <ListView
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/listView"
-            android:layout_below="@+id/editText_cmdCallsign"
-            android:layout_alignStart="@+id/editText_cmdCallsign"
-            android:smoothScrollbar="true"
-            android:layout_above="@+id/btn_next"
-            />
-    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Member"
+        android:id="@+id/bn_addMember"
+        android:layout_below="@+id/editText_cmdCallsign"
+        android:layout_alignEnd="@+id/textView3"
+        android:layout_marginTop="94dp" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView_addCmd"
+        android:layout_above="@+id/btn_createOps"
+        android:smoothScrollbar="false"
+        android:layout_alignStart="@+id/listView_addMember"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_marginBottom="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List of Command:"
+        android:id="@+id/textView4"
+        android:layout_marginTop="93dp"
+        android:layout_below="@+id/bn_addMember"
+        android:layout_alignEnd="@+id/bn_addMember" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Command"
-        android:id="@+id/button7"
-        android:layout_above="@+id/btn_next"
-        android:layout_toStartOf="@+id/linearLayout"
-        android:layout_marginBottom="131dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0 Commands added"
-        android:id="@+id/textView4"
-        android:paddingLeft="5dp"
-        android:elegantTextHeight="false"
-        android:gravity="center"
-        android:layout_alignTop="@+id/button7"
-        android:layout_alignBottom="@+id/button7"
-        android:textAlignment="center"
-        android:layout_alignParentEnd="true" />
+        android:id="@+id/btn_addCmd"
+        android:layout_alignBottom="@+id/listView_addCmd"
+        android:layout_toStartOf="@+id/listView_addCmd"
+        android:layout_marginBottom="57dp" />
 
 </RelativeLayout>

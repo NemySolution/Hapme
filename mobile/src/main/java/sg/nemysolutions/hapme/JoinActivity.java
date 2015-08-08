@@ -12,7 +12,7 @@ import android.view.MenuItem;
 //Key person: Yee Keng & Ming Sheng
 /*********************************************/
 
-public class Join extends AppCompatActivity {
+public class JoinActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

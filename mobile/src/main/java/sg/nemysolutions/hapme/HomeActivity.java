@@ -1,6 +1,6 @@
 package sg.nemysolutions.hapme;
 
-/**************** Home Page ******************/
+/**************** HomeActivity Page ******************/
 /* This page is to allow users to select whether
 * they want to join or create operation.
 * on page load, check if the user is already
@@ -15,7 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Home extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class Home extends AppCompatActivity {
         bn_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Home.this, Create.class);
+                Intent intent = new Intent(HomeActivity.this, CreateActivity.class);
                 startActivity(intent);
             }
         });
@@ -36,7 +36,7 @@ public class Home extends AppCompatActivity {
         bn_join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Home.this, Join.class);
+                Intent intent = new Intent(HomeActivity.this, JoinActivity.class);
                 startActivity(intent);
             }
         });

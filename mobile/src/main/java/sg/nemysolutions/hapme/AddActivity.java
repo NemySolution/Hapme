@@ -1,6 +1,6 @@
 package sg.nemysolutions.hapme;
 
-/**************** Add command Page ******************/
+/**************** AddActivity command Page ******************/
 /* This page is to allow users to add a command,
 * attach a myo gesture and vibration sequence
 * to it. Please ensure that they are able to name
@@ -30,7 +30,7 @@ import com.thalmic.myo.scanner.ScanActivity;
 
 import java.util.LinkedList;
 
-public class Add extends AppCompatActivity {
+public class AddActivity extends AppCompatActivity {
 
     /*
         Myo Section Start

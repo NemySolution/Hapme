@@ -1,6 +1,6 @@
 package sg.nemysolutions.hapme;
 
-/**************** Commands Page ******************/
+/**************** CommandsActivity Page ******************/
 /* This page is to allow users to broadcast a
 * command.(backup page to broadcast the command*/
 
@@ -10,7 +10,7 @@ package sg.nemysolutions.hapme;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Commands extends AppCompatActivity {
+public class CommandsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

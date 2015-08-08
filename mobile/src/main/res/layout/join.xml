@@ -31,4 +31,5 @@
         android:id="@+id/bn_join"
         android:layout_below="@+id/et_callSign"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

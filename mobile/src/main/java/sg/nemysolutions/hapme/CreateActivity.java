@@ -16,7 +16,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.parse.ParseObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,22 +40,45 @@ public class CreateActivity extends AppCompatActivity {
 
         //declare button
         Button bn_addCmd = (Button) findViewById(R.id.bn_addCmd);
-        Button bn_addMember = (Button) findViewById(R.id.bn_addMember);
 
         //add command
         bn_addCmd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CreateActivity.this, AddActivity.class);
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, 0);
             }
         });
 
-        //add member
-        bn_addMember.setOnClickListener(new View.OnClickListener() {
+        Button bn_createOps = (Button) findViewById(R.id.btn_createOps);
+
+        //create ops
+        bn_createOps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EditText editText_opsName = (EditText) findViewById(R.id.editText_opsName);
+                EditText editText_cmdCallsign = (EditText) findViewById(R.id.editText_opsName);
+                EditText editText_secretKey = (EditText) findViewById(R.id.editText_secretKey);
 
+                ParseObject operation = new ParseObject("Operation");
+                operation.put("opsName", editText_opsName.getText().toString());
+                operation.put("callSign", editText_cmdCallsign.getText().toString());
+                operation.put("secretKey", editText_secretKey.getText().toString());
+
+                operation.saveInBackground();
+
+                ParseObject command;
+
+                for (Command c : commandList) {
+                    command  = new ParseObject("Command");
+                    command.put("opsName", editText_opsName.getText().toString());
+                    command.put("commandName", c.getCommandName());
+                    command.put("vibrationSeq", c.getVibrationSeq());
+                    command.put("gestureSeq", c.getGestureSeq());
+                    command.saveInBackground();
+                }
+
+                finish();
             }
         });
 
@@ -59,18 +86,7 @@ public class CreateActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        // For Add member result
         if (requestCode == 0) {
-            if(resultCode == RESULT_OK){
-                //String result=data.getStringExtra("result");
-            }
-            if (resultCode == RESULT_CANCELED) {
-                //Write your code if there's no result
-            }
-        }
-
-        if (requestCode == 1) {
             if(resultCode == RESULT_OK){
                Command command = (Command) data.getSerializableExtra("command");
                commandList.add(command);

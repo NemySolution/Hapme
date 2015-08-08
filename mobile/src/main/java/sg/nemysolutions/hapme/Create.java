@@ -1,7 +1,8 @@
 package sg.nemysolutions.hapme;
 
 /**************** Create Page ******************/
-/* This page is to allow users to create operation*/
+/* This page is to allow Commanders to create
+* an operation*/
 
 //Key person: Yeekeng and Ming Sheng
 /************************************************/

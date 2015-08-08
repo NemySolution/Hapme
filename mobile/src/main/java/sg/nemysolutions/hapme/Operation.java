@@ -1,8 +1,14 @@
 package sg.nemysolutions.hapme;
 
 /**************** Operation Page ******************/
-/* This page is to allow users to select whether
- they want to join or create operation*/
+/* This page is to allow users to view operation
+* details and to assure them that they are in
+* an operation.
+*
+* For Ground Commander, this page
+* will let him able to MANAGE operation details,
+* commands and also broadcast it. Viewing of location
+* of members are in consideration*/
 
 //Key person: Yeekeng and Ming Sheng
 /*************************************************/

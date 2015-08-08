@@ -92,6 +92,10 @@
             android:name=".Commands"
             android:label="@string/title_activity_commands" >
         </activity>
+        <activity
+            android:name=".Join"
+            android:label="@string/title_activity_join" >
+        </activity>
     </application>
 
 </manifest>

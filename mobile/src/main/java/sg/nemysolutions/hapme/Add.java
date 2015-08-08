@@ -1,10 +1,12 @@
 package sg.nemysolutions.hapme;
 
 /**************** Add Page ******************/
-/* This page is to allow users to add a command
-and attach a myo gesture to it.*/
+/* This page is to allow users to add a command,
+* attach a myo gesture and vibration sequence
+* to it. Please ensure that they are able to name
+* the commands also.*/
 
-//Key person: Esmond
+//Key person: Esmond*/
 /********************************************/
 
 import android.graphics.Color;

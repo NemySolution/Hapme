@@ -9,6 +9,7 @@ package sg.nemysolutions.hapme;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,6 +32,8 @@ public class CreateActivity extends AppCompatActivity {
     List<String> commandTextList = new ArrayList<String>();
     List<Command> commandList = new ArrayList<Command>();
     ListView lw_commands;
+    ArrayAdapter<String> arrayAdapter;
+    ListView listView_addCmd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class CreateActivity extends AppCompatActivity {
         setContentView(R.layout.create);
 
         lw_commands = (ListView) findViewById(R.id.listView_addCmd);
+        listView_addCmd = (ListView) findViewById(R.id.listView_addCmd);
 
         //declare button
         Button bn_addCmd = (Button) findViewById(R.id.bn_addCmd);
@@ -49,6 +54,8 @@ public class CreateActivity extends AppCompatActivity {
                 startActivityForResult(intent, 0);
             }
         });
+
+        listView_addCmd.setOnItemClickListener(onItemClickListener);
 
         Button bn_createOps = (Button) findViewById(R.id.btn_createOps);
 
@@ -70,7 +77,7 @@ public class CreateActivity extends AppCompatActivity {
                 ParseObject command;
 
                 for (Command c : commandList) {
-                    command  = new ParseObject("Command");
+                    command = new ParseObject("Command");
                     command.put("opsName", editText_opsName.getText().toString());
                     command.put("commandName", c.getCommandName());
                     command.put("vibrationSeq", c.getVibrationSeq());
@@ -81,8 +88,26 @@ public class CreateActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }//end of oncreate()
+
+    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+                                long arg3) {
+            AlertDialog.Builder adb=new AlertDialog.Builder(getApplicationContext());
+            adb.setTitle("Delete?");
+            adb.setMessage("Are you sure you want to delete " + position);
+            final int positionToRemove = position;
+            adb.setNegativeButton("Cancel", null);
+            adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    commandList.remove(positionToRemove);
+                    commandTextList.remove(positionToRemove);
+                    arrayAdapter.notifyDataSetChanged();
+                }});
+            adb.show();
+        }
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -97,7 +122,16 @@ public class CreateActivity extends AppCompatActivity {
     }//onActivityResult
 
     private void setCommandTextList() {
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commandTextList);
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commandTextList);
+       arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commandTextList);
         lw_commands.setAdapter(arrayAdapter);
     }
+
+
+
+
+
+
+
+
 }

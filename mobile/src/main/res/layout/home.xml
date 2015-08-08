@@ -12,8 +12,10 @@
         android:text="Create"
         android:id="@+id/bn_create"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="115dp" />
+        android:layout_marginTop="115dp"
+        android:layout_alignEnd="@+id/bn_join"
+        android:minWidth="150dp"
+        android:minHeight="80dp" />/>
 
     <Button
         android:layout_width="wrap_content"
@@ -21,6 +23,8 @@
         android:text="Join"
         android:id="@+id/bn_join"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/bn_create" />
+        android:layout_below="@+id/bn_create"
+        android:minWidth="150dp"
+        android:minHeight="80dp" />
 
 </RelativeLayout>

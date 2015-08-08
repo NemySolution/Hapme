@@ -62,46 +62,61 @@
     android:layout_below="@+id/editText_cmdCallsign"
     android:layout_alignStart="@+id/editText_cmdCallsign"
     android:smoothScrollbar="true"
-        android:layout_above="@+id/linearLayout"
-        android:layout_marginBottom="10dp" />
+        android:layout_above="@+id/linearLayout" />
 
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Add Member"
-    android:id="@+id/bn_addMember"
-    android:layout_centerVertical="true"
-    android:layout_toStartOf="@+id/listView_addMember" />
-
-    <LinearLayout
+    <GridLayout
         android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="false"
         android:id="@+id/linearLayout">
 
-        <Button
-            android:layout_width="110dp"
-            android:layout_height="fill_parent"
-            android:text="View Member Location"
-            android:id="@+id/button7"
-            android:layout_below="@+id/listView_addMember"
-            android:layout_alignParentStart="true" />
-
-        <Button
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="END Ops"
-        android:id="@+id/bn_endOps"
-            android:layout_below="@+id/listView_addMember"
-            android:layout_toStartOf="@+id/bn_Broadcast" />
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="View Member Location"
+            android:id="@+id/button7"
+            android:layout_below="@+id/listView_addMember"
+            android:layout_alignParentStart="true"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="fill"
+            android:gravity="center" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Broadcast Command"
-            android:id="@+id/bn_Broadcast" />
-    </LinearLayout>
+            android:id="@+id/bn_Broadcast"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_gravity="fill"
+            android:gravity="center" />
+
+        <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="END Ops"
+        android:id="@+id/bn_endOps"
+            android:layout_below="@+id/listView_addMember"
+            android:layout_toStartOf="@+id/bn_Broadcast"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_gravity="fill"
+            android:gravity="center" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Command"
+            android:id="@+id/bn_editCmd"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:layout_gravity="fill"
+            android:gravity="center" />
+
+    </GridLayout>
 
 </RelativeLayout>

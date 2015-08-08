@@ -31,7 +31,8 @@
             android:hint="Gesture 1"
             android:editable="false"
             android:layout_toStartOf="@+id/et_gesture2"
-            android:layout_below="@+id/et_commandName" />
+            android:layout_below="@+id/et_commandName"
+            android:textSize="15dp"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -40,7 +41,8 @@
             android:hint="Gesture 2"
             android:editable="false"
             android:layout_alignTop="@+id/et_gesture1"
-            android:layout_alignEnd="@+id/message" />
+            android:layout_alignEnd="@+id/message"
+            android:textSize="15dp"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -49,7 +51,8 @@
             android:hint="Gesture 3"
             android:editable="false"
             android:layout_toEndOf="@+id/et_gesture2"
-            android:layout_below="@+id/et_commandName" />
+            android:layout_below="@+id/et_commandName"
+            android:textSize="15dp"/>
     </LinearLayout>
 
     <LinearLayout

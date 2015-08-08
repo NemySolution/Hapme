@@ -28,4 +28,13 @@
         android:layout_below="@+id/message"
         android:layout_alignParentStart="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connect to Myo"
+        android:id="@+id/bn_sync"
+        android:layout_marginTop="95dp"
+        android:layout_below="@+id/command"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

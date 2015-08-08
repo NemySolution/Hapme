@@ -6,77 +6,59 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="sg.nemysolutions.hapme.AddActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/message"
-        android:layout_above="@+id/bn_sync"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lock state"
-        android:id="@+id/lock_state"
-        android:layout_above="@+id/message"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/command"
-        android:layout_below="@+id/message"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Connect to Myo"
-        android:id="@+id/bn_sync"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_commandName"
         android:hint="Enter Command Name"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:gravity="center"/>
 
-    <EditText
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/et_gesture1"
-        android:hint="Gesture 1"
-        android:layout_toStartOf="@+id/et_gesture2"
-        android:layout_below="@+id/et_commandName" />
+        android:layout_below="@+id/et_commandName"
+        android:id="@+id/linearLayout3"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_gesture2"
-        android:hint="Gesture 1"
-        android:layout_alignTop="@+id/et_gesture1"
-        android:layout_alignEnd="@+id/message" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_gesture1"
+            android:hint="Gesture 1"
+            android:layout_toStartOf="@+id/et_gesture2"
+            android:layout_below="@+id/et_commandName" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_gesture3"
-        android:hint="Gesture 1"
-        android:layout_toEndOf="@+id/et_gesture2"
-        android:layout_below="@+id/et_commandName" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_gesture2"
+            android:hint="Gesture 2"
+            android:layout_alignTop="@+id/et_gesture1"
+            android:layout_alignEnd="@+id/message" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_gesture3"
+            android:hint="Gesture 3"
+            android:layout_toEndOf="@+id/et_gesture2"
+            android:layout_below="@+id/et_commandName" />
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_gesture1"
         android:gravity="center"
         android:padding="0dp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/linearLayout2">
+        android:id="@+id/linearLayout2"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp">
 
         <Button
             android:layout_width="wrap_content"
@@ -110,18 +92,48 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Done"
-        android:id="@+id/bn_done"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:text="Clear"
+        android:id="@+id/bn_clear"
+        android:layout_alignTop="@+id/bn_done"
+        android:layout_toStartOf="@+id/lock_state" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clear"
-        android:id="@+id/bn_clear"
-        android:layout_below="@+id/bn_done"
+        android:text="Done"
+        android:id="@+id/bn_done"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_toEndOf="@+id/lock_state" />
+
+    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/message"
+        android:layout_above="@+id/bn_sync"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lock state"
+        android:id="@+id/lock_state"
+        android:layout_above="@+id/message"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/command"
+        android:layout_below="@+id/message"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connect to Myo"
+        android:id="@+id/bn_sync"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

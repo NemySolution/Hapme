@@ -13,16 +13,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateActivity extends AppCompatActivity {
+    List<String> commandTextList = new ArrayList<String>();
+    List<Command> commandList = new ArrayList<Command>();
+    ListView lw_commands;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create);
+
+        lw_commands = (ListView) findViewById(R.id.listView_addCmd);
 
         //declare button
         Button bn_addCmd = (Button) findViewById(R.id.bn_addCmd);
@@ -62,11 +72,16 @@ public class CreateActivity extends AppCompatActivity {
 
         if (requestCode == 1) {
             if(resultCode == RESULT_OK){
-
                Command command = (Command) data.getSerializableExtra("command");
-
-
+               commandList.add(command);
+               commandTextList.add(command.getCommandName());
+               setCommandTextList();
             }
         }
     }//onActivityResult
+
+    private void setCommandTextList() {
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commandTextList);
+        lw_commands.setAdapter(arrayAdapter);
+    }
 }

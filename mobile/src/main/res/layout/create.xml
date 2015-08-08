@@ -43,11 +43,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="List of Members:"
+        android:text="Secret Key:"
         android:id="@+id/textView3"
-        android:layout_marginTop="19dp"
-        android:layout_alignTop="@+id/listView_addMember"
-        android:layout_toStartOf="@+id/listView_addMember" />
+        android:layout_alignBaseline="@+id/editText"
+        android:layout_alignBottom="@+id/editText"
+        android:layout_alignEnd="@+id/textView2" />
 
     <Button
         android:layout_width="wrap_content"
@@ -59,49 +59,36 @@
 
     <ListView
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listView_addMember"
-        android:layout_below="@+id/editText_cmdCallsign"
-        android:layout_alignStart="@+id/editText_cmdCallsign"
-        android:smoothScrollbar="true"
-        android:layout_marginBottom="15dp"
-        android:layout_above="@+id/listView_addCmd" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Member"
-        android:id="@+id/bn_addMember"
-        android:layout_below="@+id/editText_cmdCallsign"
-        android:layout_alignEnd="@+id/textView3"
-        android:layout_marginTop="94dp" />
-
-    <ListView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView_addCmd"
-        android:layout_above="@+id/btn_createOps"
         android:smoothScrollbar="false"
-        android:layout_alignStart="@+id/listView_addMember"
-        android:layout_alignTop="@+id/textView4"
-        android:layout_marginBottom="5dp" />
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/bn_addCmd"
+        android:layout_below="@+id/textView4" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="List of Command:"
         android:id="@+id/textView4"
-        android:layout_marginTop="93dp"
-        android:layout_below="@+id/bn_addMember"
-        android:layout_alignEnd="@+id/bn_addMember" />
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Command"
         android:id="@+id/bn_addCmd"
-        android:layout_alignBottom="@+id/listView_addCmd"
-        android:layout_toStartOf="@+id/listView_addCmd"
-        android:layout_marginBottom="57dp" />
+        android:layout_above="@+id/btn_createOps"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_below="@+id/editText_cmdCallsign"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/editText_cmdCallsign" />
 
 </RelativeLayout>

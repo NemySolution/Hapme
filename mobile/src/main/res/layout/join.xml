@@ -23,14 +23,27 @@
         android:id="@+id/et_callSign"
         android:hint="Call Sign"
         android:layout_below="@+id/et_opsID"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:imeOptions="actionNext"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Join"
         android:id="@+id/bn_join"
-        android:layout_below="@+id/et_callSign"
+        android:layout_below="@+id/et_secretKey"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_secretKey"
+        android:layout_below="@+id/et_callSign"
+        android:layout_centerHorizontal="true"
+        android:hint="Secret Key"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:imeOptions="actionDone"/>
 
 </RelativeLayout>

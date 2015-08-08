@@ -23,7 +23,10 @@
     android:layout_height="wrap_content"
     android:id="@+id/editText_opsName"
     android:layout_alignParentTop="true"
-    android:layout_toEndOf="@+id/textView" />
+    android:layout_toEndOf="@+id/textView"
+    android:editable="false"
+    android:enabled="true"
+    android:text="followme" />
 
 <TextView
     android:layout_width="wrap_content"
@@ -39,7 +42,9 @@
     android:layout_height="wrap_content"
     android:id="@+id/editText_cmdCallsign"
     android:layout_below="@+id/textView"
-    android:layout_alignStart="@+id/editText_opsName" />
+    android:layout_alignStart="@+id/editText_opsName"
+    android:enabled="true"
+    android:text="bigboss" />
 
 <TextView
     android:layout_width="wrap_content"

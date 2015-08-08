@@ -73,27 +73,27 @@
         </receiver>
         <!-- FOR PUSH SERVICE -->
         <activity
-            android:name=".Home"
+            android:name=".HomeActivity"
             android:label="@string/title_activity_home" >
         </activity>
         <activity
-            android:name=".Create"
+            android:name=".CreateActivity"
             android:label="@string/title_activity_create" >
         </activity>
         <activity
-            android:name=".Add"
+            android:name=".AddActivity"
             android:label="@string/title_activity_add" >
         </activity>
         <activity
-            android:name=".Operation"
+            android:name=".OperationActivity"
             android:label="@string/title_activity_operation" >
         </activity>
         <activity
-            android:name=".Commands"
+            android:name=".CommandsActivity"
             android:label="@string/title_activity_commands" >
         </activity>
         <activity
-            android:name=".Join"
+            android:name=".JoinActivity"
             android:label="@string/title_activity_join" >
         </activity>
     </application>

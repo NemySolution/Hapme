@@ -41,42 +41,42 @@ public class MainActivity extends AppCompatActivity {
         bn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Add.class);
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
                 startActivity(intent);
             }
         });
         bn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Commands.class);
+                Intent intent = new Intent(MainActivity.this, CommandsActivity.class);
                 startActivity(intent);
             }
         });
         bn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Create.class);
+                Intent intent = new Intent(MainActivity.this, CreateActivity.class);
                 startActivity(intent);
             }
         });
         bn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Home.class);
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
         bn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Operation.class);
+                Intent intent = new Intent(MainActivity.this, OperationActivity.class);
                 startActivity(intent);
             }
         });
         bn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Join.class);
+                Intent intent = new Intent(MainActivity.this, JoinActivity.class);
                 startActivity(intent);
             }
         });

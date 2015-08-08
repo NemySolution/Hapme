@@ -1,6 +1,6 @@
 package sg.nemysolutions.hapme;
 
-/**************** Operation Page ******************/
+/**************** OperationActivity Page ******************/
 /* This page is to allow users to view operation
 * details and to assure them that they are in
 * an operation.
@@ -16,7 +16,7 @@ package sg.nemysolutions.hapme;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Operation extends AppCompatActivity {
+public class OperationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

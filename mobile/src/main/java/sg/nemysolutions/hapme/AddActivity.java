@@ -13,8 +13,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,13 +35,18 @@ import java.util.LinkedList;
 
 public class AddActivity extends AppCompatActivity {
 
-    /*
-        Myo Section Start
-     */
     private TextView lockView;
     private TextView messageView;
     private TextView commandView;
     private Button bn_sync;
+    private Button bn_waveIn;
+    private Button bn_waveOut;
+    private Button bn_fingerSpread;
+    private Button bn_clear;
+    private Button bn_done;
+    private EditText et_gesture1;
+    private EditText et_gesture2;
+    private EditText et_gesture3;
 
     private LinkedList<Pose> capturedPoseList;
 
@@ -47,17 +55,20 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add);
 
-        /*
-            Myo Section Start
-         */
-        // three text views to view lock state and pose command
         lockView = (TextView) findViewById(R.id.lock_state);
         commandView = (TextView) findViewById(R.id.command);
         messageView = (TextView) findViewById(R.id.message);
-        messageView.setText("Please connect to a Myo Device");
-        messageView.setTextColor(Color.RED);
 
         bn_sync = (Button) findViewById(R.id.bn_sync);
+        bn_waveIn = (Button) findViewById(R.id.bn_waveIn);
+        bn_waveOut = (Button) findViewById(R.id.bn_waveOut);
+        bn_fingerSpread = (Button) findViewById(R.id.bn_fingerSpread);
+        bn_clear = (Button) findViewById(R.id.bn_clear);
+        bn_done = (Button) findViewById(R.id.bn_done);
+
+        et_gesture1 = (EditText) findViewById(R.id.et_gesture1);
+        et_gesture2 = (EditText) findViewById(R.id.et_gesture2);
+        et_gesture3 = (EditText) findViewById(R.id.et_gesture3);
 
         bn_sync.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +76,36 @@ public class AddActivity extends AppCompatActivity {
                 // Launch the ScanActivity to scan for Myos to connect to
                 Intent intent = new Intent(getBaseContext(), ScanActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        bn_waveIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPose("WAVE_IN");
+            }
+        });
+
+        bn_waveOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPose("WAVE_OUT");
+            }
+        });
+
+        bn_fingerSpread.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPose("FINGERS_SPREAD");
+            }
+        });
+
+        bn_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_gesture1.setText("");
+                et_gesture2.setText("");
+                et_gesture3.setText("");
             }
         });
 
@@ -86,44 +127,24 @@ public class AddActivity extends AppCompatActivity {
 
         // Initialise pose list to capture pose
         capturedPoseList = new LinkedList<>();
-        /*
-            Myo Section End
-         */
+    }
+
+    private void setPose(String pose) {
+        if (et_gesture1.getText().toString().equals("")) {
+            et_gesture1.setText(pose);
+        } else if (et_gesture2.getText().toString().equals("")) {
+            et_gesture2.setText(pose);
+        } else if (et_gesture3.getText().toString().equals("")) {
+            et_gesture3.setText(pose);
+        } else {
+            Log.e("NICHOLAS", "LOL");
+        }
     }
 
     // this method reads the captured pose and return numeric command
     private int getCommand(LinkedList<Pose> poseLinkedList) {
         lockView.setText(poseLinkedList.toString());
-        int command = -1;
-        /**
-        if (poseLinkedList.size() == 1) {
-            if (poseLinkedList.poll() == Pose.FIST) {
-                command = 0;
-            }
-        } else if (poseLinkedList.size() % 2 != 0 || poseLinkedList.isEmpty()) {
-            command = -1;
-        } else {
-            command = 0;
-            for (int i = 0; i < poseLinkedList.size(); i++) {
-
-                if (i % 2 == 1) {
-                    switch (poseLinkedList.get(i)) {
-                        case WAVE_IN:
-                            command += 1;
-                            break;
-                        case WAVE_OUT:
-                            command += 2;
-                            break;
-                        case FINGERS_SPREAD:
-                            command += 3;
-                            break;
-                    }
-
-                }
-            }
-        }
-         **/
-        command = 0;
+        int command = 0;
         for (int i = 0; i < poseLinkedList.size(); i++) {
 
             switch (poseLinkedList.get(i)) {
@@ -141,9 +162,6 @@ public class AddActivity extends AppCompatActivity {
         poseLinkedList.clear();
         return command;
     }
-    /*
-        Myo Section End
-     */
 
     private DeviceListener mListener = new AbstractDeviceListener() {
         // onConnect() is called whenever a Myo has been connected.
@@ -157,7 +175,8 @@ public class AddActivity extends AppCompatActivity {
         // onDisconnect() is called whenever a Myo has been disconnected.
         @Override
         public void onDisconnect(Myo myo, long timestamp) {
-            messageView.setText("Myo Disconnected!");
+            messageView.setText("Myo Disconnected! Please connect to a Myo Device");
+            messageView.setTextColor(Color.RED);
             messageView.setTextColor(Color.RED);
             bn_sync.setEnabled(true);
         }
@@ -208,51 +227,20 @@ public class AddActivity extends AppCompatActivity {
                     break;
                 case FIST:
                     messageView.setText(getString(R.string.pose_fist));
-                    /**
-                    if (capturedPoseList.peekLast() != Pose.FIST) {
-                        capturedPoseList.offer(pose);
-                        commandView.setText("Captured pose: " + getString(R.string.pose_fist));
-                    } else {
-                        commandView.setText("Pose not captured !");
-                    }
-                     **/
+                    commandView.setText("Pose not captured !");
                     break;
                 case WAVE_IN:
                     messageView.setText(getString(R.string.pose_wavein));
-                    /**
-                    if (capturedPoseList.peekLast() == Pose.FIST) {
-                        capturedPoseList.offer(pose);
-                        commandView.setText("Captured pose: " + getString(R.string.pose_wavein));
-                    } else {
-                        commandView.setText("Pose not captured !");
-                    }
-                     **/
                     capturedPoseList.offer(pose);
                     commandView.setText("Captured pose: " + getString(R.string.pose_wavein));
                     break;
                 case WAVE_OUT:
                     messageView.setText(getString(R.string.pose_waveout));
-                    /**
-                    if (capturedPoseList.peekLast() == Pose.FIST) {
-                        capturedPoseList.offer(pose);
-                        commandView.setText("Captured pose: " + getString(R.string.pose_waveout));
-                    } else {
-                        commandView.setText("Pose not captured !");
-                    }
-                     **/
                     capturedPoseList.offer(pose);
                     commandView.setText("Captured pose: " + getString(R.string.pose_waveout));
                     break;
                 case FINGERS_SPREAD:
                     messageView.setText(getString(R.string.pose_fingersspread));
-                    /**
-                    if (capturedPoseList.peekLast() == Pose.FIST) {
-                        capturedPoseList.offer(pose);
-                        commandView.setText("Captured pose: " + getString(R.string.pose_fingersspread));
-                    } else {
-                        commandView.setText("Pose not captured !");
-                    }
-                     **/
                     capturedPoseList.offer(pose);
                     commandView.setText("Captured pose: " + getString(R.string.pose_fingersspread));
                     break;

@@ -9,16 +9,16 @@
     <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/message"
-        android:layout_below="@+id/lock_state"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/bn_sync"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lock state"
         android:id="@+id/lock_state"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/message"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,8 +33,81 @@
         android:layout_height="wrap_content"
         android:text="Connect to Myo"
         android:id="@+id/bn_sync"
-        android:layout_marginTop="95dp"
-        android:layout_below="@+id/command"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_commandName"
+        android:hint="Enter Command Name"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_gesture1"
+        android:hint="Gesture 1"
+        android:layout_toStartOf="@+id/et_gesture2"
+        android:layout_below="@+id/et_commandName" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_gesture2"
+        android:hint="Gesture 1"
+        android:layout_alignTop="@+id/et_gesture1"
+        android:layout_alignEnd="@+id/message" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_gesture3"
+        android:hint="Gesture 1"
+        android:layout_toEndOf="@+id/et_gesture2"
+        android:layout_below="@+id/et_commandName" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wave In"
+        android:id="@+id/bn_waveIn"
+        android:layout_marginTop="48dp"
+        android:layout_below="@+id/et_gesture2"
+        android:layout_alignStart="@+id/bn_waveOut" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wave Out"
+        android:id="@+id/bn_waveOut"
+        android:layout_below="@+id/bn_waveIn"
+        android:layout_toStartOf="@+id/et_gesture3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Finger Spread"
+        android:id="@+id/bn_fingerSpread"
+        android:layout_below="@+id/bn_waveOut"
+        android:layout_alignStart="@+id/bn_sync" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear"
+        android:id="@+id/bn_clear"
+        android:layout_below="@+id/bn_fingerSpread"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:id="@+id/bn_done"
+        android:layout_below="@+id/bn_clear"
+        android:layout_alignStart="@+id/bn_clear" />
 
 </RelativeLayout>

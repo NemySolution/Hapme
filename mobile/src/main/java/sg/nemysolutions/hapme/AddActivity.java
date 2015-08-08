@@ -31,7 +31,10 @@ import com.thalmic.myo.AbstractDeviceListener;
 import com.thalmic.myo.XDirection;
 import com.thalmic.myo.scanner.ScanActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -47,6 +50,7 @@ public class AddActivity extends AppCompatActivity {
     private EditText et_gesture1;
     private EditText et_gesture2;
     private EditText et_gesture3;
+    private EditText et_commandName;
 
     private LinkedList<Pose> capturedPoseList;
 
@@ -69,6 +73,8 @@ public class AddActivity extends AppCompatActivity {
         et_gesture1 = (EditText) findViewById(R.id.et_gesture1);
         et_gesture2 = (EditText) findViewById(R.id.et_gesture2);
         et_gesture3 = (EditText) findViewById(R.id.et_gesture3);
+
+        et_commandName = (EditText) findViewById(R.id.et_commandName);
 
         bn_sync.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +112,23 @@ public class AddActivity extends AppCompatActivity {
                 et_gesture1.setText("");
                 et_gesture2.setText("");
                 et_gesture3.setText("");
+            }
+        });
+
+        bn_done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<String> gestureList = Arrays.asList(et_gesture1.getText().toString(), et_gesture2.getText().toString(), et_gesture3.getText().toString());
+
+                //set Command object
+                Command cmd = new Command();
+                cmd.setCommandName(et_commandName.getText().toString());
+                cmd.setGestureSeq(gestureList);
+                cmd.setVibrationSeq(gestureList);
+
+                Intent intent = new Intent(AddActivity.this, CreateActivity.class);
+                intent.putExtra("Command", cmd);
+                finish();
             }
         });
 

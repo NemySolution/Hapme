@@ -3,13 +3,11 @@ package sg.nemysolutions.hapme;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
+import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by Nvcwk on 8/8/2015.
- */
 @ParseClassName("Command")
-public class Command extends ParseObject {
+public class Command extends ParseObject implements Serializable {
     public String getCommandID() {
         return getString("commandID");
     }

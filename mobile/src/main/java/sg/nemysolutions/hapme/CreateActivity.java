@@ -22,7 +22,16 @@ public class CreateActivity extends AppCompatActivity {
         setContentView(R.layout.create);
 
 
+        Button bn_addCmd = (Button) findViewById(R.id.bn_addCmd);
         Button bn_addMember = (Button) findViewById(R.id.bn_addMember);
+
+        bn_addCmd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CreateActivity.this, AddActivity.class);
+                startActivity(intent);
+            }
+        });
 
         bn_addMember.setOnClickListener(new View.OnClickListener() {
             @Override

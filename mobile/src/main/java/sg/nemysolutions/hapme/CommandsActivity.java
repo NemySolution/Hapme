@@ -9,13 +9,57 @@ package sg.nemysolutions.hapme;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommandsActivity extends AppCompatActivity {
+    List<String> commandList  = new ArrayList<String>();
+    ListView lw = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.commands);
+
+        lw = (ListView) findViewById(R.id.lv_commands);
+
+        ParseQuery<Command> query = ParseQuery.getQuery(Command.class);
+        query.whereEqualTo("opsName", "123");
+        query.findInBackground(new FindCallback<Command>() {
+            @Override
+            public void done(List<Command> results, ParseException e) {
+                for (Command a : results) {
+                    commandList.add(a.getCommandName());
+                }
+
+                setList();
+            }
+        });
+
+        lw.setOnItemClickListener(onItemClickListener);
     }
 
+    private void setList() {
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commandList);
+        lw.setAdapter(arrayAdapter);
+    }
+
+    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+                                long arg3) {
+
+        }
+    };
 }

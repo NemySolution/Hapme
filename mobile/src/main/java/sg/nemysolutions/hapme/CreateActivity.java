@@ -7,24 +7,19 @@ package sg.nemysolutions.hapme;
 //Key person: Yeekeng and Ming Sheng
 /************************************************/
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +50,7 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
-        listView_addCmd.setOnItemClickListener(onItemClickListener);
+        //listView_addCmd.setOnItemClickListener(onItemClickListener);
 
         Button bn_createOps = (Button) findViewById(R.id.btn_createOps);
 
@@ -63,8 +58,8 @@ public class CreateActivity extends AppCompatActivity {
         bn_createOps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText editText_opsName = (EditText) findViewById(R.id.editText_opsName);
-                EditText editText_cmdCallsign = (EditText) findViewById(R.id.editText_opsName);
+                EditText editText_opsName = (EditText) findViewById(R.id.et_opsName);
+                EditText editText_cmdCallsign = (EditText) findViewById(R.id.et_opsName);
                 EditText editText_secretKey = (EditText) findViewById(R.id.editText_secretKey);
 
                 ParseObject operation = new ParseObject("Operation");
@@ -90,24 +85,24 @@ public class CreateActivity extends AppCompatActivity {
         });
     }//end of oncreate()
 
-    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-                                long arg3) {
-            AlertDialog.Builder adb=new AlertDialog.Builder(getApplicationContext());
-            adb.setTitle("Delete?");
-            adb.setMessage("Are you sure you want to delete " + position);
-            final int positionToRemove = position;
-            adb.setNegativeButton("Cancel", null);
-            adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    commandList.remove(positionToRemove);
-                    commandTextList.remove(positionToRemove);
-                    arrayAdapter.notifyDataSetChanged();
-                }});
-            adb.show();
-        }
-    };
+//    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+//        @Override
+//        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+//                                long arg3) {
+//            AlertDialog.Builder adb=new AlertDialog.Builder(getApplicationContext());
+//            adb.setTitle("Delete?");
+//            adb.setMessage("Are you sure you want to delete " + position);
+//            final int positionToRemove = position;
+//            adb.setNegativeButton("Cancel", null);
+//            adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int which) {
+//                    commandList.remove(positionToRemove);
+//                    commandTextList.remove(positionToRemove);
+//                    arrayAdapter.notifyDataSetChanged();
+//                }});
+//            adb.show();
+//        }
+//    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

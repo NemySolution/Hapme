@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:text="Operation Name:"
         android:id="@+id/textView"
-        android:layout_alignBaseline="@+id/editText_opsName"
-        android:layout_alignBottom="@+id/editText_opsName"
+        android:layout_alignBaseline="@+id/et_opsName"
+        android:layout_alignBottom="@+id/et_opsName"
         android:layout_alignEnd="@+id/textView2" />
 
 
@@ -20,7 +20,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText_opsName"
+        android:id="@+id/et_opsName"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/textView" />
 
@@ -29,16 +29,16 @@
         android:layout_height="wrap_content"
         android:text="Commander Callsign:"
         android:id="@+id/textView2"
-        android:layout_alignBaseline="@+id/editText_cmdCallsign"
-        android:layout_alignBottom="@+id/editText_cmdCallsign"
+        android:layout_alignBaseline="@+id/et_callsign"
+        android:layout_alignBottom="@+id/et_callsign"
         android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText_cmdCallsign"
+        android:id="@+id/et_callsign"
         android:layout_below="@+id/textView"
-        android:layout_alignStart="@+id/editText_opsName" />
+        android:layout_alignStart="@+id/et_opsName" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -87,8 +87,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText_secretKey"
-        android:layout_below="@+id/editText_cmdCallsign"
+        android:layout_below="@+id/et_callsign"
         android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/editText_cmdCallsign" />
+        android:layout_alignStart="@+id/et_callsign" />
 
 </RelativeLayout>

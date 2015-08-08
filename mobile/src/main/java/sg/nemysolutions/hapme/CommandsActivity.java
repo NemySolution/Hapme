@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -47,6 +48,7 @@ public class CommandsActivity extends AppCompatActivity {
 
                     Command command = new Command();
                     command.setOpsName(c.getString("opsName"));
+                    command.setCommandName(c.getString("commandName"));
                     command.setCommandID(c.getObjectId());
 
                     commandList.add(command);
@@ -74,6 +76,11 @@ public class CommandsActivity extends AppCompatActivity {
             push.setChannel(command.getOpsName());
             push.setMessage(command.getCommandID());
             push.sendInBackground();
+
+            int duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(getApplicationContext(), "Command: " + command.getCommandName() + " SENT!", duration);
+            toast.show();
         }
     };
 }

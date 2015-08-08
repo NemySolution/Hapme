@@ -86,7 +86,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/editText_secretKey"
         android:layout_below="@+id/editText_cmdCallsign"
         android:layout_alignParentEnd="true"
         android:layout_alignStart="@+id/editText_cmdCallsign" />

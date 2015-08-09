@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -27,11 +28,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateActivity extends AppCompatActivity {
-    List<String> commandTextList = new ArrayList<String>();
-    List<Command> commandList = new ArrayList<Command>();
+
+    //global variable
+    ArrayList<String> commandTextList = new ArrayList<>();
+    List<Command> commandList = new ArrayList<>();
     ListView lw_commands;
-    ArrayAdapter<String> arrayAdapter;
+//    ArrayAdapter<String> arrayAdapter;
     ListView listView_addCmd;
+    CustomListView arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +47,11 @@ public class CreateActivity extends AppCompatActivity {
         lw_commands = (ListView) findViewById(R.id.listView_addCmd);
         listView_addCmd = (ListView) findViewById(R.id.listView_addCmd);
 
-        //declare button
+        //declare buttons
         Button bn_addCmd = (Button) findViewById(R.id.bn_addCmd);
+        Button bn_createOps = (Button) findViewById(R.id.btn_createOps);
 
-        //add command
+        //add command button that goes to add cmd page
         bn_addCmd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +60,7 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
-        Button bn_createOps = (Button) findViewById(R.id.btn_createOps);
+
 
         //create ops
         bn_createOps.setOnClickListener(new View.OnClickListener() {
@@ -87,9 +92,16 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
-        listView_addCmd.setOnItemClickListener(onItemClickListener);
+
+        //handle listview item onclick, for deleting item
+//        listView_addCmd.setOnItemClickListener(onItemClickListener);
+
+
     }//end of oncreate()
 
+    /**********************
+     * handle onlclick
+     */
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int position,
@@ -111,6 +123,7 @@ public class CreateActivity extends AppCompatActivity {
         }
     };
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0) {
@@ -125,7 +138,9 @@ public class CreateActivity extends AppCompatActivity {
 
     private void setCommandTextList() {
 //        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commandTextList);
-       arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commandTextList);
+//       arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commandTextList);
+        Log.e("helllo","here");
+         arrayAdapter = new CustomListView(commandTextList,this);
         lw_commands.setAdapter(arrayAdapter);
     }
 

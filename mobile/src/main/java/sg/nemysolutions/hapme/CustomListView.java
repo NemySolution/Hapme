@@ -16,16 +16,18 @@ import java.util.ArrayList;
 /**
  * Created by yeekeng on 9/8/2015.
  * the custom list view with a delete button
- * TODO update the button image and check if the delete is working correctly
+ *
  */
 public class CustomListView extends BaseAdapter implements ListAdapter {
     private ArrayList<String> list = new ArrayList<>();
+    private ArrayList<Command> list2 = new ArrayList<>();
     private Context context;
 
 
 
-    public CustomListView(ArrayList<String> list, Context context) {
+    public CustomListView(ArrayList<String> list,ArrayList<Command> list2, Context context) {
         this.list = list;
+        this.list2 = list2;
         this.context = context;
     }
 
@@ -49,7 +51,8 @@ public class CustomListView extends BaseAdapter implements ListAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater =
+                    (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.cust_listview, null);
         }
 
@@ -75,6 +78,7 @@ public class CustomListView extends BaseAdapter implements ListAdapter {
                 adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         list.remove(position); //or some other task
+                        list2.remove(position);
                         notifyDataSetChanged();
                     }
                 });

@@ -29,12 +29,13 @@ import java.util.List;
 
 public class CreateActivity extends AppCompatActivity {
 
-    //global variable
+    //handles the cmd that is displayed on listview
     ArrayList<String> commandTextList = new ArrayList<>();
-    List<Command> commandList = new ArrayList<>();
+    //handles the command that goes to the parse db
+    ArrayList<Command> commandList = new ArrayList<>();
     ListView lw_commands;
 //    ArrayAdapter<String> arrayAdapter;
-    ListView listView_addCmd;
+//    ListView listView_addCmd;
     CustomListView arrayAdapter;
 
     @Override
@@ -42,16 +43,17 @@ public class CreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create);
 
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        this.getWindow()
+                .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         lw_commands = (ListView) findViewById(R.id.listView_addCmd);
-        listView_addCmd = (ListView) findViewById(R.id.listView_addCmd);
+//        listView_addCmd = (ListView) findViewById(R.id.listView_addCmd);
 
         //declare buttons
         Button bn_addCmd = (Button) findViewById(R.id.bn_addCmd);
         Button bn_createOps = (Button) findViewById(R.id.btn_createOps);
 
-        //add command button that goes to add cmd page
+        //button that goes to "add cmd" page
         bn_addCmd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,29 +101,29 @@ public class CreateActivity extends AppCompatActivity {
 
     }//end of oncreate()
 
-    /**********************
-     * handle onlclick
-     */
-    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-                                long arg3) {
-            AlertDialog.Builder adb=new AlertDialog.Builder(CreateActivity.this);
-            final int positionToRemove = position;
-
-            adb.setTitle("Delete?");
-            adb.setMessage("Are you sure you want to delete " + commandTextList.get(position));
-
-            adb.setNegativeButton("Cancel", null);
-            adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    commandList.remove(positionToRemove);
-                    commandTextList.remove(positionToRemove);
-                    arrayAdapter.notifyDataSetChanged();
-                }});
-            adb.show();
-        }
-    };
+//    /**********************
+//     * handle onlclick for delete, old
+//     */
+//    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+//        @Override
+//        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+//                                long arg3) {
+//            AlertDialog.Builder adb=new AlertDialog.Builder(CreateActivity.this);
+//            final int positionToRemove = position;
+//
+//            adb.setTitle("Delete?");
+//            adb.setMessage("Are you sure you want to delete " + commandTextList.get(position));
+//
+//            adb.setNegativeButton("Cancel", null);
+//            adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int which) {
+//                    commandList.remove(positionToRemove);
+//                    commandTextList.remove(positionToRemove);
+//                    arrayAdapter.notifyDataSetChanged();
+//                }});
+//            adb.show();
+//        }
+//    };
 
 
     @Override
@@ -139,8 +141,8 @@ public class CreateActivity extends AppCompatActivity {
     private void setCommandTextList() {
 //        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commandTextList);
 //       arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commandTextList);
-        Log.e("helllo","here");
-         arrayAdapter = new CustomListView(commandTextList,this);
+
+         arrayAdapter = new CustomListView(commandTextList,commandList,this);
         lw_commands.setAdapter(arrayAdapter);
     }
 

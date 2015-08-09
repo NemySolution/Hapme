@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -91,17 +92,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 //        mContext = getApplicationContext();
-//        bn7.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
+        bn7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ver = getVersion();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage(ver).setTitle("version");
+                // 3. Get the AlertDialog from create()
+                AlertDialog dialog = builder.create();
+                dialog.show();
 //                try {
 //                    create(mContext);
 //                } catch (PackageManager.NameNotFoundException e) {
 //                    e.printStackTrace();
 //                }
-//            }
-//        });
+            }
+        });
 
     }
 
@@ -128,5 +137,18 @@ public class MainActivity extends AppCompatActivity {
 //                .setView(message)
 //                .create();
 //    }
+
+    private String getVersion(){
+        try {
+            PackageManager packageManager=getPackageManager();
+            PackageInfo packageInfo=packageManager.getPackageInfo(getPackageName(),0);
+            return packageInfo.versionName;
+        }
+        catch (  PackageManager.NameNotFoundException e) {
+            Log.e("versionerrorrrrrrr","Error while fetching app version", e);
+
+            return "?";
+        }
+    }
 
 }

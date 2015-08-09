@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
- versionCode value indicates the .apk released version of the application code,
- which corresponds to a minor follow-on release, as shown by the android:versionName string
 http://developer.android.com/tools/publishing/versioning.html
+android version can be change at build.gradle
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sg.nemysolutions.hapme"
-    android:versionCode="1"
-    android:versionName="2"
-    >
-
+    package="sg.nemysolutions.hapme">
 
 
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"

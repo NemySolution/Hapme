@@ -95,7 +95,7 @@
         android:layout_below="@+id/et_callsign"
         android:layout_alignParentEnd="true"
         android:layout_alignStart="@+id/et_callsign"
-        android:imeOptions="flagNavigateNext"
+        android:imeOptions="actionDone"
         android:singleLine="true"/>
 
 </RelativeLayout>

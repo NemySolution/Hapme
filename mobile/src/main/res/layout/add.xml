@@ -13,7 +13,9 @@
         android:hint="Enter Command Name"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:imeOptions="actionDone"
+        android:singleLine="true"/>
 
     <LinearLayout
         android:orientation="horizontal"

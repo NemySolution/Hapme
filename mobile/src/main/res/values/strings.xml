@@ -23,4 +23,5 @@
     <string name="title_activity_join">Join</string>
     <string name="title_activity_add_member">add Member</string>
     <string name="title_activity_add_member_name">addMemberName</string>
+
 </resources>

@@ -31,8 +31,6 @@ import com.parse.ParseQuery;
 
 import java.util.List;
 
-import sg.nemysolutions.hapme.entity.Command;
-
 public class OperationActivity extends AppCompatActivity {
 
     EditText et_opsName;

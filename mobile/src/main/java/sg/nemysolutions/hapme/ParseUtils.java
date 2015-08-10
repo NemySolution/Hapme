@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.parse.Parse;
 import com.parse.ParseInstallation;
-import com.parse.ParseObject;
 
 public class ParseUtils {
     public static void registerParse(Context context) {

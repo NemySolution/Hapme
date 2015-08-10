@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
@@ -70,34 +71,38 @@ public class CreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String deviceId = ParseInstallation.getCurrentInstallation().getString("installationId");
+                if (et_opsName.getText().toString().equals("") || et_callSign.getText().toString().equals("") || et_secretKey.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please enter all the fields!", Toast.LENGTH_SHORT).show();
+                } else {
+                    String deviceId = ParseInstallation.getCurrentInstallation().getString("installationId");
 
-                // Save the operation to parse, followed by the commands
-                final ParseObject operation;
-                operation = new ParseObject("Operation");
-                operation.put("deviceId", deviceId);
-                operation.put("opsName", et_opsName.getText().toString());
-                operation.put("callSign", et_callSign.getText().toString());
-                operation.put("secretKey", et_secretKey.getText().toString());
-                operation.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        ParseObject command;
-                        for (Command c : commandList) {
-                            command = new ParseObject("Command");
-                            command.put("opsId", operation.getObjectId());
-                            command.put("opsName", et_opsName.getText().toString());
-                            command.put("commandName", c.getCommandName());
-                            command.put("vibrationSeq", c.getVibrationSeq());
-                            command.put("gestureSeq", c.getGestureSeq());
-                            command.saveInBackground();
+                    // Save the operation to parse, followed by the commands
+                    final ParseObject operation;
+                    operation = new ParseObject("Operation");
+                    operation.put("deviceId", deviceId);
+                    operation.put("opsName", et_opsName.getText().toString());
+                    operation.put("callSign", et_callSign.getText().toString());
+                    operation.put("secretKey", et_secretKey.getText().toString());
+                    operation.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            ParseObject command;
+                            for (Command c : commandList) {
+                                command = new ParseObject("Command");
+                                command.put("opsId", operation.getObjectId());
+                                command.put("opsName", et_opsName.getText().toString());
+                                command.put("commandName", c.getCommandName());
+                                command.put("vibrationSeq", c.getVibrationSeq());
+                                command.put("gestureSeq", c.getGestureSeq());
+                                command.saveInBackground();
+                            }
+                            Intent intent = new Intent(CreateActivity.this, OperationActivity.class);
+                            intent.putExtra("opsId", operation.getObjectId());
+                            startActivity(intent);
+                            finish();
                         }
-                        Intent intent = new Intent(CreateActivity.this, OperationActivity.class);
-                        intent.putExtra("opsId", operation.getObjectId());
-                        startActivity(intent);
-                        finish();
-                    }
-                });
+                    });
+                }
 
             }
         });

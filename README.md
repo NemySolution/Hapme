@@ -9,6 +9,8 @@ Haptics Communication System
 * Others = Try to use two letters to summarize the object, followed by an underscore with the description
 
 ## To Do List
-* View members in the channel in Operation page.
+* View members in the channel in Operation page. (should auto update when a member joins)
+* Receiver for notifications
 * Use Myo to send commands
 * Watch App
+* Vibration sequence

@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import sg.nemysolutions.hapme.entity.Command;
+
 /**
  * Created by yeekeng on 9/8/2015.
  * the custom list view with a delete button

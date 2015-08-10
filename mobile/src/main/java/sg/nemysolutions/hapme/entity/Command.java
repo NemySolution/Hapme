@@ -1,21 +1,17 @@
-package sg.nemysolutions.hapme;
-
-import com.parse.ParseClassName;
-import com.parse.ParseObject;
+package sg.nemysolutions.hapme.entity;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class Command implements Serializable {
+
     private String commandID;
     private String opsName;
     private String commandName;
     private List<String> vibrationSeq;
     private List<String> gestureSeq;
 
-    public Command() {
-
-    }
+    public Command() {}
 
     public String getCommandID() {
         return commandID;
@@ -56,4 +52,5 @@ public class Command implements Serializable {
     public void setGestureSeq(List<String> gestureSeq) {
         this.gestureSeq = gestureSeq;
     }
+
 }

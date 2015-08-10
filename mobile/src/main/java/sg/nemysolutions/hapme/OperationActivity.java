@@ -13,14 +13,19 @@ package sg.nemysolutions.hapme;
 //Key person: Yeekeng and Ming Sheng
 /*************************************************/
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
 import java.util.List;
@@ -29,38 +34,41 @@ public class OperationActivity extends AppCompatActivity {
 
     EditText et_opsName;
     EditText et_callSign;
+    Button bn_broadcast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.operation);
 
+        Intent intent = getIntent();
+        String opsId = intent.getStringExtra("opsId");
+
+        ParsePush.subscribeInBackground(opsId);
+
         et_opsName = (EditText) findViewById(R.id.et_opsName);
         et_callSign = (EditText) findViewById(R.id.et_callSign);
+        bn_broadcast = (Button) findViewById(R.id.bn_broadcast);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
-        query.whereEqualTo("opsName", "opDick");
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> results, ParseException e) {
-                for (ParseObject c : results) {
-                    et_opsName.setText(c.getString("opsName"));
-                    et_callSign.setText(c.getString("callSign"));
+        query.getInBackground(opsId, new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    et_opsName.setText(object.getString("opsName"));
+                    et_callSign.setText(object.getString("callSign"));
+                } else {
+                    Log.e("ERROR", "Cannot retrieve operation!!");
+                    finish();
                 }
-
             }
         });
 
-        // Query list of Members in the channel
-        ParseQuery<ParseObject> membersQuery = ParseQuery.getQuery("Installation");
-        query.whereEqualTo("Installation", "opDick");
-        query.findInBackground(new FindCallback<ParseObject>() {
+        bn_broadcast.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void done(List<ParseObject> results, ParseException e) {
-                for (ParseObject c : results) {
-                    Log.e("Members", c.toString());
-                }
-
+            public void onClick(View v) {
+                Intent intent = new Intent(OperationActivity.this, CommandsActivity.class);
+                intent.putExtra("opsName", et_opsName.getText().toString());
+                startActivity(intent);
             }
         });
 

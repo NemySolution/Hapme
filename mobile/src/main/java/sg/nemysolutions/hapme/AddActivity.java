@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -32,10 +31,11 @@ import com.thalmic.myo.AbstractDeviceListener;
 import com.thalmic.myo.XDirection;
 import com.thalmic.myo.scanner.ScanActivity;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import sg.nemysolutions.hapme.entity.Command;
 
 public class AddActivity extends AppCompatActivity {
 

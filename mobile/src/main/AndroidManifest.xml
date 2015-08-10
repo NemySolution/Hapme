@@ -86,8 +86,8 @@ android version can be change at build.gradle
                 <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
         </receiver>
+        <!-- END PUSH SERVICE -->
 
-        <!-- FOR PUSH SERVICE -->
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home" >
@@ -113,7 +113,7 @@ android version can be change at build.gradle
             android:label="@string/title_activity_join" >
         </activity>
         <activity
-            android:name=".addMemberName"
+            android:name=".AddMemberName"
             android:label="@string/title_activity_add_member_name"
             android:parentActivityName=".CreateActivity" >
             <meta-data

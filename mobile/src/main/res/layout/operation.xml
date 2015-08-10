@@ -8,58 +8,56 @@
 
 
     <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Operation Name:"
-    android:id="@+id/textView"
-    android:layout_alignBaseline="@+id/et_opsName"
-    android:layout_alignBottom="@+id/et_opsName"
-    android:layout_alignEnd="@+id/textView2" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Operation Name:"
+        android:id="@+id/textView"
+        android:layout_alignBaseline="@+id/et_opsName"
+        android:layout_alignBottom="@+id/et_opsName"
+        android:layout_alignEnd="@+id/textView2" />
 
 
 
-<EditText
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/et_opsName"
-    android:layout_alignParentTop="true"
-    android:layout_toEndOf="@+id/textView"
-    android:editable="false"
-    android:enabled="true"
-    android:text="followme" />
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_opsName"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/textView"
+        android:editable="false"
+        android:enabled="true" />
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Commander Callsign:"
-    android:id="@+id/textView2"
-    android:layout_alignBaseline="@+id/et_callsign"
-    android:layout_alignBottom="@+id/et_callsign"
-    android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Commander Callsign:"
+        android:id="@+id/textView2"
+        android:layout_alignBaseline="@+id/et_callSign"
+        android:layout_alignBottom="@+id/et_callSign"
+        android:layout_alignParentStart="true" />
 
-<EditText
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/et_callsign"
-    android:layout_below="@+id/textView"
-    android:layout_alignStart="@+id/et_opsName"
-    android:enabled="true"
-    android:text="bigboss" />
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_callSign"
+        android:layout_below="@+id/textView"
+        android:layout_alignStart="@+id/et_opsName"
+        android:enabled="true" />
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="List of Members:"
-    android:id="@+id/textView3"
-    android:layout_below="@+id/et_callsign"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="10dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List of Members:"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/et_callSign"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp" />
 
     <ListView
-    android:layout_width="fill_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/listView_addMember"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listView_addMember"
         android:smoothScrollbar="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView3"
@@ -94,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Broadcast Command"
-            android:id="@+id/bn_Broadcast"
+            android:id="@+id/bn_broadcast"
             android:layout_row="2"
             android:layout_column="0"
             android:layout_gravity="fill"
@@ -103,19 +101,19 @@
             android:layout_rowWeight="1" />
 
         <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="END Ops"
-        android:id="@+id/bn_endOps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="END Ops"
+            android:id="@+id/bn_endOps"
             android:layout_below="@+id/listView_addMember"
-            android:layout_toStartOf="@+id/bn_Broadcast"
+            android:layout_toStartOf="@+id/bn_broadcast"
             android:layout_row="0"
             android:layout_column="1"
             android:layout_gravity="fill"
             android:gravity="center"
-            android:backgroundTint="#ff0110"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1" />
+            android:layout_rowWeight="1"
+            android:background="#ff0110" />
 
         <Button
             android:layout_width="wrap_content"

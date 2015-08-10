@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class addMemberName extends AppCompatActivity {
+public class AddMemberName extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -7,13 +7,12 @@ package sg.nemysolutions.hapme;
 //Key person: Nicholas
 /*************************************************/
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,9 +25,11 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+import sg.nemysolutions.hapme.entity.Command;
+
 public class CommandsActivity extends AppCompatActivity {
-    List<String> commandTextList  = new ArrayList<String>();
-    List<Command> commandList = new ArrayList<Command>();
+    List<String> commandTextList  = new ArrayList<>();
+    List<Command> commandList = new ArrayList<>();
     ListView lw = null;
 
     @Override
@@ -36,16 +37,18 @@ public class CommandsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.commands);
 
+        Intent intent = getIntent();
+        String opsName = intent.getStringExtra("opsName");
+
         lw = (ListView) findViewById(R.id.lv_commands);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
-        query.whereEqualTo("opsName", "opDick");
+        query.whereEqualTo("opsName", opsName);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> results, ParseException e) {
                 for (ParseObject c : results) {
                     commandTextList.add(c.getString("commandName"));
-
                     Command command = new Command();
                     command.setOpsName(c.getString("opsName"));
                     command.setCommandName(c.getString("commandName"));
@@ -62,7 +65,7 @@ public class CommandsActivity extends AppCompatActivity {
     }
 
     private void setList() {
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commandTextList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, commandTextList);
         lw.setAdapter(arrayAdapter);
     }
 
@@ -77,10 +80,8 @@ public class CommandsActivity extends AppCompatActivity {
             push.setMessage(command.getCommandID());
             push.sendInBackground();
 
-            int duration = Toast.LENGTH_LONG;
-
-            Toast toast = Toast.makeText(getApplicationContext(), "Command: " + command.getCommandName() + " SENT!", duration);
-            toast.show();
+            Toast.makeText(getApplicationContext(), "Command: " + command.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();
+            finish();
         }
     };
 }

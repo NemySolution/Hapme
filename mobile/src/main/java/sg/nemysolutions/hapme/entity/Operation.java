@@ -10,6 +10,7 @@ public class Operation implements Serializable {
     private String opsName;
     private String secretKey;
     private ArrayList<String> members;
+    private String deviceId;
 
     public Operation() {}
 
@@ -53,4 +54,11 @@ public class Operation implements Serializable {
         this.members = members;
     }
 
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
 }

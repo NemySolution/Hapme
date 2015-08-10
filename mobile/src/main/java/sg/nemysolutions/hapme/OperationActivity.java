@@ -24,17 +24,22 @@ import android.widget.EditText;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
 import java.util.List;
 
+import sg.nemysolutions.hapme.entity.Command;
+
 public class OperationActivity extends AppCompatActivity {
 
     EditText et_opsName;
     EditText et_callSign;
     Button bn_broadcast;
+    Button bn_endOps;
+    ParseObject currentOps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +47,25 @@ public class OperationActivity extends AppCompatActivity {
         setContentView(R.layout.operation);
 
         Intent intent = getIntent();
-        String opsId = intent.getStringExtra("opsId");
+        final String opsId = intent.getStringExtra("opsId");
+
+        final String deviceId = ParseInstallation.getCurrentInstallation().getString("installationId");
 
         ParsePush.subscribeInBackground(opsId);
 
         et_opsName = (EditText) findViewById(R.id.et_opsName);
         et_callSign = (EditText) findViewById(R.id.et_callSign);
         bn_broadcast = (Button) findViewById(R.id.bn_broadcast);
+        bn_endOps = (Button) findViewById(R.id.bn_endOps);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
         query.getInBackground(opsId, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
+                    currentOps = object;
                     et_opsName.setText(object.getString("opsName"));
                     et_callSign.setText(object.getString("callSign"));
+
                 } else {
                     Log.e("ERROR", "Cannot retrieve operation!!");
                     finish();
@@ -67,8 +77,30 @@ public class OperationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OperationActivity.this, CommandsActivity.class);
-                intent.putExtra("opsName", et_opsName.getText().toString());
+                intent.putExtra("opsId", opsId);
                 startActivity(intent);
+            }
+        });
+
+        bn_endOps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // if is the commander that is ending this operation, delete the commands first, followed by the operation.
+                if(currentOps.getString("deviceId").equals(deviceId)) {
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
+                    query.whereEqualTo("opsId", opsId);
+                    query.findInBackground(new FindCallback<ParseObject>() {
+                        @Override
+                        public void done(List<ParseObject> results, ParseException e) {
+                            for (ParseObject c : results) {
+                                c.deleteInBackground();
+                            }
+                            currentOps.deleteInBackground();
+                        }
+                    });
+                }
+                ParsePush.unsubscribeInBackground(opsId);
+                finish();
             }
         });
 

@@ -54,6 +54,7 @@ public class JoinActivity extends AppCompatActivity {
                             Intent intent = new Intent(JoinActivity.this, OperationActivity.class);
                             intent.putExtra("opsId", object.getObjectId());
                             startActivity(intent);
+                            finish();
                         } else {
                             Log.e("ERROR", "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!");
                             Toast.makeText(JoinActivity.this, "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!", Toast.LENGTH_LONG).show();

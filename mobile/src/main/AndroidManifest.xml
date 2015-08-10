@@ -72,8 +72,6 @@ android version can be change at build.gradle
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
-                <!-- IMPORTANT: Change "com.parse.tutorials.pushnotifications" to match your app's package name. -->
                 <category android:name="sg.nemysolutions.hapme.pushnotifications" />
             </intent-filter>
         </receiver>

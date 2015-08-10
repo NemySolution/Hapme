@@ -28,6 +28,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.parse.Parse;
+import com.parse.ParseInstallation;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 //    private static Context mContext;
@@ -38,15 +41,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         // Start Parse
         ParseUtils.registerParse(MainActivity.this);
 
+        // Check with Parse whether this user is in any channels
+        List<String> subscribedChannels = ParseInstallation.getCurrentInstallation().getList("channels");
+        if (subscribedChannels != null) {
+            if (!subscribedChannels.isEmpty()) {
+                Intent intent = new Intent(MainActivity.this, OperationActivity.class);
+                intent.putExtra("opsId", subscribedChannels.get(0));
+                startActivity(intent);
+                finish();
+            }
+        }
         Button bn1 = (Button) findViewById(R.id.button);
         Button bn2 = (Button) findViewById(R.id.button2);
         Button bn3 = (Button) findViewById(R.id.button3);
         Button bn4 = (Button) findViewById(R.id.button4);
-        Button bn5 = (Button) findViewById(R.id.button5);
         Button bn6 = (Button) findViewById(R.id.button6);
         Button bn7 = (Button) findViewById(R.id.button7);
 
@@ -75,13 +86,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                startActivity(intent);
-            }
-        });
-        bn5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, OperationActivity.class);
                 startActivity(intent);
             }
         });

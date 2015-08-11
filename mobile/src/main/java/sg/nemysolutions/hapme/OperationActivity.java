@@ -18,8 +18,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -28,8 +32,12 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import sg.nemysolutions.hapme.entity.Command;
 
 public class OperationActivity extends AppCompatActivity {
 
@@ -38,6 +46,8 @@ public class OperationActivity extends AppCompatActivity {
     Button bn_broadcast;
     Button bn_endOps;
     ParseObject currentOps;
+    ListView lw_addMember;
+    List<String> membersList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +94,7 @@ public class OperationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // if is the commander that is ending this operation, delete the commands first, followed by the operation.
-                if(currentOps.getString("deviceId").equals(deviceId)) {
+                if (currentOps.getString("deviceId").equals(deviceId)) {
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
                     query.whereEqualTo("opsId", opsId);
                     query.findInBackground(new FindCallback<ParseObject>() {
@@ -102,6 +112,31 @@ public class OperationActivity extends AppCompatActivity {
             }
         });
 
+
+        ParseQuery<ParseObject> memberQuery = ParseQuery.getQuery("Operation");
+        memberQuery.getInBackground(opsId, new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                membersList = object.getList("members");
+            }
+        });
+
+        setList();
     }
 
+    private void setList() {
+        if(membersList != null) {
+            if(membersList.size() != 0) {
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, membersList);
+                lw_addMember.setAdapter(arrayAdapter);
+            }
+        }
+    }
+
+    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+                                long arg3) {
+
+        }
+    };
 }

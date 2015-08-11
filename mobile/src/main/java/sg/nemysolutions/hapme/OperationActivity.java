@@ -125,6 +125,11 @@ public class OperationActivity extends AppCompatActivity {
                             currentOps.deleteInBackground();
                         }
                     });
+                } else {
+                    membersList = currentOps.getList("members");
+                    membersList.remove(callSign);
+                    currentOps.put("members", membersList);
+                    currentOps.saveInBackground();
                 }
                 ParsePush.unsubscribeInBackground(opsId);
                 finish();

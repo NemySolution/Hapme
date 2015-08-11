@@ -86,8 +86,13 @@ public class OperationActivity extends AppCompatActivity {
                 // get the list of members and update it with current user to parse
                 if (object.getList("members") != null) {
                     members = object.getList("members");
+                    if(!members.contains(callSign)) {
+                        members.add(callSign);
+                    }
+                } else {
+                    members.add(callSign);
                 }
-                members.add(callSign);
+
                 object.put("members", members);
                 object.saveInBackground(new SaveCallback() {
                     @Override

@@ -77,8 +77,11 @@ public class OperationActivity extends AppCompatActivity {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
         query.getInBackground(opsId, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
+
+                // store the object to update later
                 currentOps = object;
-                // update the members
+
+                // get the list of members and update it with current user to parse
                 if (object.getList("members") != null) {
                     members = object.getList("members");
                 }

@@ -23,7 +23,6 @@ import com.parse.ParseObject;
 import com.parse.SaveCallback;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import sg.nemysolutions.hapme.entity.Command;
 

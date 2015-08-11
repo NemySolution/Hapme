@@ -42,23 +42,28 @@ public class JoinActivity extends AppCompatActivity {
         bn_join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // initiate joining of operation
-                ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
-                query.whereEqualTo("opsName", et_opsName.getText().toString());
-                query.whereEqualTo("secretKey", et_secretKey.getText().toString());
-                query.getFirstInBackground(new GetCallback<ParseObject>() {
-                    public void done(ParseObject object, ParseException e) {
-                        if (e == null) {
-                            Intent intent = new Intent(JoinActivity.this, OperationActivity.class);
-                            intent.putExtra("opsId", object.getObjectId());
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Log.e("ERROR", "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!");
-                            Toast.makeText(JoinActivity.this, "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!", Toast.LENGTH_LONG).show();
+                if (et_opsName.getText().toString().equals("") || et_secretKey.getText().toString().equals("")) {
+                    Toast.makeText(JoinActivity.this, "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!", Toast.LENGTH_LONG).show();
+                } else {
+                    // initiate joining of operation
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
+                    query.whereEqualTo("opsName", et_opsName.getText().toString());
+                    query.whereEqualTo("secretKey", et_secretKey.getText().toString());
+                    query.getFirstInBackground(new GetCallback<ParseObject>() {
+                        public void done(ParseObject object, ParseException e) {
+                            if (e == null) {
+                                Intent intent = new Intent(JoinActivity.this, OperationActivity.class);
+                                intent.putExtra("opsId", object.getObjectId());
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Log.e("ERROR", "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!");
+                                Toast.makeText(JoinActivity.this, "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!", Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                });
+                    });
+                }
+
             }
         });
 

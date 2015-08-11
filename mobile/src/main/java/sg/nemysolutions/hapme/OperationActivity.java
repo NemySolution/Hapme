@@ -131,7 +131,6 @@ public class OperationActivity extends AppCompatActivity {
         ParseQuery<ParseObject> memberQuery = ParseQuery.getQuery("Operation");
         memberQuery.getInBackground(opsId, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
-                membersList = new ArrayList<String>();
                 membersList = object.getList("members");
                 membersList.add(0, object.getString("callSign") + " (Commander)");
                 setList();

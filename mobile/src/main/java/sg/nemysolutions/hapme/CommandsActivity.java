@@ -38,19 +38,19 @@ public class CommandsActivity extends AppCompatActivity {
         setContentView(R.layout.commands);
 
         Intent intent = getIntent();
-        String opsId = intent.getStringExtra("opsId");
+        String opsName = intent.getStringExtra("opsName");
 
         lw = (ListView) findViewById(R.id.lv_commands);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
-        query.whereEqualTo("opsId", opsId);
+        query.whereEqualTo("opsName", opsName);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> results, ParseException e) {
                 for (ParseObject c : results) {
                     commandTextList.add(c.getString("commandName"));
                     Command command = new Command();
-                    command.setOpsId(c.getString("opsId"));
+                    command.setOpsName(c.getString("opsName"));
                     command.setCommandName(c.getString("commandName"));
                     command.setCommandID(c.getObjectId());
 
@@ -76,7 +76,7 @@ public class CommandsActivity extends AppCompatActivity {
             Command command = commandList.get(position);
 
             ParsePush push = new ParsePush();
-            push.setChannel(command.getOpsId());
+            push.setChannel(command.getOpsName());
             push.setMessage(command.getCommandID());
             push.sendInBackground();
 

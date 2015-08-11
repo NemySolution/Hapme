@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -54,10 +55,15 @@ public class JoinActivity extends AppCompatActivity {
                     query.getFirstInBackground(new GetCallback<ParseObject>() {
                         public void done(ParseObject object, ParseException e) {
                             if (e == null) {
+                                ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                                installation.put("opsId", object.getObjectId());
+                                installation.put("opsName", object.getString("opsName"));
+                                installation.put("callSign",et_callSign.getText().toString());
+                                installation.saveInBackground();
                                 Intent intent = new Intent(JoinActivity.this, OperationActivity.class);
-                                intent.putExtra("opsId", object.getObjectId());
-                                intent.putExtra("opsName", object.getString("opsName"));
-                                intent.putExtra("callSign", et_callSign.getText().toString());
+//                                intent.putExtra("opsId", object.getObjectId());
+//                                intent.putExtra("opsName", object.getString("opsName"));
+//                                intent.putExtra("callSign", et_callSign.getText().toString());
                                 startActivity(intent);
                                 finish();
                             } else {

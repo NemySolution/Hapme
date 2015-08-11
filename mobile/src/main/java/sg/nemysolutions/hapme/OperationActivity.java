@@ -55,12 +55,16 @@ public class OperationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.operation);
 
-        Intent intent = getIntent();
-        opsId = intent.getStringExtra("opsId");
-        opsName = intent.getStringExtra("opsName");
-        callSign = intent.getStringExtra("callSign");
+//        Intent intent = getIntent();
+//        opsId = intent.getStringExtra("opsId");
+//        opsName = intent.getStringExtra("opsName");
+//        callSign = intent.getStringExtra("callSign");
 
-        final String deviceId = ParseInstallation.getCurrentInstallation().getString("installationId");
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        final String deviceId = installation.getString("installationId");
+        opsId = installation.getString("opsId");
+        opsName = installation.getString("opsName");
+        callSign = installation.getString("callSign");
 
         lw_addMember = (ListView) findViewById(R.id.lw_addMember);
         bn_refresh = (Button) findViewById(R.id.bn_refresh);
@@ -105,7 +109,7 @@ public class OperationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OperationActivity.this, CommandsActivity.class);
-                intent.putExtra("opsId", opsId);
+                intent.putExtra("opsName", opsName);
                 startActivity(intent);
             }
         });
@@ -156,7 +160,7 @@ public class OperationActivity extends AppCompatActivity {
                 if(membersList == null) {
                     membersList = new ArrayList<>();
                 }
-                membersList.set(0, membersList.get(0) +  " (Commander)");
+//                membersList.set(0, membersList.get(0) +  " (Commander)");
                 setList();
             }
         });
@@ -170,4 +174,5 @@ public class OperationActivity extends AppCompatActivity {
             }
         }
     }
+
 }

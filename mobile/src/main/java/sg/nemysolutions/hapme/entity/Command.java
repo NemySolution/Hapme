@@ -6,7 +6,7 @@ import java.util.List;
 public class Command implements Serializable {
 
     private String commandID;
-    private String opsId;
+    private String opsName;
     private String commandName;
     private List<String> vibrationSeq;
     private List<String> gestureSeq;
@@ -21,12 +21,12 @@ public class Command implements Serializable {
         this.commandID = commandID;
     }
 
-    public String getOpsId() {
-        return opsId;
+    public String getOpsName() {
+        return opsName;
     }
 
-    public void setOpsId(String opsId) {
-        this.opsId = opsId;
+    public void setOpsName(String opsName) {
+        this.opsName = opsName;
     }
 
     public String getCommandName() {

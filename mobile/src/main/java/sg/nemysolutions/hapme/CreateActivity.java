@@ -88,17 +88,21 @@ public class CreateActivity extends AppCompatActivity {
                             ParseObject command;
                             for (Command c : commandList) {
                                 command = new ParseObject("Command");
-                                command.put("opsId", operation.getObjectId());
                                 command.put("opsName", et_opsName.getText().toString());
                                 command.put("commandName", c.getCommandName());
                                 command.put("vibrationSeq", c.getVibrationSeq());
                                 command.put("gestureSeq", c.getGestureSeq());
                                 command.saveInBackground();
                             }
+                            ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                            installation.put("opsId", operation.getObjectId());
+                            installation.put("opsName", operation.getString("opsName"));
+                            installation.put("callSign", operation.getString("callSign"));
+                            installation.saveInBackground();
                             Intent intent = new Intent(CreateActivity.this, OperationActivity.class);
-                            intent.putExtra("opsId", operation.getObjectId());
-                            intent.putExtra("opsName", operation.getString("opsName"));
-                            intent.putExtra("callSign", operation.getString("callSign"));
+//                            intent.putExtra("opsId", operation.getObjectId());
+//                            intent.putExtra("opsName", operation.getString("opsName"));
+//                            intent.putExtra("callSign", operation.getString("callSign"));
                             startActivity(intent);
                             finish();
                         }

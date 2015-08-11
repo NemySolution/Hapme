@@ -56,6 +56,7 @@ public class JoinActivity extends AppCompatActivity {
                             if (e == null) {
                                 Intent intent = new Intent(JoinActivity.this, OperationActivity.class);
                                 intent.putExtra("opsId", object.getObjectId());
+                                intent.putExtra("opsName", object.getString("opsName"));
                                 intent.putExtra("callSign", et_callSign.getText().toString());
                                 startActivity(intent);
                                 finish();

@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         if (subscribedChannels != null) {
             if (!subscribedChannels.isEmpty()) {
                 Intent intent = new Intent(MainActivity.this, OperationActivity.class);
-                intent.putExtra("opsId", subscribedChannels.get(0));
+                intent.putExtra("opsName", subscribedChannels.get(0));
                 startActivity(intent);
                 finish();
             }

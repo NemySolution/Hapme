@@ -97,6 +97,7 @@ public class CreateActivity extends AppCompatActivity {
                             }
                             Intent intent = new Intent(CreateActivity.this, OperationActivity.class);
                             intent.putExtra("opsId", operation.getObjectId());
+                            intent.putExtra("opsName", operation.getString("opsName"));
                             intent.putExtra("callSign", operation.getString("callSign"));
                             startActivity(intent);
                             finish();

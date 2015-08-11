@@ -46,6 +46,7 @@ public class OperationActivity extends AppCompatActivity {
     List<String> membersList;
     Button bn_refresh;
     String opsId;
+    String opsName;
     String callSign;
     List<String> members = new ArrayList<>();
 
@@ -56,11 +57,10 @@ public class OperationActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         opsId = intent.getStringExtra("opsId");
+        opsName = intent.getStringExtra("opsName");
         callSign = intent.getStringExtra("callSign");
 
         final String deviceId = ParseInstallation.getCurrentInstallation().getString("installationId");
-
-        ParsePush.subscribeInBackground(opsId);
 
         lw_addMember = (ListView) findViewById(R.id.lw_addMember);
         bn_refresh = (Button) findViewById(R.id.bn_refresh);
@@ -75,6 +75,9 @@ public class OperationActivity extends AppCompatActivity {
 
                 // store the object to update later
                 currentOps = object;
+
+                // subscribe
+                ParsePush.subscribeInBackground(object.getString("opsName"));
 
                 // get the list of members and update it with current user to parse
                 if (object.getList("members") != null) {
@@ -120,6 +123,7 @@ public class OperationActivity extends AppCompatActivity {
                             for (ParseObject c : results) {
                                 c.deleteInBackground();
                             }
+                            ParsePush.unsubscribeInBackground(currentOps.getString("opsName"));
                             currentOps.deleteInBackground();
                         }
                     });
@@ -129,7 +133,6 @@ public class OperationActivity extends AppCompatActivity {
                     currentOps.put("members", membersList);
                     currentOps.saveInBackground();
                 }
-                ParsePush.unsubscribeInBackground(opsId);
                 finish();
             }
         });
@@ -150,12 +153,10 @@ public class OperationActivity extends AppCompatActivity {
         memberQuery.getInBackground(opsId, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 membersList = object.getList("members");
-
                 if(membersList == null) {
                     membersList = new ArrayList<>();
                 }
-
-                //membersList.add(0, object.getString("callSign") + " (Commander)");
+                membersList.set(0, membersList.get(0) +  " (Commander)");
                 setList();
             }
         });

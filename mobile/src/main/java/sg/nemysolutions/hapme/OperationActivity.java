@@ -63,6 +63,8 @@ public class OperationActivity extends AppCompatActivity {
 
         ParsePush.subscribeInBackground(opsId);
 
+        lw_addMember = (ListView) findViewById(R.id.lw_addMember);
+        bn_refresh = (Button) findViewById(R.id.bn_refresh);
         et_opsName = (EditText) findViewById(R.id.et_opsName);
         et_callSign = (EditText) findViewById(R.id.et_callSign);
         bn_broadcast = (Button) findViewById(R.id.bn_broadcast);
@@ -114,8 +116,7 @@ public class OperationActivity extends AppCompatActivity {
             }
         });
 
-        lw_addMember = (ListView) findViewById(R.id.lw_addMember);
-        bn_refresh = (Button) findViewById(R.id.bn_refresh);
+
         bn_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +131,9 @@ public class OperationActivity extends AppCompatActivity {
         ParseQuery<ParseObject> memberQuery = ParseQuery.getQuery("Operation");
         memberQuery.getInBackground(opsId, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
+                membersList = new ArrayList<String>();
                 membersList = object.getList("members");
+                membersList.add(0, object.getString("callSign") + " (Commander)");
                 setList();
             }
         });

@@ -80,7 +80,7 @@ public class OperationActivity extends AppCompatActivity {
                 if (object.getList("members") != null) {
                     members = object.getList("members");
                 }
-                members.add(et_callSign.getText().toString());
+                members.add(callSign);
                 object.put("members", members);
                 object.saveInBackground(new SaveCallback() {
                     @Override
@@ -152,7 +152,7 @@ public class OperationActivity extends AppCompatActivity {
                 membersList = object.getList("members");
 
                 if(membersList == null) {
-                    membersList = new ArrayList<String>();
+                    membersList = new ArrayList<>();
                 }
 
                 membersList.add(0, object.getString("callSign") + " (Commander)");

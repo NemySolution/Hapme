@@ -11,7 +11,7 @@ Haptics Communication System
 ## To Do List
 * ~~View members in the channel in Operation page. (should auto update when a member joins)~~
 * Receiver for notifications
-* Only Commander should be able to send the commands he created (currently all members are able to see)
+* Only Commander should be able to send the commands he created (currently all members are able to send all commands)
 * Member default commands
 * Use Myo to send commands
 * Watch App

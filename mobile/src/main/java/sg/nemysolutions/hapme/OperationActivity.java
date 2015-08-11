@@ -155,7 +155,7 @@ public class OperationActivity extends AppCompatActivity {
                     membersList = new ArrayList<>();
                 }
 
-                membersList.add(0, object.getString("callSign") + " (Commander)");
+                //membersList.add(0, object.getString("callSign") + " (Commander)");
                 setList();
             }
         });

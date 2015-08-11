@@ -33,6 +33,7 @@ import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,8 @@ public class OperationActivity extends AppCompatActivity {
     List<String> membersList;
     Button bn_refresh;
     String opsId;
+    String callSign;
+    List<String> members = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,7 @@ public class OperationActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         opsId = intent.getStringExtra("opsId");
+        callSign = intent.getStringExtra("callSign");
 
         final String deviceId = ParseInstallation.getCurrentInstallation().getString("installationId");
 
@@ -73,15 +77,26 @@ public class OperationActivity extends AppCompatActivity {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
         query.getInBackground(opsId, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    currentOps = object;
-                    et_opsName.setText(object.getString("opsName"));
-                    et_callSign.setText(object.getString("callSign"));
-
-                } else {
-                    Log.e("ERROR", "Cannot retrieve operation!!");
-                    finish();
+                currentOps = object;
+                // update the members
+                if (object.getList("members") != null) {
+                    members = object.getList("members");
                 }
+                members.add(et_callSign.getText().toString());
+                object.put("members", members);
+                object.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            et_opsName.setText(currentOps.getString("opsName"));
+                            et_callSign.setText(currentOps.getString("callSign"));
+                        } else {
+                            Log.e("ERROR", "Cannot retrieve operation!!");
+                            finish();
+                        }
+                    }
+                });
+
             }
         });
 

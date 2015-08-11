@@ -14,6 +14,8 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.List;
+
 /**************** MainActivity ******************/
 /* A "login" page for all the users (GC & members)
 * for members to join an operation*/
@@ -54,6 +56,7 @@ public class JoinActivity extends AppCompatActivity {
                             if (e == null) {
                                 Intent intent = new Intent(JoinActivity.this, OperationActivity.class);
                                 intent.putExtra("opsId", object.getObjectId());
+                                intent.putExtra("callSign", et_callSign.getText().toString());
                                 startActivity(intent);
                                 finish();
                             } else {

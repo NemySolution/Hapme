@@ -80,7 +80,6 @@ public class CreateActivity extends AppCompatActivity {
                     operation = new ParseObject("Operation");
                     operation.put("deviceId", deviceId);
                     operation.put("opsName", et_opsName.getText().toString());
-                    operation.put("callSign", et_callSign.getText().toString());
                     operation.put("secretKey", et_secretKey.getText().toString());
                     operation.saveInBackground(new SaveCallback() {
                         @Override
@@ -97,6 +96,7 @@ public class CreateActivity extends AppCompatActivity {
                             }
                             Intent intent = new Intent(CreateActivity.this, OperationActivity.class);
                             intent.putExtra("opsId", operation.getObjectId());
+                            intent.putExtra("callSign", operation.getString("callSign"));
                             startActivity(intent);
                             finish();
                         }

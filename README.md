@@ -9,7 +9,7 @@ Haptics Communication System
 * Others = Try to use two letters to summarize the object, followed by an underscore with the description
 
 ## To Do List
-* --View members in the channel in Operation page. (should auto update when a member joins)--
+* ~~View members in the channel in Operation page. (should auto update when a member joins)~~
 * Receiver for notifications
 * Only Commander should be able to send the commands he created (currently all members are able to see)
 * Member default commands

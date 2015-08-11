@@ -48,6 +48,8 @@ public class OperationActivity extends AppCompatActivity {
     ParseObject currentOps;
     ListView lw_addMember;
     List<String> membersList;
+    Button bn_refresh;
+    String opsId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class OperationActivity extends AppCompatActivity {
         setContentView(R.layout.operation);
 
         Intent intent = getIntent();
-        final String opsId = intent.getStringExtra("opsId");
+        opsId = intent.getStringExtra("opsId");
 
         final String deviceId = ParseInstallation.getCurrentInstallation().getString("installationId");
 
@@ -112,15 +114,26 @@ public class OperationActivity extends AppCompatActivity {
             }
         });
 
+        lw_addMember = (ListView) findViewById(R.id.lw_addMember);
+        bn_refresh = (Button) findViewById(R.id.bn_refresh);
+        bn_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                grabMembers();
+            }
+        });
 
+        grabMembers();
+    }
+
+    private void grabMembers() {
         ParseQuery<ParseObject> memberQuery = ParseQuery.getQuery("Operation");
         memberQuery.getInBackground(opsId, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 membersList = object.getList("members");
+                setList();
             }
         });
-
-        setList();
     }
 
     private void setList() {
@@ -131,12 +144,4 @@ public class OperationActivity extends AppCompatActivity {
             }
         }
     }
-
-    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-                                long arg3) {
-
-        }
-    };
 }

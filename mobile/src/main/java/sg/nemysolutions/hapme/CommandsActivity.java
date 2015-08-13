@@ -60,6 +60,7 @@ public class CommandsActivity extends AppCompatActivity {
 
                         commandList.add(command);
                     }
+                    setList();
                 }
             });
         } else {
@@ -75,9 +76,8 @@ public class CommandsActivity extends AppCompatActivity {
             default2.setCommandName("Send Location");
             commandList.add(default2);
             commandTextList.add(default2.getCommandName());
+            setList();
         }
-
-        setList();
 
         lw.setOnItemClickListener(onItemClickListener);
     }

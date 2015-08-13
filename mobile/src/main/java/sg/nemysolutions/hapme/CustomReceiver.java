@@ -6,12 +6,16 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.parse.ParsePushBroadcastReceiver;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CustomReceiver extends BroadcastReceiver {
+public class CustomReceiver extends ParsePushBroadcastReceiver {
     @Override
-    public void onReceive(Context context, Intent intent) {
+    protected void onPushReceive(Context context, Intent intent) {
+        super.onPushReceive(context, intent);
+
         try {
             JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
 
@@ -24,4 +28,13 @@ public class CustomReceiver extends BroadcastReceiver {
         }
     }
 
+    @Override
+    protected void onPushDismiss(Context context, Intent intent) {
+        super.onPushDismiss(context, intent);
+    }
+
+    @Override
+    protected void onPushOpen(Context context, Intent intent) {
+        super.onPushOpen(context, intent);
+    }
 }

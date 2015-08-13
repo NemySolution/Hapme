@@ -13,7 +13,10 @@ Haptics Communication System
 * ~~Receiver for notifications~~
 * ~~Only Commander should be able to send the commands he created (currently all members are able to send all commands)~~
 * ~~Member default commands~~
-* Need to make UI buttons display accordingly to the user profile (commander and members)
-* Use Myo to send commands
+* Set Vibration sequence for commands and notifications
+* Commander need to be able to send Commands using Myo Armband
+* Commander need to be able to edit Operation details, remove members
+* Need to make UI buttons (View Location button, Edit Operation button) display accordingly to the user profile (commander and members)
 * Watch App
-* Vibration sequence
+* Simple web app for Command Post to view all the commands sent, highlight to them when there is an "high alert" command sent.
+* GPS and Google Map location (KIV)

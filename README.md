@@ -12,7 +12,7 @@ Haptics Communication System
 * ~~View members in the channel in Operation page. (should auto update when a member joins)~~
 * ~~Receiver for notifications~~
 * ~~Only Commander should be able to send the commands he created (currently all members are able to send all commands)~~
-* ~Member default commands~~
+* ~~Member default commands~~
 * Need to make UI buttons display accordingly to the user profile (commander and members)
 * Use Myo to send commands
 * Watch App

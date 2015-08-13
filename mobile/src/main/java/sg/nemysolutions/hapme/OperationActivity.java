@@ -137,7 +137,6 @@ public class OperationActivity extends AppCompatActivity {
                             for (ParseObject c : results) {
                                 c.deleteInBackground();
                             }
-                            ParsePush.unsubscribeInBackground(currentOps.getString("opsName"));
                             currentOps.deleteInBackground();
                         }
                     });
@@ -147,6 +146,7 @@ public class OperationActivity extends AppCompatActivity {
                     currentOps.put("members", membersList);
                     currentOps.saveInBackground();
                 }
+                ParsePush.unsubscribeInBackground(currentOps.getString("opsName"));
                 finish();
             }
         });

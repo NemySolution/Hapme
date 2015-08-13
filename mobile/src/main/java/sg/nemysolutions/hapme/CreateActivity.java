@@ -72,6 +72,8 @@ public class CreateActivity extends AppCompatActivity {
 
                 if (et_opsName.getText().toString().equals("") || et_callSign.getText().toString().equals("") || et_secretKey.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "Please enter all the fields!", Toast.LENGTH_SHORT).show();
+                } else if (et_opsName.getText().toString().equals("default")) {
+                    Toast.makeText(getApplicationContext(), "default cannot be used as Ops name!", Toast.LENGTH_SHORT).show();
                 } else {
                     String deviceId = ParseInstallation.getCurrentInstallation().getString("installationId");
 

@@ -114,6 +114,11 @@ public class OperationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OperationActivity.this, CommandsActivity.class);
+                if (currentOps.getString("deviceId").equals(deviceId)) {
+                    intent.putExtra("isCommander", "true");
+                } else {
+                    intent.putExtra("isCommander", "false");
+                }
                 intent.putExtra("opsName", opsName);
                 startActivity(intent);
             }

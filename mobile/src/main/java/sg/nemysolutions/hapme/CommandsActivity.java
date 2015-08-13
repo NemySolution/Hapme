@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
@@ -31,6 +32,7 @@ public class CommandsActivity extends AppCompatActivity {
     List<String> commandTextList  = new ArrayList<>();
     List<Command> commandList = new ArrayList<>();
     ListView lw = null;
+    String opsName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,27 +41,43 @@ public class CommandsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String opsName = intent.getStringExtra("opsName");
+        String isCommander = intent.getStringExtra("isCommander");
 
         lw = (ListView) findViewById(R.id.lv_commands);
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
-        query.whereEqualTo("opsName", opsName);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> results, ParseException e) {
-                for (ParseObject c : results) {
-                    commandTextList.add(c.getString("commandName"));
-                    Command command = new Command();
-                    command.setOpsName(c.getString("opsName"));
-                    command.setCommandName(c.getString("commandName"));
-                    command.setCommandID(c.getObjectId());
+        if (isCommander.equals("true")) {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
+            query.whereEqualTo("opsName", opsName);
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> results, ParseException e) {
+                    for (ParseObject c : results) {
+                        commandTextList.add(c.getString("commandName"));
+                        Command command = new Command();
+                        command.setOpsName(c.getString("opsName"));
+                        command.setCommandName(c.getString("commandName"));
+                        command.setCommandID(c.getObjectId());
 
-                    commandList.add(command);
+                        commandList.add(command);
+                    }
                 }
+            });
+        } else {
+            // members default commands
+            Command default1 = new Command();
+            default1.setOpsName(opsName);
+            default1.setCommandName("Need Backup");
+            commandList.add(default1);
+            commandTextList.add(default1.getCommandName());
 
-                setList();
-            }
-        });
+            Command default2 = new Command();
+            default2.setOpsName(opsName);
+            default2.setCommandName("Send Location");
+            commandList.add(default2);
+            commandTextList.add(default2.getCommandName());
+        }
+
+        setList();
 
         lw.setOnItemClickListener(onItemClickListener);
     }
@@ -77,7 +95,7 @@ public class CommandsActivity extends AppCompatActivity {
 
             ParsePush push = new ParsePush();
             push.setChannel(command.getOpsName());
-            push.setMessage(command.getCommandID());
+            push.setMessage(command.getCommandName());
             push.sendInBackground();
 
             Toast.makeText(getApplicationContext(), "Command: " + command.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();

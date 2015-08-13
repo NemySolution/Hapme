@@ -5,16 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.parse.ParsePushBroadcastReceiver;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CustomReceiver extends BroadcastReceiver {
-    public CustomReceiver() {
-        super();
-    }
-
     @Override
     public void onReceive(Context context, Intent intent) {
         try {

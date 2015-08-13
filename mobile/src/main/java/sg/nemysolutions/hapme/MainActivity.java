@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.parse.Parse;
 import com.parse.ParseInstallation;
 
 import java.util.List;
@@ -36,7 +37,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Start Parse
-        ParseUtils.registerParse(MainActivity.this);
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "0RgU1BAusmGZiIkOFDVucZcEtbCHPiJx479CDcKG", "GhyTkHlqG22YziVd7fbP8YNTYK6wbmrcwF99yM5G");
+        ParseInstallation.getCurrentInstallation().saveInBackground();
 
         // Check with Parse whether this user is in any channels
         List<String> subscribedChannels = ParseInstallation.getCurrentInstallation().getList("channels");

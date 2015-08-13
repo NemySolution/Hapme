@@ -61,9 +61,6 @@ public class JoinActivity extends AppCompatActivity {
                                 installation.put("callSign",et_callSign.getText().toString());
                                 installation.saveInBackground();
                                 Intent intent = new Intent(JoinActivity.this, OperationActivity.class);
-//                                intent.putExtra("opsId", object.getObjectId());
-//                                intent.putExtra("opsName", object.getString("opsName"));
-//                                intent.putExtra("callSign", et_callSign.getText().toString());
                                 startActivity(intent);
                                 finish();
                             } else {

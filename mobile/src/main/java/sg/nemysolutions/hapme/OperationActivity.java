@@ -55,11 +55,6 @@ public class OperationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.operation);
 
-//        Intent intent = getIntent();
-//        opsId = intent.getStringExtra("opsId");
-//        opsName = intent.getStringExtra("opsName");
-//        callSign = intent.getStringExtra("callSign");
-
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         final String deviceId = installation.getString("installationId");
         opsId = installation.getString("opsId");

@@ -1,4 +1,4 @@
-package sg.nemysolutions.hapme;
+package sg.nemysolutions.hapme.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

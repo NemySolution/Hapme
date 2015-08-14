@@ -1,4 +1,4 @@
-package sg.nemysolutions.hapme;
+package sg.nemysolutions.hapme.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import java.util.List;
+import sg.nemysolutions.hapme.R;
 
 /**************** MainActivity ******************/
 /* A "login" page for all the users (GC & members)

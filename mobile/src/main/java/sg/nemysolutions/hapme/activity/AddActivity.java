@@ -1,4 +1,4 @@
-package sg.nemysolutions.hapme;
+package sg.nemysolutions.hapme.activity;
 
 /**************** AddActivity command Page ******************/
 /* This page is to allow users to add a command,
@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import sg.nemysolutions.hapme.R;
 import sg.nemysolutions.hapme.entity.Command;
 
 public class AddActivity extends AppCompatActivity {
@@ -131,7 +132,7 @@ public class AddActivity extends AppCompatActivity {
 
                 Intent intent = new Intent();
                 intent.putExtra("command", cmd);
-                setResult(RESULT_OK,intent);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });

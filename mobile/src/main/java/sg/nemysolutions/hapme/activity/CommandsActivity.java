@@ -1,4 +1,4 @@
-package sg.nemysolutions.hapme;
+package sg.nemysolutions.hapme.activity;
 
 /**************** CommandsActivity Page ******************/
 /* This page is to allow users to broadcast a
@@ -26,6 +26,7 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+import sg.nemysolutions.hapme.R;
 import sg.nemysolutions.hapme.entity.Command;
 
 public class CommandsActivity extends AppCompatActivity {

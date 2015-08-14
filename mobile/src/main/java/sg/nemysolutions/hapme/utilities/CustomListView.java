@@ -1,4 +1,4 @@
-package sg.nemysolutions.hapme;
+package sg.nemysolutions.hapme.utilities;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import sg.nemysolutions.hapme.R;
 import sg.nemysolutions.hapme.entity.Command;
 
 /**

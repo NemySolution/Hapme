@@ -1,4 +1,4 @@
-package sg.nemysolutions.hapme;
+package sg.nemysolutions.hapme.activity;
 
 /**************** CreateActivity operation Page ******************/
 /* This page is to allow Commanders to create
@@ -24,6 +24,8 @@ import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 
+import sg.nemysolutions.hapme.utilities.CustomListView;
+import sg.nemysolutions.hapme.R;
 import sg.nemysolutions.hapme.entity.Command;
 
 public class CreateActivity extends AppCompatActivity {

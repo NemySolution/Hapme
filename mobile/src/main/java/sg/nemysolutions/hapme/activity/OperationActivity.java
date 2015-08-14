@@ -1,4 +1,4 @@
-package sg.nemysolutions.hapme;
+package sg.nemysolutions.hapme.activity;
 
 /**************** OperationActivity Page ******************/
 /* This page is to allow users to view operation
@@ -34,6 +34,8 @@ import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import sg.nemysolutions.hapme.R;
 
 public class OperationActivity extends AppCompatActivity {
 

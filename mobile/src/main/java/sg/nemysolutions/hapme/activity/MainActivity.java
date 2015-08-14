@@ -1,4 +1,4 @@
-package sg.nemysolutions.hapme;
+package sg.nemysolutions.hapme.activity;
 
 /**************** MainActivity ******************/
 /* Temporary page for us to easily access our
@@ -26,6 +26,8 @@ import com.parse.Parse;
 import com.parse.ParseInstallation;
 
 import java.util.List;
+
+import sg.nemysolutions.hapme.R;
 
 public class MainActivity extends AppCompatActivity {
 //    private static Context mContext;

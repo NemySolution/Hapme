@@ -1,4 +1,4 @@
-package sg.nemysolutions.hapme;
+package sg.nemysolutions.hapme.activity;
 
 /**************** HomeActivity Page ******************/
 /* This page is to allow users to select whether
@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import sg.nemysolutions.hapme.R;
 
 public class HomeActivity extends AppCompatActivity {
 

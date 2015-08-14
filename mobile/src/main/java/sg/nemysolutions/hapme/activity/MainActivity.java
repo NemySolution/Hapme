@@ -32,8 +32,6 @@ import sg.nemysolutions.hapme.utilities.Information;
 import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 public class MainActivity extends AppCompatActivity {
-//    private static Context mContext;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 String ver = Information.getVersion(MainActivity.this);
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setMessage(ver).setTitle("Version");
+
                 // 3. Get the AlertDialog from create()
                 AlertDialog dialog = builder.create();
                 dialog.show();

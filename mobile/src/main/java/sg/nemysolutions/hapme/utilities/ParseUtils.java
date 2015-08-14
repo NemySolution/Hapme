@@ -32,7 +32,7 @@ public class ParseUtils {
         // Check with Parse whether this user is in any channels
         List<String> subscribedChannels = new ArrayList<>();
 
-        if (!ParseInstallation.getCurrentInstallation().getList("channels").isEmpty()) {
+        if (ParseInstallation.getCurrentInstallation().getList("channels") != null) {
             subscribedChannels = ParseInstallation.getCurrentInstallation().getList("channels");
         }
 

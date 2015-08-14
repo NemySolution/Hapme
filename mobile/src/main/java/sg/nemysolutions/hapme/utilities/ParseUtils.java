@@ -3,6 +3,7 @@ package sg.nemysolutions.hapme.utilities;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -54,7 +55,7 @@ public class ParseUtils {
      */
     public static void createOperation(final AppCompatActivity context, final String opsName, String callSign, String secretKey, final List<Command> commandList) {
 
-        ParseObject operation = new ParseObject("Operation");
+        final ParseObject operation = new ParseObject("Operation");
         operation.put("deviceId", ParseInstallation.getCurrentInstallation().getInstallationId());
         operation.put("opsName", opsName);
         operation.put("callSign", callSign);
@@ -77,15 +78,27 @@ public class ParseUtils {
                     command.saveInBackground();
                 }
 
-                Intent intent = new Intent(context, OperationActivity.class);
-                context.startActivity(intent);
-                context.finish();
-
-                /*ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                ParseInstallation installation = ParseInstallation.getCurrentInstallation();
                 installation.put("opsId", operation.getObjectId());
                 installation.put("opsName", operation.getString("opsName"));
                 installation.put("callSign", operation.getString("callSign"));
-                installation.saveInBackground();
+
+                installation.saveInBackground(new SaveCallback() {
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            Intent intent = new Intent(context, OperationActivity.class);
+                            context.startActivity(intent);
+                            context.finish();
+                        } else {
+                            Toast.makeText(context, "Cannot Create Operation. Try Again!", Toast.LENGTH_SHORT);
+                        }
+                    }
+                });
+
+
+
+
+                /*
                 Intent intent = new Intent(CreateOperationActivity.this, OperationActivity.class);
 //                            intent.putExtra("opsId", operation.getObjectId());
 //                            intent.putExtra("opsName", operation.getString("opsName"));

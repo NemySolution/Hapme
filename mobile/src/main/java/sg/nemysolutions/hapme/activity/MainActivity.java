@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setMessage(ver).setTitle("Version");
 
-                // 3. Get the AlertDialog from activity_createOperation()
+                // 3. Get the AlertDialog from activity_createoperation()
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }

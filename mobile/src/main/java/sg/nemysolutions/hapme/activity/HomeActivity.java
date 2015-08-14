@@ -2,7 +2,7 @@ package sg.nemysolutions.hapme.activity;
 
 /**************** HomeActivity Page ******************/
 /* This page is to allow users to select whether
-* they want to join or activity_createOperation operation.
+* they want to join or activity_createoperation operation.
 * on page load, check if the user is already
 * in an operation. */
 
@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
         bn_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, CreateActivity.class);
+                Intent intent = new Intent(HomeActivity.this, CreateOperationActivity.class);
                 startActivity(intent);
             }
         });

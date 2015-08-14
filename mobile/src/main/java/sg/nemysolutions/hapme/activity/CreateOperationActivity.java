@@ -1,7 +1,7 @@
 package sg.nemysolutions.hapme.activity;
 
 /**************** CreateActivity operation Page ******************/
-/* This page is to allow Commanders to activity_createOperation
+/* This page is to allow Commanders to activity_createoperation
 * an operation*/
 
 //Key person: Yeekeng and Ming Sheng
@@ -15,11 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.parse.ParseException;
-import com.parse.ParseInstallation;
-import com.parse.ParseObject;
-import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 
@@ -48,7 +43,7 @@ public class CreateOperationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_createOperation);
+        setContentView(R.layout.activity_createoperation);
 
         Common.offAutoKey(this);
 

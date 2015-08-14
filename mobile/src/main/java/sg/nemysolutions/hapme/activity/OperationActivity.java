@@ -147,13 +147,15 @@ public class OperationActivity extends AppCompatActivity {
             public void done(ParseObject object, ParseException e) {
                 if (object.getList("members") != null && object.getList("members").size() != 0) {
                     members = object.getList("members");
-
-                    if (!members.contains(currentOps.getString("callSign") + " (Commander)")) {
-                        members.add(0, currentOps.getString("callSign") + " (Commander)");
-                    }
-
-                    membersAdapter.notifyDataSetChanged();
+                } else {
+                    members = new ArrayList<String>();
                 }
+
+                if (!members.contains(currentOps.getString("callSign") + " (Commander)")) {
+                    members.add(0, currentOps.getString("callSign") + " (Commander)");
+                }
+
+                setList();
             }
         });
     }

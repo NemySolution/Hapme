@@ -10,10 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Operation Name:"
-        android:id="@+id/textView"
+        android:id="@+id/tv_operationName"
         android:layout_alignBaseline="@+id/et_opsName"
         android:layout_alignBottom="@+id/et_opsName"
-        android:layout_alignEnd="@+id/textView2" />
+        android:layout_alignEnd="@+id/tv_commanderCallsign" />
 
 
 
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/et_opsName"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/textView"
+        android:layout_toEndOf="@+id/tv_operationName"
         android:imeOptions="flagNavigateNext"
         android:singleLine="true"/>
 
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Commander Callsign:"
-        android:id="@+id/textView2"
+        android:id="@+id/tv_commanderCallsign"
         android:layout_alignBaseline="@+id/et_callSign"
         android:layout_alignBottom="@+id/et_callSign"
         android:layout_alignParentStart="true"
@@ -40,7 +40,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_callSign"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/tv_operationName"
         android:layout_alignStart="@+id/et_opsName"
         android:imeOptions="flagNavigateNext"
         android:singleLine="true"/>
@@ -49,35 +49,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Secret Key:"
-        android:id="@+id/textView3"
-        android:layout_alignBaseline="@+id/editText_secretKey"
-        android:layout_alignBottom="@+id/editText_secretKey"
-        android:layout_alignEnd="@+id/textView2" />
+        android:id="@+id/tv_secretKey"
+        android:layout_alignBaseline="@+id/et_secretKey"
+        android:layout_alignBottom="@+id/et_secretKey"
+        android:layout_alignEnd="@+id/tv_commanderCallsign" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Operation"
-        android:id="@+id/btn_createOps"
+        android:id="@+id/bn_createOps"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView_addCmd"
+        android:id="@+id/lv_addCmd"
         android:smoothScrollbar="false"
         android:layout_alignParentStart="true"
         android:layout_above="@+id/bn_addCmd"
-        android:layout_below="@+id/textView4" />
+        android:layout_below="@+id/tv_listOfCommand" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="List of Command:"
-        android:id="@+id/textView4"
+        android:id="@+id/tv_listOfCommand"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/editText_secretKey"
+        android:layout_below="@+id/et_secretKey"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -85,13 +85,13 @@
         android:layout_height="wrap_content"
         android:text="Add Command"
         android:id="@+id/bn_addCmd"
-        android:layout_above="@+id/btn_createOps"
+        android:layout_above="@+id/bn_createOps"
         android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText_secretKey"
+        android:id="@+id/et_secretKey"
         android:layout_below="@+id/et_callSign"
         android:layout_alignParentEnd="true"
         android:layout_alignStart="@+id/et_callSign"

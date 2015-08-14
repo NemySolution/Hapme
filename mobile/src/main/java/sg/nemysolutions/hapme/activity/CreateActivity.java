@@ -49,11 +49,11 @@ public class CreateActivity extends AppCompatActivity {
         this.getWindow()
                 .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        lw_commands = (ListView) findViewById(R.id.listView_addCmd);
+        lw_commands = (ListView) findViewById(R.id.lv_addCmd);
 
         //declare buttons
         Button bn_addCmd = (Button) findViewById(R.id.bn_addCmd);
-        Button bn_createOps = (Button) findViewById(R.id.btn_createOps);
+        Button bn_createOps = (Button) findViewById(R.id.bn_createOps);
 
         //button that goes to "add cmd" page
         bn_addCmd.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +66,7 @@ public class CreateActivity extends AppCompatActivity {
 
         et_opsName = (EditText) findViewById(R.id.et_opsName);
         et_callSign = (EditText) findViewById(R.id.et_callSign);
-        et_secretKey = (EditText) findViewById(R.id.editText_secretKey);
+        et_secretKey = (EditText) findViewById(R.id.et_secretKey);
 
         bn_createOps.setOnClickListener(new View.OnClickListener() {
             @Override

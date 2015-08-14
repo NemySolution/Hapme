@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button bn3 = (Button) findViewById(R.id.button3);
         Button bn4 = (Button) findViewById(R.id.button4);
-        Button bn6 = (Button) findViewById(R.id.button6);
+        Button bn6 = (Button) findViewById(R.id.bn_joinOperation);
         Button bn7 = (Button) findViewById(R.id.button7);
 
         bn3.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +125,10 @@ public class MainActivity extends AppCompatActivity {
 //                .create();
 //    }
 
+    /**
+     *
+     * @return
+     */
     private String getVersion(){
         try {
             PackageManager packageManager=getPackageManager();

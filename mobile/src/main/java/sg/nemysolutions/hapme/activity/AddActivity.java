@@ -64,7 +64,7 @@ public class AddActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         lockView = (TextView) findViewById(R.id.lock_state);
-        commandView = (TextView) findViewById(R.id.command);
+        commandView = (TextView) findViewById(R.id.tv_command);
         messageView = (TextView) findViewById(R.id.message);
 
         bn_sync = (Button) findViewById(R.id.bn_sync);
@@ -128,7 +128,7 @@ public class AddActivity extends AppCompatActivity {
                 Command cmd = new Command();
                 cmd.setCommandName(et_commandName.getText().toString());
                 cmd.setGestureSeq(gestureList);
-                cmd.setVibrationSeq(gestureList);
+                cmd.setVibrationSeq(gestureList); // dummy list. Ming Sheng will change when he is done with watch
 
                 Intent intent = new Intent();
                 intent.putExtra("command", cmd);
@@ -165,7 +165,7 @@ public class AddActivity extends AppCompatActivity {
         } else if (et_gesture3.getText().toString().equals("")) {
             et_gesture3.setText(pose);
         } else {
-            Log.e("NICHOLAS", "LOL");
+            Log.e("Error", "All 3 gestures are filled.");
         }
     }
 

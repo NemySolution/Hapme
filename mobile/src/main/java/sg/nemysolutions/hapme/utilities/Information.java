@@ -8,7 +8,7 @@ import android.util.Log;
 public class Information {
 
     /**
-     *
+     * This method is called by MainActivity.java to retrieve application version
      * @param context
      * @return
      */

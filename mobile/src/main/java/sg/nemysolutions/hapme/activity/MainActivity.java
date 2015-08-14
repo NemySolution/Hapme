@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         bn_createOperation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CreateActivity.class);
+                Intent intent = new Intent(MainActivity.this, CreateOperationActivity.class);
                 startActivity(intent);
             }
         });
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setMessage(ver).setTitle("Version");
 
-                // 3. Get the AlertDialog from create()
+                // 3. Get the AlertDialog from activity_createOperation()
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }

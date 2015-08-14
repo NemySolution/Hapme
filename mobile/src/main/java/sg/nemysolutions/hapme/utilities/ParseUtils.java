@@ -119,7 +119,15 @@ public class ParseUtils {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
         query.getInBackground(installation.getString("opsId"), new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
-                object.add("members", callSign);
+                List<String> members = object.getList("members");
+
+                if (members == null) {
+                    members = new ArrayList<String>();
+                }
+
+                members.add(callSign);
+
+                object.put("members", members);
                 object.saveInBackground();
             }
         });

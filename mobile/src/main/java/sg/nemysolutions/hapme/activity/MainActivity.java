@@ -28,6 +28,8 @@ import com.parse.ParseInstallation;
 import java.util.List;
 
 import sg.nemysolutions.hapme.R;
+import sg.nemysolutions.hapme.utilities.Information;
+import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 public class MainActivity extends AppCompatActivity {
 //    private static Context mContext;
@@ -38,10 +40,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Start Parse
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "0RgU1BAusmGZiIkOFDVucZcEtbCHPiJx479CDcKG", "GhyTkHlqG22YziVd7fbP8YNTYK6wbmrcwF99yM5G");
-        ParseInstallation.getCurrentInstallation().saveInBackground();
+        // Initialise Parse
+        ParseUtils.registerParse(this);
 
         // Check with Parse whether this user is in any channels
         List<String> subscribedChannels = ParseInstallation.getCurrentInstallation().getList("channels");
@@ -53,26 +53,28 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        Button bn3 = (Button) findViewById(R.id.button3);
-        Button bn4 = (Button) findViewById(R.id.button4);
-        Button bn6 = (Button) findViewById(R.id.button6);
-        Button bn7 = (Button) findViewById(R.id.button7);
+        Button bn_homePage = (Button) findViewById(R.id.bn_homePage);
+        Button bn_createOperation = (Button) findViewById(R.id.bn_createOperation);
+        Button bn_joinOperation = (Button) findViewById(R.id.bn_joinOperation);
+        Button bn_about = (Button) findViewById(R.id.bn_about);
 
-        bn3.setOnClickListener(new View.OnClickListener() {
+        bn_createOperation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateActivity.class);
                 startActivity(intent);
             }
         });
-        bn4.setOnClickListener(new View.OnClickListener() {
+
+        bn_homePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
-        bn6.setOnClickListener(new View.OnClickListener() {
+
+        bn_joinOperation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, JoinActivity.class);
@@ -80,62 +82,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        mContext = getApplicationContext();
-        bn7.setOnClickListener(new View.OnClickListener() {
+        bn_about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ver = getVersion();
-
+                String ver = Information.getVersion(MainActivity.this);
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setMessage(ver).setTitle("version");
+                builder.setMessage(ver).setTitle("Version");
                 // 3. Get the AlertDialog from create()
                 AlertDialog dialog = builder.create();
                 dialog.show();
-//                try {
-//                    create(mContext);
-//                } catch (PackageManager.NameNotFoundException e) {
-//                    e.printStackTrace();
-//                }
             }
         });
-
     }
-
-//    public static AlertDialog create(Context context) throws PackageManager.NameNotFoundException {
-//
-//        PackageInfo pInfo=
-//                context.getPackageManager()
-//                        .getPackageInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-//
-//        String versionInfo=pInfo.versionName;
-//        String aboutTitle=String.format("About %s", context.getString(R.string.app_name));
-//        String versionString=String.format("Version: %s",versionInfo);
-//        final TextView message=new TextView(context);
-//
-//        message.setPadding(5, 5, 5, 5);
-//        message.setText(versionString);
-//        Linkify.addLinks(message, Linkify.ALL);
-//
-//
-//        return new AlertDialog.Builder(context)
-//                .setTitle(aboutTitle)
-//                .setCancelable(true)
-//                .setPositiveButton(context.getString(android.R.string.ok), null)
-//                .setView(message)
-//                .create();
-//    }
-
-    private String getVersion(){
-        try {
-            PackageManager packageManager=getPackageManager();
-            PackageInfo packageInfo=packageManager.getPackageInfo(getPackageName(),0);
-            return packageInfo.versionName;
-        }
-        catch (  PackageManager.NameNotFoundException e) {
-            Log.e("versionerrorrrrrrr","Error while fetching app version", e);
-
-            return "?";
-        }
-    }
-
 }

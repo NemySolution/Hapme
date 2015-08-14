@@ -44,13 +44,10 @@ public class MainActivity extends AppCompatActivity {
         ParseUtils.registerParse(this);
 
         // Check with Parse whether this user is in any channels
-        List<String> subscribedChannels = ParseInstallation.getCurrentInstallation().getList("channels");
-        if (subscribedChannels != null) {
-            if (!subscribedChannels.isEmpty()) {
-                Intent intent = new Intent(MainActivity.this, OperationActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        if (!ParseUtils.getChannels().isEmpty()) {
+            Intent intent = new Intent(MainActivity.this, OperationActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         Button bn_homePage = (Button) findViewById(R.id.bn_homePage);

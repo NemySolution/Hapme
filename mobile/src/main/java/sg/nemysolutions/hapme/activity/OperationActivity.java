@@ -84,7 +84,7 @@ public class OperationActivity extends AppCompatActivity {
 
                 ParsePush.subscribeInBackground(currentOps.getString("opsName"));
 
-                retrieveList();
+                retrieveOperationMembers();
             }
         });
 
@@ -135,7 +135,7 @@ public class OperationActivity extends AppCompatActivity {
         bn_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                retrieveList();
+                retrieveOperationMembers();
             }
         });
 
@@ -147,21 +147,16 @@ public class OperationActivity extends AppCompatActivity {
             public void done(ParseObject object, ParseException e) {
                 if (object.getList("members") != null && object.getList("members").size() != 0) {
                     members = object.getList("members");
+
+                    if (!members.contains(currentOps.getString("callSign") + " (Commander)")) {
+                        members.add(0, currentOps.getString("callSign") + " (Commander)");
+                    }
+
+                    membersAdapter.notifyDataSetChanged();
                 }
             }
         });
     }
-
-    private void retrieveList() {
-        retrieveOperationMembers();
-
-        if (!members.contains(currentOps.getString("callSign") + " (Commander)")) {
-            members.add(0, currentOps.getString("callSign") + " (Commander)");
-        }
-
-        membersAdapter.notifyDataSetChanged();
-    }
-
 
     private void setList() {
         membersAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, members);

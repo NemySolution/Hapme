@@ -1,12 +1,12 @@
 package sg.nemysolutions.hapme.activity;
 
 /**************** OperationActivity Page ******************/
-/* This page is to allow users to view operation
+/* This page is to allow users to view activity_operation
 * details and to assure them that they are in
-* an operation.
+* an activity_operation.
 *
 * For Ground Commander, this page
-* will let him able to MANAGE operation details,
+* will let him able to MANAGE activity_operation details,
 * commands and also broadcast it. Viewing of location
 * of members are in consideration*/
 
@@ -55,7 +55,7 @@ public class OperationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.operation);
+        setContentView(R.layout.activity_operation);
 
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         final String deviceId = installation.getInstallationId();
@@ -98,7 +98,7 @@ public class OperationActivity extends AppCompatActivity {
                             et_opsName.setText(currentOps.getString("opsName"));
                             et_callSign.setText(currentOps.getString("callSign"));
                         } else {
-                            Log.e("ERROR", "Cannot retrieve operation!!");
+                            Log.e("ERROR", "Cannot retrieve activity_operation!!");
                             finish();
                         }
                     }
@@ -124,7 +124,7 @@ public class OperationActivity extends AppCompatActivity {
         bn_endOps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // if is the commander that is ending this operation, delete the commands first, followed by the operation.
+                // if is the commander that is ending this activity_operation, delete the commands first, followed by the activity_operation.
                 if (currentOps.getString("deviceId").equals(deviceId)) {
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
                     query.whereEqualTo("opsId", opsId);

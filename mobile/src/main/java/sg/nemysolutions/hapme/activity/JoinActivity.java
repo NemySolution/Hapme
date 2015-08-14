@@ -19,7 +19,7 @@ import sg.nemysolutions.hapme.R;
 
 /**************** MainActivity ******************/
 /* A "login" page for all the users (GC & members)
-* for members to join an operation*/
+* for members to join an activity_operation*/
 
 //Key person: Yee Keng & Ming Sheng
 /*********************************************/
@@ -48,7 +48,7 @@ public class JoinActivity extends AppCompatActivity {
                 if (et_opsName.getText().toString().equals("") || et_secretKey.getText().toString().equals("")) {
                     Toast.makeText(JoinActivity.this, "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!", Toast.LENGTH_LONG).show();
                 } else {
-                    // initiate joining of operation
+                    // initiate joining of activity_operation
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
                     query.whereEqualTo("opsName", et_opsName.getText().toString());
                     query.whereEqualTo("secretKey", et_secretKey.getText().toString());

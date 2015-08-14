@@ -1,8 +1,8 @@
 package sg.nemysolutions.hapme.activity;
 
-/**************** CreateActivity operation Page ******************/
+/**************** CreateActivity activity_operation Page ******************/
 /* This page is to allow Commanders to activity_createoperation
-* an operation*/
+* an activity_operation*/
 
 //Key person: Yeekeng and Ming Sheng
 /************************************************/

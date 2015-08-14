@@ -96,7 +96,7 @@ public class CreateOperationActivity extends AppCompatActivity {
 
     private void displayCommandList() {
         lw_commands = (ListView) findViewById(R.id.lv_addCmd);
-        arrayAdapter = new CustomListView(commandTextList,commandList,this);
+        arrayAdapter = new CustomListView(commandTextList, commandList, this);
         lw_commands.setAdapter(arrayAdapter);
     }
 

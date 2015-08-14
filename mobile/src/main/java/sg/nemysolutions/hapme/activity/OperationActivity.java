@@ -83,7 +83,7 @@ public class OperationActivity extends AppCompatActivity {
                 // get the list of members and update it with current user to parse
                 if (object.getList("members") != null) {
                     members = object.getList("members");
-                    if(!members.contains(callSign)) {
+                    if (!members.contains(callSign)) {
                         members.add(callSign);
                     }
                 } else {
@@ -164,7 +164,7 @@ public class OperationActivity extends AppCompatActivity {
         memberQuery.getInBackground(opsId, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 membersList = object.getList("members");
-                if(membersList == null) {
+                if (membersList == null) {
                     membersList = new ArrayList<>();
                 }
 //                membersList.set(0, membersList.get(0) +  " (Commander)");
@@ -174,8 +174,8 @@ public class OperationActivity extends AppCompatActivity {
     }
 
     private void setList() {
-        if(membersList != null) {
-            if(membersList.size() != 0) {
+        if (membersList != null) {
+            if (membersList.size() != 0) {
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, membersList);
                 lw_addMember.setAdapter(arrayAdapter);
             }

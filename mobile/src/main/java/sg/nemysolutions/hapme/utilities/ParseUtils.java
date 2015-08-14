@@ -3,15 +3,20 @@ package sg.nemysolutions.hapme.utilities;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import sg.nemysolutions.hapme.activity.OperationActivity;
@@ -103,6 +108,19 @@ public class ParseUtils {
 //                            intent.putExtra("opsId", operation.getObjectId());
 //                            intent.putExtra("opsName", operation.getString("opsName"));
 //                            intent.putExtra("callSign", operation.getString("callSign")); */
+            }
+        });
+    }
+
+    public static void joinOperation(final String callSign) {
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        List<String> members;
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
+        query.getInBackground(installation.getString("opsId"), new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                object.add("members", callSign);
+                object.saveInBackground();
             }
         });
     }

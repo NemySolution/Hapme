@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sg.nemysolutions.hapme.R;
+import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 public class OperationActivity extends AppCompatActivity {
 
@@ -43,21 +44,22 @@ public class OperationActivity extends AppCompatActivity {
     EditText et_callSign;
     Button bn_broadcast;
     Button bn_endOps;
-    ParseObject currentOps;
     ListView lw_addMember;
-    List<String> membersList;
     Button bn_refresh;
     String opsId;
     String opsName;
     String callSign;
+    ArrayAdapter<String> membersAdapter;
     List<String> members = new ArrayList<>();
+    ParseInstallation installation;
+    ParseObject currentOps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_operation);
 
-        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        installation = ParseInstallation.getCurrentInstallation();
         final String deviceId = installation.getInstallationId();
         opsId = installation.getString("opsId");
         opsName = installation.getString("opsName");
@@ -70,40 +72,19 @@ public class OperationActivity extends AppCompatActivity {
         bn_broadcast = (Button) findViewById(R.id.bn_broadcast);
         bn_endOps = (Button) findViewById(R.id.bn_endOps);
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
-        query.getInBackground(opsId, new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
+        et_opsName.setText(opsName);
+        et_callSign.setText(callSign);
 
-                // store the object to update later
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
+        query.getInBackground(installation.getString("opsId"), new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
                 currentOps = object;
 
-                // subscribe
-                ParsePush.subscribeInBackground(object.getString("opsName"));
+                setList();
 
-                // get the list of members and update it with current user to parse
-                if (object.getList("members") != null) {
-                    members = object.getList("members");
-                    if (!members.contains(callSign)) {
-                        members.add(callSign);
-                    }
-                } else {
-                    members.add(callSign);
-                }
+                ParsePush.subscribeInBackground(currentOps.getString("opsName"));
 
-                object.put("members", members);
-                object.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            et_opsName.setText(currentOps.getString("opsName"));
-                            et_callSign.setText(currentOps.getString("callSign"));
-                        } else {
-                            Log.e("ERROR", "Cannot retrieve activity_operation!!");
-                            finish();
-                        }
-                    }
-                });
-
+                retrieveList();
             }
         });
 
@@ -111,11 +92,13 @@ public class OperationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OperationActivity.this, CommandsActivity.class);
+
                 if (currentOps.getString("deviceId").equals(deviceId)) {
                     intent.putExtra("isCommander", "true");
                 } else {
                     intent.putExtra("isCommander", "false");
                 }
+
                 intent.putExtra("opsName", opsName);
                 startActivity(intent);
             }
@@ -138,48 +121,51 @@ public class OperationActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    membersList = currentOps.getList("members");
-                    membersList.remove(callSign);
-                    currentOps.put("members", membersList);
+                    members = currentOps.getList("members");
+                    members.remove(callSign);
+                    currentOps.put("members", members);
                     currentOps.saveInBackground();
                 }
+
                 ParsePush.unsubscribeInBackground(currentOps.getString("opsName"));
                 finish();
             }
         });
 
-
         bn_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                grabMembers();
+                retrieveList();
             }
         });
 
-        grabMembers();
     }
 
-    private void grabMembers() {
+    private void retrieveOperationMembers() {
         ParseQuery<ParseObject> memberQuery = ParseQuery.getQuery("Operation");
-        memberQuery.getInBackground(opsId, new GetCallback<ParseObject>() {
+        memberQuery.getInBackground(installation.getString("opsId"), new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
-                membersList = object.getList("members");
-                if (membersList == null) {
-                    membersList = new ArrayList<>();
+                if (object.getList("members") != null && object.getList("members").size() != 0) {
+                    members = object.getList("members");
                 }
-//                membersList.set(0, membersList.get(0) +  " (Commander)");
-                setList();
             }
         });
     }
+
+    private void retrieveList() {
+        retrieveOperationMembers();
+
+        if (!members.contains(currentOps.getString("callSign") + " (Commander)")) {
+            members.add(0, currentOps.getString("callSign") + " (Commander)");
+        }
+
+        membersAdapter.notifyDataSetChanged();
+    }
+
 
     private void setList() {
-        if (membersList != null) {
-            if (membersList.size() != 0) {
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, membersList);
-                lw_addMember.setAdapter(arrayAdapter);
-            }
-        }
+        membersAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, members);
+        lw_addMember.setAdapter(membersAdapter);
     }
 
 }

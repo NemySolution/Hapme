@@ -16,6 +16,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import sg.nemysolutions.hapme.R;
+import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 /**************** MainActivity ******************/
 /* A "login" page for all the users (GC & members)
@@ -52,6 +53,7 @@ public class JoinActivity extends AppCompatActivity {
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
                     query.whereEqualTo("opsName", et_opsName.getText().toString());
                     query.whereEqualTo("secretKey", et_secretKey.getText().toString());
+
                     query.getFirstInBackground(new GetCallback<ParseObject>() {
                         public void done(ParseObject object, ParseException e) {
                             if (e == null) {
@@ -60,6 +62,9 @@ public class JoinActivity extends AppCompatActivity {
                                 installation.put("opsName", object.getString("opsName"));
                                 installation.put("callSign",et_callSign.getText().toString());
                                 installation.saveInBackground();
+
+                                ParseUtils.joinOperation(et_callSign.getText().toString());
+
                                 Intent intent = new Intent(JoinActivity.this, OperationActivity.class);
                                 startActivity(intent);
                                 finish();

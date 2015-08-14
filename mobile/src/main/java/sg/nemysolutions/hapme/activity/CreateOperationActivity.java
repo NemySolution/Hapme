@@ -30,20 +30,23 @@ public class CreateOperationActivity extends AppCompatActivity {
     ArrayList<String> commandTextList = new ArrayList<>(); //handles the cmd that is displayed on listview
     ArrayList<Command> commandList = new ArrayList<>(); //handles the command that goes to the parse db
 
-    ListView lw_commands = (ListView) findViewById(R.id.lv_addCmd);;
+    ListView lw_commands;
     CustomListView arrayAdapter;
-
-    EditText et_opsName = (EditText) findViewById(R.id.et_opsName);
-    EditText et_callSign = (EditText) findViewById(R.id.et_callSign);
-    EditText et_secretKey = (EditText) findViewById(R.id.et_secretKey);
-
-    Button bn_addCmd = (Button) findViewById(R.id.bn_addCmd);
-    Button bn_createOps = (Button) findViewById(R.id.bn_createOps);
+    EditText et_opsName;
+    EditText et_callSign;
+    EditText et_secretKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createoperation);
+
+        et_opsName = (EditText) findViewById(R.id.et_opsName);
+        et_callSign = (EditText) findViewById(R.id.et_callSign);
+        et_secretKey = (EditText) findViewById(R.id.et_secretKey);
+
+        Button bn_addCmd = (Button) findViewById(R.id.bn_addCmd);
+        Button bn_createOps = (Button) findViewById(R.id.bn_createOps);
 
         Common.offAutoKey(this);
 
@@ -73,6 +76,8 @@ public class CreateOperationActivity extends AppCompatActivity {
                 }
             }
         });
+
+        displayCommandList();
     }
 
     @Override
@@ -84,12 +89,13 @@ public class CreateOperationActivity extends AppCompatActivity {
                 commandList.add(command);
                 commandTextList.add(command.getCommandName());
 
-                displayCommandList();
+                arrayAdapter.notifyDataSetChanged();
             }
         }
     }
 
     private void displayCommandList() {
+        lw_commands = (ListView) findViewById(R.id.lv_addCmd);
         arrayAdapter = new CustomListView(commandTextList,commandList,this);
         lw_commands.setAdapter(arrayAdapter);
     }

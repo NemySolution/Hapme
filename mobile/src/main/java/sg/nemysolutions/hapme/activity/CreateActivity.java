@@ -24,6 +24,7 @@ import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 
+import sg.nemysolutions.hapme.utilities.Common;
 import sg.nemysolutions.hapme.utilities.CustomListView;
 import sg.nemysolutions.hapme.R;
 import sg.nemysolutions.hapme.entity.Command;
@@ -46,8 +47,7 @@ public class CreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create);
 
-        this.getWindow()
-                .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        Common.offAutoKey(this);
 
         lw_commands = (ListView) findViewById(R.id.lv_addCmd);
 

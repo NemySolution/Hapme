@@ -70,7 +70,7 @@
         android:layout_alignParentStart="false"
         android:layout_above="@+id/bn_createOps"
         android:layout_below="@+id/bn_addCmd"
-        android:layout_marginTop="1dp" />
+        android:layout_marginTop="2dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
         android:id="@+id/bn_addCmd"
         android:layout_below="@+id/et_secretKey"
         android:layout_toEndOf="@+id/tv_listOfCommand"
-        android:src="@mipmap/img_add"
+        android:src="@drawable/button_add"
         android:background="@null"/>
 
     <EditText

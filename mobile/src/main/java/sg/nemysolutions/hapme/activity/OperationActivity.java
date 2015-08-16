@@ -327,15 +327,14 @@ public class OperationActivity extends AppCompatActivity {
                             push.setMessage(c.getCommandName());
                             push.sendInBackground();
 
+                            Toast.makeText(getApplicationContext(), "Command: " + c.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();
                             commandFound = true;
                             break;
                         }
                     }
 
                     // feedback to user by Toast
-                    if (commandFound == true) {
-                        Toast.makeText(getApplicationContext(), "Command: " + c.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();
-                    } else {
+                    if (commandFound == false) {
                         Toast.makeText(getApplicationContext(), "Command not found.", Toast.LENGTH_SHORT).show();
                     }
 

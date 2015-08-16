@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Initialise Parse
-        ParseUtils.registerParse(this);
+//        ParseUtils.registerParse(this);
 
         // Check with Parse whether this user is in any channels
         if (!ParseUtils.getChannels().isEmpty()) {

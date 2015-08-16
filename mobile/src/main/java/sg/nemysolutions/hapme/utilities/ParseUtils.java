@@ -28,12 +28,13 @@ public class ParseUtils {
      *
      * @param context
      */
-    public static void registerParse(Context context) {
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(context);
-        Parse.initialize(context, AppConfig.parseAppId, AppConfig.parseClientKey);
-        ParseInstallation.getCurrentInstallation().saveInBackground();
-    }
+    //yk: i comment this out to test parse, its working now and can be remove
+//    public static void registerParse(Context context) {
+//        // Enable Local Datastore.
+//        Parse.enableLocalDatastore(context);
+//        Parse.initialize(context, AppConfig.parseAppId, AppConfig.parseClientKey);
+//        ParseInstallation.getCurrentInstallation().saveInBackground();
+//    }
 
     /**
      *

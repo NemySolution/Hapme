@@ -15,6 +15,7 @@ package sg.nemysolutions.hapme.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -40,24 +42,30 @@ import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 public class OperationActivity extends AppCompatActivity {
 
-    EditText et_opsName;
-    EditText et_callSign;
-    Button bn_broadcast;
-    Button bn_endOps;
-    ListView lw_addMember;
-    Button bn_refresh;
-    String opsId;
-    String opsName;
-    String callSign;
-    ArrayAdapter<String> membersAdapter;
-    List<String> members = new ArrayList<>();
-    ParseInstallation installation;
-    ParseObject currentOps;
+    private EditText et_opsName;
+    private EditText et_callSign;
+    private Button bn_broadcast;
+    private Button bn_endOps;
+    private ListView lw_addMember;
+    private Button bn_refresh;
+    private String opsId;
+    private String opsName;
+    private String callSign;
+    private ArrayAdapter<String> membersAdapter;
+    private List<String> members = new ArrayList<>();
+    private ParseInstallation installation;
+    private ParseObject currentOps;
+    private Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_operation);
+
+
+        //auto refresh
+        this.mHandler = new Handler();
+        this.mHandler.postDelayed(m_Runnable,10000);
 
         installation = ParseInstallation.getCurrentInstallation();
         final String deviceId = installation.getInstallationId();
@@ -128,6 +136,7 @@ public class OperationActivity extends AppCompatActivity {
                 }
 
                 ParsePush.unsubscribeInBackground(currentOps.getString("opsName"));
+                mHandler.removeCallbacks(m_Runnable);
                 finish();
             }
         });
@@ -136,6 +145,7 @@ public class OperationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 retrieveOperationMembers();
+                mHandler.removeCallbacks(m_Runnable);
             }
         });
 
@@ -165,4 +175,20 @@ public class OperationActivity extends AppCompatActivity {
         lw_addMember.setAdapter(membersAdapter);
     }
 
+    /******************************
+     * runnable function to do the auto refresh
+     */
+    private final Runnable m_Runnable = new Runnable()
+    {
+        public void run()
+
+        {
+            retrieveOperationMembers();
+//            Toast.makeText(getBaseContext(),"runn",Toast.LENGTH_SHORT).show();
+            Log.e("runnnnnnnnnnnnnn","runnnnnnnnnnnn");
+            mHandler.postDelayed(m_Runnable, 10000);
+
+        }
+
+    };//runnable
 }

@@ -42,7 +42,8 @@
         android:id="@+id/et_callSign"
         android:layout_below="@+id/tv_operationName"
         android:layout_alignStart="@+id/et_opsName"
-        android:enabled="true" />
+        android:enabled="true"
+        android:editable="false"/>
 
     <TextView
         android:layout_width="wrap_content"

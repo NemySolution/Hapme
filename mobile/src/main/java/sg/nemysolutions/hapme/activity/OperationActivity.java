@@ -14,6 +14,7 @@ package sg.nemysolutions.hapme.activity;
 /*************************************************/
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -33,8 +34,17 @@ import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
+import com.thalmic.myo.AbstractDeviceListener;
+import com.thalmic.myo.Arm;
+import com.thalmic.myo.DeviceListener;
+import com.thalmic.myo.Hub;
+import com.thalmic.myo.Myo;
+import com.thalmic.myo.Pose;
+import com.thalmic.myo.XDirection;
+import com.thalmic.myo.scanner.ScanActivity;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import sg.nemysolutions.hapme.R;
@@ -44,24 +54,33 @@ public class OperationActivity extends AppCompatActivity {
 
     private EditText et_opsName;
     private EditText et_callSign;
+
     private Button bn_broadcast;
     private Button bn_endOps;
-    private ListView lw_addMember;
     private Button bn_refresh;
+    private Button bn_myo;
+
     private String opsId;
     private String opsName;
     private String callSign;
+
+    private ListView lw_addMember;
+
     private ArrayAdapter<String> membersAdapter;
+
     private List<String> members = new ArrayList<>();
+
     private ParseInstallation installation;
     private ParseObject currentOps;
+
     private Handler mHandler;
+
+    private LinkedList<Pose> capturedPoseList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_operation);
-
 
         //auto refresh
         this.mHandler = new Handler();
@@ -149,6 +168,42 @@ public class OperationActivity extends AppCompatActivity {
             }
         });
 
+        /*
+            Myo Device Start
+         */
+        // Create Button to check for myo connectivity
+        bn_myo = (Button) findViewById(R.id.bn_myo);
+
+        // First, we initialize the Hub singleton with an application identifier.
+        Hub hub = Hub.getInstance();
+        if (!hub.init(this)) {
+            // We can't do anything with the Myo device if the Hub can't be initialized, so exit.
+            Toast.makeText(this, "Couldn't initialize Hub", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        // Next, register for DeviceListener callbacks.
+        hub.addListener(mListener);
+        // Disable usage data being sent to Thalmic
+        hub.setSendUsageData(false);
+        // Using this policy means Myo will be locked until the user performs the unlock pose. This is the default policy.
+        hub.setLockingPolicy(Hub.LockingPolicy.NONE);
+        // Initialise pose list to capture pose
+        capturedPoseList = new LinkedList<>();
+
+        bn_myo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Launch the ScanActivity to scan for Myos to connect to
+                Intent intent = new Intent(getBaseContext(), ScanActivity.class);
+                startActivity(intent);
+            }
+        });
+        /*
+            Myo Device End
+         */
+
     }
 
     private void retrieveOperationMembers() {
@@ -191,4 +246,116 @@ public class OperationActivity extends AppCompatActivity {
         }
 
     };//runnable
+
+    /*
+        Myo Device start
+     */
+    private DeviceListener mListener = new AbstractDeviceListener() {
+        // onConnect() is called whenever a Myo has been connected.
+        @Override
+        public void onConnect(Myo myo, long timestamp) {
+            Toast.makeText(getApplicationContext(), "Myo Connected!", Toast.LENGTH_SHORT).show();
+            //messageView.setText("Myo Connected!");
+            //messageView.setTextColor(Color.BLUE);
+            bn_myo.setEnabled(false);
+        }
+
+        // onDisconnect() is called whenever a Myo has been disconnected.
+        @Override
+        public void onDisconnect(Myo myo, long timestamp) {
+            Toast.makeText(getApplicationContext(), "Myo Disconnected! Please connect to a Myo Device", Toast.LENGTH_SHORT).show();
+//            messageView.setText("Myo Disconnected! Please connect to a Myo Device");
+//            messageView.setTextColor(Color.RED);
+//            messageView.setTextColor(Color.RED);
+            bn_myo.setEnabled(true);
+        }
+
+        // onArmSync() is called whenever Myo has recognized a Sync Gesture after someone has put it on their
+        // arm. This lets Myo know which arm it's on and which way it's facing.
+        @Override
+        public void onArmSync(Myo myo, long timestamp, Arm arm, XDirection xDirection) {
+//            messageView.setText(myo.getArm() == Arm.LEFT ? R.string.arm_left : R.string.arm_right);
+        }
+
+        // onArmUnsync() is called whenever Myo has detected that it was moved from a stable position on a person's arm after
+        // it recognized the arm. Typically this happens when someone takes Myo off of their arm, but it can also happen
+        // when Myo is moved around on the arm.
+        @Override
+        public void onArmUnsync(Myo myo, long timestamp) {
+            //messageView.setText("Unsync");
+        }
+
+        // onUnlock() is called whenever a synced Myo has been unlocked. Under the standard locking
+        // policy, that means poses will now be delivered to the listener.
+        @Override
+        public void onUnlock(Myo myo, long timestamp) {
+            //lockView.setText(R.string.unlocked);
+        }
+
+        // onLock() is called whenever a synced Myo has been locked. Under the standard locking
+        // policy, that means poses will no longer be delivered to the listener.
+        @Override
+        public void onLock(Myo myo, long timestamp) {
+            //lockView.setText(R.string.locked);
+        }
+
+        @Override
+        public void onPose(Myo myo, long timestamp, Pose pose) {
+            // Handle the cases of the Pose enumeration, and change the text of the text view
+            // based on the pose we receive.
+            switch (pose) {
+                case UNKNOWN:
+                    //messageView.setText(getString(R.string.pose_unknown));
+                    break;
+                case REST:
+                    //messageView.setText(getString(R.string.pose_rest));
+                    break;
+                case DOUBLE_TAP:
+                    Toast.makeText(getApplicationContext(), "DOUBLE_TAP: Send Command " + capturedPoseList.toString(), Toast.LENGTH_SHORT).show();
+                    //messageView.setText(getString(R.string.pose_doubletap));
+                    //commandView.setText(String.format("Command %d", getCommand(capturedPoseList)));
+                    break;
+                case FIST:
+                    Toast.makeText(getApplicationContext(), "FIST", Toast.LENGTH_SHORT).show();
+                    //messageView.setText(getString(R.string.pose_fist));
+                    //commandView.setText("Pose not captured !");
+                    break;
+                case WAVE_IN:
+                    Toast.makeText(getApplicationContext(), "WAVE_IN", Toast.LENGTH_SHORT).show();
+                    //messageView.setText(getString(R.string.pose_wavein));
+                    capturedPoseList.offer(pose);
+                    //commandView.setText("Captured pose: " + getString(R.string.pose_wavein));
+                    break;
+                case WAVE_OUT:
+                    Toast.makeText(getApplicationContext(), "WAVE_OUT", Toast.LENGTH_SHORT).show();
+                    //messageView.setText(getString(R.string.pose_waveout));
+                    capturedPoseList.offer(pose);
+                    //commandView.setText("Captured pose: " + getString(R.string.pose_waveout));
+                    break;
+                case FINGERS_SPREAD:
+                    Toast.makeText(getApplicationContext(), "FINGERS_SPREAD", Toast.LENGTH_SHORT).show();
+                    //messageView.setText(getString(R.string.pose_fingersspread));
+                    capturedPoseList.offer(pose);
+                    //commandView.setText("Captured pose: " + getString(R.string.pose_fingersspread));
+                    break;
+            }
+
+            if (pose != Pose.UNKNOWN && pose != Pose.REST) {
+                // Tell the Myo to stay unlocked until told otherwise. We do that here so you can
+                // hold the poses without the Myo becoming locked.
+                myo.unlock(Myo.UnlockType.HOLD);
+
+                // Notify the Myo that the pose has resulted in an action, in this case changing
+                // the text on the screen. The Myo will vibrate.
+                myo.notifyUserAction();
+            } else {
+                // Tell the Myo to stay unlocked only for a short period. This allows the Myo to
+                // stay unlocked while poses are being performed, but lock after inactivity.
+                myo.unlock(Myo.UnlockType.TIMED);
+            }
+        }
+    };
+    /*
+        Myo Device end
+     */
 }

@@ -39,7 +39,7 @@ Haptics Communication System
 * Set Vibration sequence for commands and notifications
 * Commander need to be able to send Commands using Myo Armband
 * Commander need to be able to edit Operation details, remove members
-* Need to make UI buttons (View Location button, Edit Operation button) display accordingly to the user profile (commander and members)
+* Need to make UI buttons (View Location button, Edit Operation button,'commander callsign' textview) display accordingly to the user profile (commander and members)
 * Watch App
 * Simple web app for Command Post to view all the commands sent, highlight to them when there is an "high alert" command sent.
 * GPS and Google Map location (KIV)

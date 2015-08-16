@@ -1,6 +1,8 @@
 package sg.nemysolutions.hapme.activity;
 
-/**************** CreateActivity activity_operation Page ******************/
+/************************************************
+ * CreateActivity activity_operation Page
+
 /* This page is to allow Commanders to create_operation
 * an activity_operation*/
 
@@ -13,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,9 +29,10 @@ import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 public class CreateOperationActivity extends AppCompatActivity {
 
-
-    private ArrayList<String> commandTextList = new ArrayList<>(); //handles the cmd that is displayed on listview
-    private ArrayList<Command> commandList = new ArrayList<>(); //handles the command that goes to the parse db
+    //handles the cmd that is displayed on listview
+    private ArrayList<String> commandTextList = new ArrayList<>();
+    //handles the command that goes to the parse db
+    private ArrayList<Command> commandList = new ArrayList<>();
 
     private ListView lw_commands;
     private CustomListView arrayAdapter;
@@ -45,7 +49,7 @@ public class CreateOperationActivity extends AppCompatActivity {
         et_callSign = (EditText) findViewById(R.id.et_callSign);
         et_secretKey = (EditText) findViewById(R.id.et_secretKey);
 
-        Button bn_addCmd = (Button) findViewById(R.id.bn_addCmd);
+        ImageButton bn_addCmd = (ImageButton) findViewById(R.id.bn_addCmd);
         Button bn_createOps = (Button) findViewById(R.id.bn_createOps);
 
         Common.offAutoKey(this);
@@ -64,10 +68,24 @@ public class CreateOperationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                if (et_opsName.getText().toString().equals("") || et_callSign.getText().toString().equals("") || et_secretKey.getText().toString().equals("")) {
-                    Toast.makeText(getApplicationContext(), "Please enter all the fields!", Toast.LENGTH_SHORT).show();
+//                if (et_opsName.getText().toString().equals("") ||
+//                        et_callSign.getText().toString().equals("") ||
+//                        et_secretKey.getText().toString().equals("")) {
+//                    Toast.makeText(getApplicationContext(),
+//                            "Please enter all the fields!", Toast.LENGTH_SHORT).show();
+                if (et_opsName.getText().toString().equals("")) {
+                    et_opsName.setError("Operation name required");
+                }
+                if (et_callSign.getText().toString().equals("")) {
+                    et_callSign.setError("Callsign required");
+                }
+                if (et_secretKey.getText().toString().equals("")) {
+                    et_secretKey.setError("secret key required");
+
                 } else if (et_opsName.getText().toString().equals("default")) {
-                    Toast.makeText(getApplicationContext(), "default cannot be used as Ops name!", Toast.LENGTH_SHORT).show();
+                    et_opsName.setError("default cannot be used as Ops name!");
+//                    Toast.makeText(getApplicationContext(),
+//                            "default cannot be used as Ops name!", Toast.LENGTH_SHORT).show();
                 } else {
                     ParseUtils.createOperation(CreateOperationActivity.this,
                             et_opsName.getText().toString(),

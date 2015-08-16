@@ -67,26 +67,30 @@
         android:layout_height="wrap_content"
         android:id="@+id/lv_addCmd"
         android:smoothScrollbar="false"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/bn_addCmd"
-        android:layout_below="@+id/tv_listOfCommand" />
+        android:layout_alignParentStart="false"
+        android:layout_above="@+id/bn_createOps"
+        android:layout_below="@+id/bn_addCmd"
+        android:layout_marginTop="2dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="List of Command:"
         android:id="@+id/tv_listOfCommand"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/et_secretKey"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/lv_addCmd"
+        android:textSize="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Command"
         android:id="@+id/bn_addCmd"
-        android:layout_above="@+id/bn_createOps"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/et_secretKey"
+        android:layout_toEndOf="@+id/tv_listOfCommand"
+        android:src="@drawable/button_add"
+        android:background="@null"/>
 
     <EditText
         android:layout_width="fill_parent"

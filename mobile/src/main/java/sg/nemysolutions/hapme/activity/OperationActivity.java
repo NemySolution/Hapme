@@ -171,6 +171,7 @@ public class OperationActivity extends AppCompatActivity {
 
         /*
             Myo Device Start
+            pre-requisite: User must be a Ground Commander
          */
         // Create Button to check for myo connectivity
         bn_myo = (Button) findViewById(R.id.bn_myo);
@@ -250,6 +251,7 @@ public class OperationActivity extends AppCompatActivity {
 
     /*
         Myo Device start
+        pre-requisite: User must be a Ground Commander
      */
     private DeviceListener mListener = new AbstractDeviceListener() {
         // onConnect() is called whenever a Myo has been connected.
@@ -312,57 +314,47 @@ public class OperationActivity extends AppCompatActivity {
             // based on the pose we receive.
             switch (pose) {
                 case UNKNOWN:
-                    //messageView.setText(getString(R.string.pose_unknown));
                     break;
                 case REST:
-                    //messageView.setText(getString(R.string.pose_rest));
                     break;
                 case DOUBLE_TAP:
-                    Toast.makeText(getApplicationContext(), "DOUBLE_TAP: Send Command " + capturedPoseList.toString(), Toast.LENGTH_SHORT).show();
-
-                    // Convert linked list to array list
-                    ArrayList<String> poseArrayList = new ArrayList<String>();
-                    poseArrayList.addAll(capturedPoseList);
-
-                    // Compare pose list with command list
+                     // Compare pose list with command list
                     Boolean commandFound = false;
                     for (Command c: commandList) {
-                        if (Arrays.equals(c.getGestureSeq().toArray(), poseArrayList.toArray())) {
+                        if (Arrays.equals(c.getGestureSeq().toArray(), capturedPoseList.toArray())) {
                             ParsePush push = new ParsePush();
                             push.setChannel(c.getOpsName());
                             push.setMessage(c.getCommandName());
                             push.sendInBackground();
 
-                            Toast.makeText(getApplicationContext(), "Command: " + c.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();
                             commandFound = true;
                             break;
                         }
                     }
 
-                    if (commandFound == false) {
+                    // feedback to user by Toast
+                    if (commandFound == true) {
+                        Toast.makeText(getApplicationContext(), "Command: " + c.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();
+                    } else {
                         Toast.makeText(getApplicationContext(), "Command not found.", Toast.LENGTH_SHORT).show();
                     }
 
+                    // clear captured list
                     capturedPoseList.clear();
-                    //messageView.setText(getString(R.string.pose_doubletap));
                     break;
                 case FIST:
                     Toast.makeText(getApplicationContext(), "FIST", Toast.LENGTH_SHORT).show();
-                    //messageView.setText(getString(R.string.pose_fist));
                     break;
                 case WAVE_IN:
                     Toast.makeText(getApplicationContext(), "WAVE_IN", Toast.LENGTH_SHORT).show();
-                    //messageView.setText(getString(R.string.pose_wavein));
                     capturedPoseList.offer("WAVE_IN");
                     break;
                 case WAVE_OUT:
                     Toast.makeText(getApplicationContext(), "WAVE_OUT", Toast.LENGTH_SHORT).show();
-                    //messageView.setText(getString(R.string.pose_waveout));
                     capturedPoseList.offer("WAVE_OUT");
                     break;
                 case FINGERS_SPREAD:
                     Toast.makeText(getApplicationContext(), "FINGERS_SPREAD", Toast.LENGTH_SHORT).show();
-                    //messageView.setText(getString(R.string.pose_fingersspread));
                     capturedPoseList.offer("FINGERS_SPREAD");
                     break;
             }
@@ -383,7 +375,6 @@ public class OperationActivity extends AppCompatActivity {
         }
     };
 
-    // pre-requisite: User must be a Ground Commander
     private void getCommandListFromParse() {
         // Retrieve Command list from parse
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");

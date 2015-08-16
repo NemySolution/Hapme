@@ -54,7 +54,8 @@ android version can be change at build.gradle
         </activity>
         <activity
             android:name=".activity.CreateOperationActivity"
-            android:label="@string/title_activity_create" >
+            android:label="@string/title_activity_create"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".activity.AddCmdActivity"

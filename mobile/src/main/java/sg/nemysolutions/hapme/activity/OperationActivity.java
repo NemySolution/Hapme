@@ -14,7 +14,6 @@ package sg.nemysolutions.hapme.activity;
 /*************************************************/
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -33,7 +32,6 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
-import com.parse.SaveCallback;
 import com.thalmic.myo.AbstractDeviceListener;
 import com.thalmic.myo.Arm;
 import com.thalmic.myo.DeviceListener;
@@ -43,13 +41,16 @@ import com.thalmic.myo.Pose;
 import com.thalmic.myo.XDirection;
 import com.thalmic.myo.scanner.ScanActivity;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
 import sg.nemysolutions.hapme.R;
 import sg.nemysolutions.hapme.entity.Command;
-import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 public class OperationActivity extends AppCompatActivity {
 
@@ -74,7 +75,6 @@ public class OperationActivity extends AppCompatActivity {
     private String callSign;
 
     private List<String> members = new ArrayList<>();
-    private List<String> commandTextList = new ArrayList<>();
     private List<Command> commandList = new ArrayList<>();
     private LinkedList<String> capturedPoseList;
 
@@ -191,7 +191,7 @@ public class OperationActivity extends AppCompatActivity {
         // Using this policy means Myo will be locked until the user performs the unlock pose. This is the default policy.
         hub.setLockingPolicy(Hub.LockingPolicy.NONE);
         // Initialise pose list to capture pose
-        capturedPoseList = new LinkedList<String>();
+        capturedPoseList = new LinkedList<>();
 
         bn_myo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,7 +263,6 @@ public class OperationActivity extends AppCompatActivity {
 
             // Clear command list
             commandList.clear();
-            commandTextList.clear();
 
             // retrieve command list from parse
             getCommandListFromParse();
@@ -320,6 +319,30 @@ public class OperationActivity extends AppCompatActivity {
                     break;
                 case DOUBLE_TAP:
                     Toast.makeText(getApplicationContext(), "DOUBLE_TAP: Send Command " + capturedPoseList.toString(), Toast.LENGTH_SHORT).show();
+
+                    // Convert linked list to array list
+                    ArrayList<String> poseArrayList = new ArrayList<String>();
+                    poseArrayList.addAll(capturedPoseList);
+
+                    // Compare pose list with command list
+                    Boolean commandFound = false;
+                    for (Command c: commandList) {
+                        if (Arrays.equals(c.getGestureSeq().toArray(), poseArrayList.toArray())) {
+                            ParsePush push = new ParsePush();
+                            push.setChannel(c.getOpsName());
+                            push.setMessage(c.getCommandName());
+                            push.sendInBackground();
+
+                            Toast.makeText(getApplicationContext(), "Command: " + c.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();
+                            commandFound = true;
+                            break;
+                        }
+                    }
+
+                    if (commandFound == false) {
+                        Toast.makeText(getApplicationContext(), "Command not found.", Toast.LENGTH_SHORT).show();
+                    }
+
                     capturedPoseList.clear();
                     //messageView.setText(getString(R.string.pose_doubletap));
                     break;
@@ -369,16 +392,23 @@ public class OperationActivity extends AppCompatActivity {
             @Override
             public void done(List<ParseObject> results, ParseException e) {
                 for (ParseObject c : results) {
-                    commandTextList.add(c.getString("commandName"));
                     Command command = new Command();
                     command.setOpsName(c.getString("opsName"));
                     command.setCommandName(c.getString("commandName"));
                     command.setCommandID(c.getObjectId());
-
+                    command.setGestureSeq(convertParseListToArrayList(c));
                     commandList.add(command);
                 }
             }
         });
+    }
+
+    private ArrayList<String> convertParseListToArrayList(ParseObject parseObject) {
+        ArrayList<String> list = new ArrayList<String>();
+        for (Object o : parseObject.getList("gestureSeq")) {
+            list.add(o.toString());
+        }
+        return list;
     }
     /*
         Myo Device end

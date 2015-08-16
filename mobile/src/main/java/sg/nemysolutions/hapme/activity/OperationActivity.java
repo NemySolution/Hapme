@@ -48,6 +48,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import sg.nemysolutions.hapme.R;
+import sg.nemysolutions.hapme.entity.Command;
 import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 public class OperationActivity extends AppCompatActivity {
@@ -60,22 +61,22 @@ public class OperationActivity extends AppCompatActivity {
     private Button bn_refresh;
     private Button bn_myo;
 
-    private String opsId;
-    private String opsName;
-    private String callSign;
-
     private ListView lw_addMember;
 
     private ArrayAdapter<String> membersAdapter;
-
-    private List<String> members = new ArrayList<>();
-
     private ParseInstallation installation;
     private ParseObject currentOps;
 
     private Handler mHandler;
 
-    private LinkedList<Pose> capturedPoseList;
+    private String opsId;
+    private String opsName;
+    private String callSign;
+
+    private List<String> members = new ArrayList<>();
+    private List<String> commandTextList = new ArrayList<>();
+    private List<Command> commandList = new ArrayList<>();
+    private LinkedList<String> capturedPoseList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,7 +191,7 @@ public class OperationActivity extends AppCompatActivity {
         // Using this policy means Myo will be locked until the user performs the unlock pose. This is the default policy.
         hub.setLockingPolicy(Hub.LockingPolicy.NONE);
         // Initialise pose list to capture pose
-        capturedPoseList = new LinkedList<>();
+        capturedPoseList = new LinkedList<String>();
 
         bn_myo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -255,19 +256,26 @@ public class OperationActivity extends AppCompatActivity {
         @Override
         public void onConnect(Myo myo, long timestamp) {
             Toast.makeText(getApplicationContext(), "Myo Connected!", Toast.LENGTH_SHORT).show();
-            //messageView.setText("Myo Connected!");
-            //messageView.setTextColor(Color.BLUE);
+
+            // Disable myo button on page
             bn_myo.setEnabled(false);
+            bn_myo.setText("Connected");
+
+            // Clear command list
+            commandList.clear();
+            commandTextList.clear();
+
+            // retrieve command list from parse
+            getCommandListFromParse();
         }
 
         // onDisconnect() is called whenever a Myo has been disconnected.
         @Override
         public void onDisconnect(Myo myo, long timestamp) {
             Toast.makeText(getApplicationContext(), "Myo Disconnected! Please connect to a Myo Device", Toast.LENGTH_SHORT).show();
-//            messageView.setText("Myo Disconnected! Please connect to a Myo Device");
-//            messageView.setTextColor(Color.RED);
-//            messageView.setTextColor(Color.RED);
+            // Enable myo button on page
             bn_myo.setEnabled(true);
+            bn_myo.setText("Disconnected");
         }
 
         // onArmSync() is called whenever Myo has recognized a Sync Gesture after someone has put it on their
@@ -312,31 +320,27 @@ public class OperationActivity extends AppCompatActivity {
                     break;
                 case DOUBLE_TAP:
                     Toast.makeText(getApplicationContext(), "DOUBLE_TAP: Send Command " + capturedPoseList.toString(), Toast.LENGTH_SHORT).show();
+                    capturedPoseList.clear();
                     //messageView.setText(getString(R.string.pose_doubletap));
-                    //commandView.setText(String.format("Command %d", getCommand(capturedPoseList)));
                     break;
                 case FIST:
                     Toast.makeText(getApplicationContext(), "FIST", Toast.LENGTH_SHORT).show();
                     //messageView.setText(getString(R.string.pose_fist));
-                    //commandView.setText("Pose not captured !");
                     break;
                 case WAVE_IN:
                     Toast.makeText(getApplicationContext(), "WAVE_IN", Toast.LENGTH_SHORT).show();
                     //messageView.setText(getString(R.string.pose_wavein));
-                    capturedPoseList.offer(pose);
-                    //commandView.setText("Captured pose: " + getString(R.string.pose_wavein));
+                    capturedPoseList.offer("WAVE_IN");
                     break;
                 case WAVE_OUT:
                     Toast.makeText(getApplicationContext(), "WAVE_OUT", Toast.LENGTH_SHORT).show();
                     //messageView.setText(getString(R.string.pose_waveout));
-                    capturedPoseList.offer(pose);
-                    //commandView.setText("Captured pose: " + getString(R.string.pose_waveout));
+                    capturedPoseList.offer("WAVE_OUT");
                     break;
                 case FINGERS_SPREAD:
                     Toast.makeText(getApplicationContext(), "FINGERS_SPREAD", Toast.LENGTH_SHORT).show();
                     //messageView.setText(getString(R.string.pose_fingersspread));
-                    capturedPoseList.offer(pose);
-                    //commandView.setText("Captured pose: " + getString(R.string.pose_fingersspread));
+                    capturedPoseList.offer("FINGERS_SPREAD");
                     break;
             }
 
@@ -347,7 +351,7 @@ public class OperationActivity extends AppCompatActivity {
 
                 // Notify the Myo that the pose has resulted in an action, in this case changing
                 // the text on the screen. The Myo will vibrate.
-                myo.notifyUserAction();
+                //myo.notifyUserAction();
             } else {
                 // Tell the Myo to stay unlocked only for a short period. This allows the Myo to
                 // stay unlocked while poses are being performed, but lock after inactivity.
@@ -355,6 +359,27 @@ public class OperationActivity extends AppCompatActivity {
             }
         }
     };
+
+    // pre-requisite: User must be a Ground Commander
+    private void getCommandListFromParse() {
+        // Retrieve Command list from parse
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
+        query.whereEqualTo("opsName", opsName);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> results, ParseException e) {
+                for (ParseObject c : results) {
+                    commandTextList.add(c.getString("commandName"));
+                    Command command = new Command();
+                    command.setOpsName(c.getString("opsName"));
+                    command.setCommandName(c.getString("commandName"));
+                    command.setCommandID(c.getObjectId());
+
+                    commandList.add(command);
+                }
+            }
+        });
+    }
     /*
         Myo Device end
      */

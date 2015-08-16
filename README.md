@@ -12,9 +12,24 @@ Haptics Communication System
 
 ##Abbreviation
 #####(if there is a need to use shortform, do try to follow the list below)
-*ops - operation(s)
-*cmd - command
-*
+* ops - operation(s)
+* cmd - command
+* 
+
+##Naming of activity and xml layout
+#####(its a total burden to think of which activity belong to which layout, so....)
+* AddCmdActivity.java => add_cmd.xml
+* CreateOperationActivity => create_operation.xml
+* CommandsActivity => commands.xml
+* HomeActivity => home.xml
+* JoinOps => join_ops.xml
+* OperationActivity => operation.xml
+* 
+
+##Naming of custom layout files
+#####(since there is already one)
+* cust_xxxxxxxxx
+* 
 
 ## To Do List
 * ~~View members in the channel in Operation page. (should auto update when a member joins)~~

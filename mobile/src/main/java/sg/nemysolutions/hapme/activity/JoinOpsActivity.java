@@ -20,12 +20,12 @@ import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 /**************** MainActivity ******************/
 /* A "login" page for all the users (GC & members)
-* for members to join an activity_operation*/
+* for members to join_ops an activity_operation*/
 
 //Key person: Yee Keng & Ming Sheng
 /*********************************************/
 
-public class JoinActivity extends AppCompatActivity {
+public class JoinOpsActivity extends AppCompatActivity {
 
     EditText et_opsName;
     EditText et_callSign;
@@ -35,7 +35,7 @@ public class JoinActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.join);
+        setContentView(R.layout.join_ops);
 
         et_opsName = (EditText) findViewById(R.id.et_opsName);
         et_callSign = (EditText) findViewById(R.id.et_callSign);
@@ -47,7 +47,7 @@ public class JoinActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (et_opsName.getText().toString().equals("") || et_secretKey.getText().toString().equals("")) {
-                    Toast.makeText(JoinActivity.this, "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(JoinOpsActivity.this, "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!", Toast.LENGTH_LONG).show();
                 } else {
                     // initiate joining of activity_operation
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
@@ -65,12 +65,12 @@ public class JoinActivity extends AppCompatActivity {
 
                                 ParseUtils.joinOperation(et_callSign.getText().toString());
 
-                                Intent intent = new Intent(JoinActivity.this, OperationActivity.class);
+                                Intent intent = new Intent(JoinOpsActivity.this, OperationActivity.class);
                                 startActivity(intent);
                                 finish();
                             } else {
                                 Log.e("ERROR", "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!");
-                                Toast.makeText(JoinActivity.this, "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(JoinOpsActivity.this, "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!", Toast.LENGTH_LONG).show();
                             }
                         }
                     });

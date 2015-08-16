@@ -4,7 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="sg.nemysolutions.hapme.activity.AddActivity">
+    tools:context="sg.nemysolutions.hapme.activity.AddCmdActivity">
 
     <EditText
         android:layout_width="fill_parent"
@@ -15,6 +15,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:imeOptions="actionDone"
+        android:imeActionLabel="Close"
         android:singleLine="true"/>
 
     <LinearLayout
@@ -22,7 +23,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_commandName"
-        android:id="@+id/linearLayout3"
+        android:id="@+id/linearLayoutGesture"
         android:layout_marginTop="10dp"
         android:gravity="center">
 
@@ -63,7 +64,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="0dp"
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linearLayoutGestBn"
         android:layout_below="@+id/textView5"
         android:layout_alignParentStart="true">
 
@@ -96,36 +97,21 @@
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Clear"
-        android:id="@+id/bn_clear"
-        android:layout_alignTop="@+id/bn_done"
-        android:layout_toStartOf="@+id/lock_state" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Done"
-        android:id="@+id/bn_done"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_toEndOf="@+id/lock_state" />
-
     <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/message"
         android:layout_above="@+id/bn_sync"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignEnd="@+id/textView5"
+        android:layout_toRightOf="@+id/textView" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lock state"
         android:id="@+id/lock_state"
-        android:layout_above="@+id/message"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/bn_sync"
+        android:layout_toStartOf="@+id/message"
+        android:layout_toLeftOf="@+id/textView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -148,9 +134,46 @@
         android:layout_height="wrap_content"
         android:text="Select Gesture&apos;s Sequence"
         android:id="@+id/textView5"
-        android:layout_below="@+id/linearLayout3"
+        android:layout_below="@+id/linearLayoutGesture"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:textSize="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="|"
+        android:id="@+id/textView"
+        android:layout_above="@+id/bn_sync"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearLayoutGestBn"
+        android:id="@+id/linearLayoutClearDone"
+        android:layout_above="@+id/message"
+        android:paddingTop="20dp"
+        android:layout_centerInParent="true"
+        android:gravity="top|center">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clear"
+            android:id="@+id/bn_clear"
+            android:layout_below="@+id/linearLayoutGestBn" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create command"
+            android:id="@+id/bn_done"
+            android:layout_alignTop="@+id/bn_clear"
+            android:layout_marginLeft="30dp" />
+    </LinearLayout>
 
 </RelativeLayout>

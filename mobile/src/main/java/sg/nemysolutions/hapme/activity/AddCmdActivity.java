@@ -1,6 +1,6 @@
 package sg.nemysolutions.hapme.activity;
 
-/**************** AddActivity command Page ******************/
+/**************** AddCmdActivity command Page ******************/
 /* This page is to allow users to add a command,
 * attach a myo gesture and vibration sequence
 * to it. Please ensure that they are able to name
@@ -39,7 +39,7 @@ import sg.nemysolutions.hapme.R;
 import sg.nemysolutions.hapme.entity.Command;
 
 
-public class AddActivity extends AppCompatActivity {
+public class AddCmdActivity extends AppCompatActivity {
 
     TextView lockView;
     TextView messageView;
@@ -60,7 +60,7 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add);
+        setContentView(R.layout.add_cmd);
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 

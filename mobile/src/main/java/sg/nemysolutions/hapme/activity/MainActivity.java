@@ -14,18 +14,10 @@ package sg.nemysolutions.hapme.activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import com.parse.Parse;
-import com.parse.ParseInstallation;
-
-import java.util.List;
 
 import sg.nemysolutions.hapme.R;
 import sg.nemysolutions.hapme.utilities.Information;
@@ -72,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         bn_joinOperation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, JoinActivity.class);
+                Intent intent = new Intent(MainActivity.this, JoinOpsActivity.class);
                 startActivity(intent);
             }
         });

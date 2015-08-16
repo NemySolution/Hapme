@@ -54,7 +54,7 @@ public class CreateOperationActivity extends AppCompatActivity {
         bn_addCmd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CreateOperationActivity.this, AddActivity.class);
+                Intent intent = new Intent(CreateOperationActivity.this, AddCmdActivity.class);
                 startActivityForResult(intent, 0);
             }
         });

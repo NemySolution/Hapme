@@ -57,7 +57,7 @@ android version can be change at build.gradle
             android:label="@string/title_activity_create" >
         </activity>
         <activity
-            android:name=".activity.AddActivity"
+            android:name=".activity.AddCmdActivity"
             android:label="@string/title_activity_add"
            >
         </activity>
@@ -70,7 +70,7 @@ android version can be change at build.gradle
             android:label="@string/title_activity_commands" >
         </activity>
         <activity
-            android:name=".activity.JoinActivity"
+            android:name=".activity.JoinOpsActivity"
             android:label="@string/title_activity_join"
             android:windowSoftInputMode="stateVisible|adjustResize">
         </activity>

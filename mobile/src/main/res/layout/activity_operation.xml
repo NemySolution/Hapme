@@ -70,9 +70,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="false"
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutClearDone"
         android:layout_centerInParent="true"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
 
 
         <Button
@@ -133,9 +135,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Refresh"
+        android:text="Refresh &amp; kill runnerable"
         android:id="@+id/bn_refresh"
-        android:layout_above="@+id/linearLayout"
+        android:layout_above="@+id/linearLayoutClearDone"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -10,20 +10,31 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Create"
+        android:text="Create New Operation"
         android:id="@+id/bn_create"
         android:minHeight="80dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:maxHeight="80dp" />
 
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Join"
+        android:text="Join an operation"
         android:id="@+id/bn_join"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/bn_create"
         android:minHeight="80dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:maxHeight="80dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please select an option"
+        android:id="@+id/tv_pleaseChoose"
+        android:layout_above="@+id/bn_create"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" />
 
 </RelativeLayout>

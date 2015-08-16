@@ -38,6 +38,7 @@ import java.util.List;
 import sg.nemysolutions.hapme.R;
 import sg.nemysolutions.hapme.entity.Command;
 
+
 public class AddActivity extends AppCompatActivity {
 
     TextView lockView;
@@ -122,18 +123,24 @@ public class AddActivity extends AppCompatActivity {
         bn_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<String> gestureList = Arrays.asList(et_gesture1.getText().toString(), et_gesture2.getText().toString(), et_gesture3.getText().toString());
+                String doneValue = et_commandName.getText().toString();
+                if(doneValue.isEmpty()){
+                    et_commandName.setError("Command name required");
+                }
+                else{
+                    List<String> gestureList = Arrays.asList(et_gesture1.getText().toString(), et_gesture2.getText().toString(), et_gesture3.getText().toString());
 
-                //set Command object
-                Command cmd = new Command();
-                cmd.setCommandName(et_commandName.getText().toString());
-                cmd.setGestureSeq(gestureList);
-                cmd.setVibrationSeq(gestureList); // dummy list. Ming Sheng will change when he is done with watch
+                    //set Command object
+                    Command cmd = new Command();
+                    cmd.setCommandName(et_commandName.getText().toString());
+                    cmd.setGestureSeq(gestureList);
+                    cmd.setVibrationSeq(gestureList); // dummy list. Ming Sheng will change when he is done with watch
 
-                Intent intent = new Intent();
-                intent.putExtra("command", cmd);
-                setResult(RESULT_OK, intent);
-                finish();
+                    Intent intent = new Intent();
+                    intent.putExtra("command", cmd);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
         });
 
@@ -155,7 +162,7 @@ public class AddActivity extends AppCompatActivity {
 
         // Initialise pose list to capture pose
         capturedPoseList = new LinkedList<>();
-    }
+    }//end of onCreate
 
     private void setPose(String pose) {
         if (et_gesture1.getText().toString().equals("")) {
@@ -176,15 +183,15 @@ public class AddActivity extends AppCompatActivity {
         for (int i = 0; i < poseLinkedList.size(); i++) {
 
             switch (poseLinkedList.get(i)) {
-            case WAVE_IN:
-                command += 1;
-                break;
-            case WAVE_OUT:
-                command += 2;
-                break;
-            case FINGERS_SPREAD:
-                command += 3;
-                break;
+                case WAVE_IN:
+                    command += 1;
+                    break;
+                case WAVE_OUT:
+                    command += 2;
+                    break;
+                case FINGERS_SPREAD:
+                    command += 3;
+                    break;
             }
         }
         poseLinkedList.clear();
@@ -289,5 +296,6 @@ public class AddActivity extends AppCompatActivity {
             }
         }
     };
+
 
 }

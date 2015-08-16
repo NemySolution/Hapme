@@ -2,7 +2,7 @@ package sg.nemysolutions.hapme.activity;
 
 /**************** HomeActivity Page ******************/
 /* This page is to allow users to select whether
-* they want to join_ops or activity_createoperation activity_operation.
+* they want to join_ops or create_operation activity_operation.
 * on page load, check if the user is already
 * in an activity_operation. */
 

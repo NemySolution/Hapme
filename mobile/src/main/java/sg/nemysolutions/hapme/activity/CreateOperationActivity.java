@@ -1,7 +1,7 @@
 package sg.nemysolutions.hapme.activity;
 
 /**************** CreateActivity activity_operation Page ******************/
-/* This page is to allow Commanders to activity_createoperation
+/* This page is to allow Commanders to create_operation
 * an activity_operation*/
 
 //Key person: Yeekeng and Ming Sheng
@@ -27,19 +27,19 @@ import sg.nemysolutions.hapme.utilities.ParseUtils;
 public class CreateOperationActivity extends AppCompatActivity {
 
 
-    ArrayList<String> commandTextList = new ArrayList<>(); //handles the cmd that is displayed on listview
-    ArrayList<Command> commandList = new ArrayList<>(); //handles the command that goes to the parse db
+    private ArrayList<String> commandTextList = new ArrayList<>(); //handles the cmd that is displayed on listview
+    private ArrayList<Command> commandList = new ArrayList<>(); //handles the command that goes to the parse db
 
-    ListView lw_commands;
-    CustomListView arrayAdapter;
-    EditText et_opsName;
-    EditText et_callSign;
-    EditText et_secretKey;
+    private ListView lw_commands;
+    private CustomListView arrayAdapter;
+    private EditText et_opsName;
+    private EditText et_callSign;
+    private EditText et_secretKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_createoperation);
+        setContentView(R.layout.create_operation);
 
         et_opsName = (EditText) findViewById(R.id.et_opsName);
         et_callSign = (EditText) findViewById(R.id.et_callSign);
@@ -59,6 +59,7 @@ public class CreateOperationActivity extends AppCompatActivity {
             }
         });
 
+        //button that create operations
         bn_createOps.setOnClickListener(new View.OnClickListener() {
 
             @Override

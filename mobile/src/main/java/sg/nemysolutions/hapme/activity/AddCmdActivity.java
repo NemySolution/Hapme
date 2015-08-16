@@ -41,19 +41,19 @@ import sg.nemysolutions.hapme.entity.Command;
 
 public class AddCmdActivity extends AppCompatActivity {
 
-    TextView lockView;
-    TextView messageView;
-    TextView commandView;
-    Button bn_sync;
-    Button bn_waveIn;
-    Button bn_waveOut;
-    Button bn_fingerSpread;
-    Button bn_clear;
-    Button bn_done;
-    EditText et_gesture1;
-    EditText et_gesture2;
-    EditText et_gesture3;
-    EditText et_commandName;
+    private TextView lockView;
+    private TextView messageView;
+    private TextView commandView;
+    private Button bn_sync;
+    private Button bn_waveIn;
+    private Button bn_waveOut;
+    private Button bn_fingerSpread;
+    private Button bn_clear;
+    private Button bn_done;
+    private EditText et_gesture1;
+    private EditText et_gesture2;
+    private EditText et_gesture3;
+    private EditText et_commandName;
 
     private LinkedList<Pose> capturedPoseList;
 

@@ -27,10 +27,10 @@ import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 public class JoinOpsActivity extends AppCompatActivity {
 
-    EditText et_opsName;
-    EditText et_callSign;
-    EditText et_secretKey;
-    Button bn_join;
+    private EditText et_opsName;
+    private EditText et_callSign;
+    private EditText et_secretKey;
+    private Button bn_join;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

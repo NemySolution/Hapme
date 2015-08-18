@@ -97,37 +97,12 @@
 
     </LinearLayout>
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/message"
-        android:layout_above="@+id/bn_sync"
-        android:layout_alignEnd="@+id/textView5"
-        android:layout_toRightOf="@+id/textView" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lock state"
-        android:id="@+id/lock_state"
-        android:layout_above="@+id/bn_sync"
-        android:layout_toStartOf="@+id/message"
-        android:layout_toLeftOf="@+id/textView" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/tv_command"
-        android:layout_below="@+id/message"
         android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Connect to Myo"
-        android:id="@+id/bn_sync"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -139,26 +114,15 @@
         android:layout_marginTop="15dp"
         android:textSize="15dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="|"
-        android:id="@+id/textView"
-        android:layout_above="@+id/bn_sync"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" />
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/linearLayoutGestBn"
         android:id="@+id/linearLayoutClearDone"
-        android:layout_above="@+id/message"
         android:paddingTop="20dp"
-        android:layout_centerInParent="true"
-        android:gravity="top|center">
+        android:gravity="top|center"
+        android:layout_centerHorizontal="true">
 
         <Button
             android:layout_width="wrap_content"
@@ -176,14 +140,5 @@
             android:layout_marginLeft="30dp" />
     </LinearLayout>
 
-
-    <TextView
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:id="@+id/linebreak2"
-        android:layout_alignTop="@+id/lock_state"
-        android:layout_marginBottom="2dp"/>
 
 </RelativeLayout>

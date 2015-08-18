@@ -36,6 +36,7 @@ public class JoinOpsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.join_ops);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         et_opsName = (EditText) findViewById(R.id.et_opsName);
         et_callSign = (EditText) findViewById(R.id.et_callSign);

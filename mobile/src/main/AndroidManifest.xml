@@ -56,12 +56,13 @@ android version can be change at build.gradle
         <activity
             android:name=".activity.CreateOperationActivity"
             android:label="@string/title_activity_create"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:parentActivityName=".activity.HomeActivity">
         </activity>
         <activity
             android:name=".activity.AddCmdActivity"
             android:label="@string/title_activity_add"
-           >
+            android:parentActivityName=".activity.CreateOperationActivity">
         </activity>
         <activity
             android:name=".activity.OperationActivity"
@@ -74,7 +75,8 @@ android version can be change at build.gradle
         <activity
             android:name=".activity.JoinOpsActivity"
             android:label="@string/title_activity_join"
-            android:windowSoftInputMode="stateVisible|adjustResize">
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:parentActivityName=".activity.HomeActivity">
         </activity>
 
         <!-- Added for Parse push notifications -->

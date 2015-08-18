@@ -44,6 +44,7 @@ public class CreateOperationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_operation);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         et_opsName = (EditText) findViewById(R.id.et_opsName);
         et_callSign = (EditText) findViewById(R.id.et_callSign);

@@ -28,22 +28,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/et_opsName"
-                android:hint="Operation Name"
+                android:hint="Name of Operation"
                 android:gravity="center"
                 android:layout_marginBottom="10dp"
                 android:imeOptions="flagNavigateNext"
-                android:singleLine="true"/>
+                android:singleLine="true"
+                android:layout_toEndOf="@+id/textView2" />
 
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/et_callSign"
-                android:hint="Call Sign"
+                android:hint="Your Call Sign"
                 android:layout_below="@+id/et_opsName"
                 android:gravity="center"
                 android:layout_marginBottom="10dp"
                 android:imeOptions="flagNavigateNext"
-                android:singleLine="true"/>
+                android:singleLine="true"
+                android:layout_toEndOf="@+id/textView3" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -51,18 +53,44 @@
                 android:text="Join"
                 android:id="@+id/bn_join"
                 android:layout_below="@+id/et_secretKey"
-                android:layout_centerInParent="true" />
+                android:layout_toEndOf="@+id/textView4"
+                android:layout_marginStart="77dp" />
 
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/et_secretKey"
                 android:layout_below="@+id/et_callSign"
-                android:hint="Secret Key"
+                android:hint="Operation's Secret Key"
                 android:gravity="center"
                 android:layout_marginBottom="10dp"
                 android:imeOptions="actionDone"
-                android:singleLine="true"/>
+                android:singleLine="true"
+                android:layout_toEndOf="@+id/textView4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ops Name: "
+                android:id="@+id/textView2"
+                android:layout_alignBottom="@+id/et_opsName"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CallSign: "
+                android:id="@+id/textView3"
+                android:layout_alignBottom="@+id/et_callSign"
+                android:layout_alignEnd="@+id/textView2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SecretKey: "
+                android:id="@+id/textView4"
+                android:layout_alignBottom="@+id/et_secretKey"
+                android:layout_toStartOf="@+id/et_callSign" />
         </RelativeLayout>
     </ScrollView>
 

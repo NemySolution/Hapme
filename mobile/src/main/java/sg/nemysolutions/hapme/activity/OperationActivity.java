@@ -240,14 +240,15 @@ public class OperationActivity extends AppCompatActivity {
         public void run()
 
         {
+            //retrieve the members in the ops
             retrieveOperationMembers();
 //            Toast.makeText(getBaseContext(),"runn",Toast.LENGTH_SHORT).show();
-            Log.e("runnnnnnnnnnnnnn","runnnnnnnnnnnn");
+//            Log.e("runnnnnnnnnnnnnn","runnnnnnnnnnnn");
             mHandler.postDelayed(m_Runnable, 10000);
 
         }
 
-    };//runnable
+    };
 
     /*
         Myo Device start

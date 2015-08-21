@@ -69,11 +69,6 @@ public class CreateOperationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-//                if (et_opsName.getText().toString().equals("") ||
-//                        et_callSign.getText().toString().equals("") ||
-//                        et_secretKey.getText().toString().equals("")) {
-//                    Toast.makeText(getApplicationContext(),
-//                            "Please enter all the fields!", Toast.LENGTH_SHORT).show();
                 if (et_opsName.getText().toString().equals("")) {
                     et_opsName.setError("Operation name required");
                 }
@@ -85,8 +80,6 @@ public class CreateOperationActivity extends AppCompatActivity {
 
                 } else if (et_opsName.getText().toString().equals("default")) {
                     et_opsName.setError("default cannot be used as Ops name!");
-//                    Toast.makeText(getApplicationContext(),
-//                            "default cannot be used as Ops name!", Toast.LENGTH_SHORT).show();
                 } else {
                     ParseUtils.createOperation(CreateOperationActivity.this,
                             et_opsName.getText().toString(),

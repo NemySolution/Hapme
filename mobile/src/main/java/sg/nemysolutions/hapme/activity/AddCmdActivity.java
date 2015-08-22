@@ -57,6 +57,7 @@ public class AddCmdActivity extends AppCompatActivity {
 
     private LinkedList<Pose> capturedPoseList;
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,11 +65,11 @@ public class AddCmdActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-//        lockView = (TextView) findViewById(R.id.lock_state);
+
         commandView = (TextView) findViewById(R.id.tv_command);
         messageView = (TextView) findViewById(R.id.message);
 
-//        bn_sync = (Button) findViewById(R.id.bn_sync);
+
         bn_waveIn = (Button) findViewById(R.id.bn_waveIn);
         bn_waveOut = (Button) findViewById(R.id.bn_waveOut);
         bn_fingerSpread = (Button) findViewById(R.id.bn_fingerSpread);
@@ -81,14 +82,6 @@ public class AddCmdActivity extends AppCompatActivity {
 
         et_commandName = (EditText) findViewById(R.id.et_commandName);
 
-//        bn_sync.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Launch the ScanActivity to scan for Myos to connect to
-//                Intent intent = new Intent(getBaseContext(), ScanActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
         bn_waveIn.setOnClickListener(new View.OnClickListener() {
             @Override

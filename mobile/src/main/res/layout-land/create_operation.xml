@@ -22,9 +22,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/et_opsName"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/tv_operationName"
         android:imeOptions="flagNavigateNext"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:layout_toEndOf="@+id/tv_operationName" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,17 +60,17 @@
         android:text="Create Operation"
         android:id="@+id/bn_createOps"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/lv_addCmd" />
+        android:layout_alignEnd="@+id/et_secretKey"
+        android:layout_marginBottom="30dp" />
 
     <ListView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lv_addCmd"
         android:smoothScrollbar="false"
         android:layout_alignParentStart="false"
-        android:layout_above="@+id/bn_createOps"
         android:layout_below="@+id/bn_addCmd"
-        android:layout_marginTop="2dp" />
+        android:layout_toStartOf="@+id/bn_createOps" />
 
     <TextView
         android:layout_width="wrap_content"

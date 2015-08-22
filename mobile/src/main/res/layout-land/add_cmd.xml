@@ -71,7 +71,8 @@
         android:padding="0dp"
         android:id="@+id/linearLayoutGestBn"
         android:layout_below="@+id/textView5"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/bn_done">
 
         <Button
             android:layout_width="wrap_content"
@@ -101,13 +102,6 @@
             android:gravity="center" />
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/tv_command"
-        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -143,8 +137,9 @@
         android:layout_height="wrap_content"
         android:text="Command Name: "
         android:id="@+id/textView"
-        android:layout_below="@+id/tv_command"
-        android:layout_alignEnd="@+id/textView6" />
+        android:layout_alignBottom="@+id/et_commandName"
+        android:layout_alignEnd="@+id/textView6"
+        android:layout_marginBottom="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -152,7 +147,7 @@
         android:text="Gesture&apos;s Sequence: "
         android:id="@+id/textView6"
         android:layout_alignBottom="@+id/linearLayoutGesture"
-        android:layout_toEndOf="@+id/tv_command" />
+        android:layout_marginBottom="10dp" />
 
 
 </RelativeLayout>

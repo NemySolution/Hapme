@@ -53,7 +53,7 @@
                 android:text="Join"
                 android:id="@+id/bn_join"
                 android:layout_below="@+id/et_secretKey"
-                android:layout_centerHorizontal="true" />
+                android:layout_alignEnd="@+id/et_secretKey" />
 
             <EditText
                 android:layout_width="fill_parent"

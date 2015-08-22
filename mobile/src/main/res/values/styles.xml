@@ -5,13 +5,14 @@
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#8BC34A</item>
          <item name="colorAccent">#64DD17</item>
+        <item name="android:actionBarSize">38dp</item>
 
-        <!--<item name="android:actionBarSize">20dp</item>-->
         <item name="android:windowActionBarOverlay">true</item>
 
         <!-- Customize your theme here. -->
-    </style>
+        <!--<item name="android:actionBarSize">35dp</item>-->
 
+    </style>
 
 
 </resources>

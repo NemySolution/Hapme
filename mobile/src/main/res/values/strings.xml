@@ -19,7 +19,7 @@
     <string name="title_activity_create">Create operation</string>
     <string name="title_activity_add">Add a command</string>
     <string name="title_activity_operation">Operation</string>
-    <string name="title_activity_commands">Add</string>
+    <string name="title_activity_commands">Broadcast Command</string>
     <string name="title_activity_join">Join an operation</string>
     <string name="title_activity_add_member">add member</string>
     <string name="title_activity_add_member_name">addMemberName</string>

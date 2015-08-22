@@ -31,7 +31,8 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
             Toast.makeText(context, "Message: " + message + " RECEIVED!", Toast.LENGTH_SHORT).show();
 
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                            .setVibrate(new long[] { 100, 1000, 100, 2000, 1000 })
+                            // [how long to wait before vibrating, vibrate ,sleep , vibrate, sleep ..]
+                            .setVibrate(new long[] { 0, 2000, 1000, 2000, 1000, 2000, 3000 })
                             .setContentTitle("ALERT!")
                             .setContentText(message);
             // Creates an explicit intent for an Activity in your app

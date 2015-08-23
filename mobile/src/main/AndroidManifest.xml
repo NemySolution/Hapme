@@ -51,7 +51,8 @@ android version can be change at build.gradle
 
         <activity
             android:name=".activity.HomeActivity"
-            android:label="@string/title_activity_home" >
+            android:label="@string/title_activity_home">
+
         </activity>
         <activity
             android:name=".activity.CreateOperationActivity"
@@ -109,10 +110,7 @@ android version can be change at build.gradle
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name=".activity.MainStart"
-            android:label="@string/title_activity_main_start" >
-        </activity>
+
     </application>
 
 </manifest>

@@ -4,15 +4,40 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#8BC34A</item>
-         <item name="colorAccent">#64DD17</item>
-        <item name="android:actionBarSize">38dp</item>
+        <item name="colorAccent">#64DD17</item>
 
         <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
 
-        <!-- Customize your theme here. -->
-        <!--<item name="android:actionBarSize">35dp</item>-->
 
     </style>
+
+    <!-- any changes require to be make on both AppTheme and AppThemeNoBar -->
+    <style name="AppThemeNoBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorPrimaryDark">#8BC34A</item>
+        <item name="colorAccent">#64DD17</item>
+
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
+
+
+    </style>
+
+
+
+
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="RobotoButtonStyle" parent="Base.Widget.AppCompat.Button">
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+
 
 
 </resources>

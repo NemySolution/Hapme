@@ -27,7 +27,7 @@ import sg.nemysolutions.hapme.R;
 import sg.nemysolutions.hapme.utilities.Information;
 import sg.nemysolutions.hapme.utilities.ParseUtils;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

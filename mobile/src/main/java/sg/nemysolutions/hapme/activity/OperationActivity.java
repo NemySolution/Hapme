@@ -1,6 +1,8 @@
 package sg.nemysolutions.hapme.activity;
 
-/**************** OperationActivity Page ******************/
+/*************************************************
+ * OperationActivity Page
+
 /* This page is to allow users to view activity_operation
 * details and to assure them that they are in
 * an activity_operation.
@@ -109,7 +111,7 @@ public class OperationActivity extends AppCompatActivity {
         lw_addMember = (ListView) findViewById(R.id.lw_addMember);
         et_opsName = (EditText) findViewById(R.id.et_opsName);
         et_callSign = (EditText) findViewById(R.id.et_callSign);
-        tv_myo = (TextView)findViewById(R.id.tv_myo);
+        tv_myo = (TextView) findViewById(R.id.tv_myo);
 
         et_opsName.setText(opsName);
         et_callSign.setText(callSign);
@@ -128,8 +130,6 @@ public class OperationActivity extends AppCompatActivity {
         });
 
 
-
-
 //
 //        bn_broadcast.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -146,7 +146,6 @@ public class OperationActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
-
 
 
 //        bn_endOps.setOnClickListener(new View.OnClickListener() {
@@ -177,10 +176,6 @@ public class OperationActivity extends AppCompatActivity {
 //                finish();
 //            }
 //        });
-
-
-
-
 
 
 //        bn_refresh.setOnClickListener(new View.OnClickListener() {
@@ -226,10 +221,6 @@ public class OperationActivity extends AppCompatActivity {
          */
 
 
-
-
-
-
     }
 
     private void retrieveOperationMembers() {
@@ -259,10 +250,8 @@ public class OperationActivity extends AppCompatActivity {
     /*********************************************************************
      * c function to do the auto refresh
      */
-    private final Runnable m_Runnable = new Runnable()
-    {
-        public void run()
-        {
+    private final Runnable m_Runnable = new Runnable() {
+        public void run() {
             //retrieve the members in the ops
             retrieveOperationMembers();
             mHandler.postDelayed(m_Runnable, 10000);
@@ -346,9 +335,9 @@ public class OperationActivity extends AppCompatActivity {
                 case REST:
                     break;
                 case DOUBLE_TAP:
-                     // Compare pose list with command list
+                    // Compare pose list with command list
                     Boolean commandFound = false;
-                    for (Command c: commandList) {
+                    for (Command c : commandList) {
                         if (Arrays.equals(c.getGestureSeq().toArray(), capturedPoseList.toArray())) {
                             ParsePush push = new ParsePush();
                             push.setChannel(c.getOpsName());
@@ -452,31 +441,31 @@ public class OperationActivity extends AppCompatActivity {
     /******************* END OPS *******************************************************
      *
      */
-        public void endOps() {
-            // if is the commander that is ending this activity_operation, delete the commands first, followed by the activity_operation.
-            if (currentOps.getString("deviceId").equals(deviceId)) {
-                ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
-                query.whereEqualTo("opsId", opsId);
-                query.findInBackground(new FindCallback<ParseObject>() {
-                    @Override
-                    public void done(List<ParseObject> results, ParseException e) {
-                        for (ParseObject c : results) {
-                            c.deleteInBackground();
-                        }
-                        currentOps.deleteInBackground();
+    public void endOps() {
+        // if is the commander that is ending this activity_operation, delete the commands first, followed by the activity_operation.
+        if (currentOps.getString("deviceId").equals(deviceId)) {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
+            query.whereEqualTo("opsId", opsId);
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> results, ParseException e) {
+                    for (ParseObject c : results) {
+                        c.deleteInBackground();
                     }
-                });
-            } else {
-                members = currentOps.getList("members");
-                members.remove(callSign);
-                currentOps.put("members", members);
-                currentOps.saveInBackground();
-            }
-
-            ParsePush.unsubscribeInBackground(currentOps.getString("opsName"));
-            mHandler.removeCallbacks(m_Runnable);
-            finish();
+                    currentOps.deleteInBackground();
+                }
+            });
+        } else {
+            members = currentOps.getList("members");
+            members.remove(callSign);
+            currentOps.put("members", members);
+            currentOps.saveInBackground();
         }
+
+        ParsePush.unsubscribeInBackground(currentOps.getString("opsName"));
+        mHandler.removeCallbacks(m_Runnable);
+        finish();
+    }
 
     /************************* REFRESH *************************************************
      *
@@ -528,10 +517,6 @@ public class OperationActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
-
-
 
 
 }

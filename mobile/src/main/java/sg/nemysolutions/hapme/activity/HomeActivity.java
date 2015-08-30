@@ -49,5 +49,26 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_exit:
+                System.exit(0);
+                return true;
+//            case R.id.action_compose:
+//                composeMessage();
+//                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

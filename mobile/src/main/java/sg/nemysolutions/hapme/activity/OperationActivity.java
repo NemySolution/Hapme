@@ -16,8 +16,12 @@ package sg.nemysolutions.hapme.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -82,6 +86,11 @@ public class OperationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_operation);
+
+
+
+
+
 
         //auto refresh
         this.mHandler = new Handler();
@@ -205,6 +214,11 @@ public class OperationActivity extends AppCompatActivity {
         /*
             Myo Device End
          */
+
+
+
+
+
 
     }
 
@@ -404,4 +418,42 @@ public class OperationActivity extends AppCompatActivity {
     /*
         Myo Device end
      */
+
+
+
+
+
+    //actionbar stuff
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_operation, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.endOps:
+
+                return true;
+//            case R.id.action_compose:
+//                composeMessage();
+//                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
+
+
+
+
+
+
 }

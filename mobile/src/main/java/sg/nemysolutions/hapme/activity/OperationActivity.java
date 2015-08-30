@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -60,11 +61,12 @@ public class OperationActivity extends AppCompatActivity {
 
     private EditText et_opsName;
     private EditText et_callSign;
+    private TextView tv_myo;
 
-    private Button bn_broadcast;
-    private Button bn_endOps;
-    private Button bn_refresh;
-    private Button bn_myo;
+//    private Button bn_broadcast;
+//    private Button bn_endOps;
+//    private Button bn_refresh;
+//    private Button bn_myo;
 
     private ListView lw_addMember;
 
@@ -77,6 +79,7 @@ public class OperationActivity extends AppCompatActivity {
     private String opsId;
     private String opsName;
     private String callSign;
+    private String deviceId;
 
     private List<String> members = new ArrayList<>();
     private List<Command> commandList = new ArrayList<>();
@@ -88,26 +91,25 @@ public class OperationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_operation);
 
 
-
-
-
-
         //auto refresh
         this.mHandler = new Handler();
-        this.mHandler.postDelayed(m_Runnable,10000);
+        this.mHandler.postDelayed(m_Runnable, 10000);
 
         installation = ParseInstallation.getCurrentInstallation();
-        final String deviceId = installation.getInstallationId();
+        deviceId = installation.getInstallationId();
         opsId = installation.getString("opsId");
         opsName = installation.getString("opsName");
         callSign = installation.getString("callSign");
 
+        //buttons //listview //edittext
+//        bn_refresh = (Button) findViewById(R.id.bn_refresh);
+//        bn_broadcast = (Button) findViewById(R.id.bn_broadcast);
+//        bn_endOps = (Button) findViewById(R.id.bn_endOps);
+//        bn_myo = (Button) findViewById(R.id.bn_myo);
         lw_addMember = (ListView) findViewById(R.id.lw_addMember);
-        bn_refresh = (Button) findViewById(R.id.bn_refresh);
         et_opsName = (EditText) findViewById(R.id.et_opsName);
         et_callSign = (EditText) findViewById(R.id.et_callSign);
-        bn_broadcast = (Button) findViewById(R.id.bn_broadcast);
-        bn_endOps = (Button) findViewById(R.id.bn_endOps);
+        tv_myo = (TextView)findViewById(R.id.tv_myo);
 
         et_opsName.setText(opsName);
         et_callSign.setText(callSign);
@@ -125,66 +127,74 @@ public class OperationActivity extends AppCompatActivity {
             }
         });
 
-        bn_broadcast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OperationActivity.this, CommandsActivity.class);
 
-                if (currentOps.getString("deviceId").equals(deviceId)) {
-                    intent.putExtra("isCommander", "true");
-                } else {
-                    intent.putExtra("isCommander", "false");
-                }
 
-                intent.putExtra("opsName", opsName);
-                startActivity(intent);
-            }
-        });
 
-        bn_endOps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // if is the commander that is ending this activity_operation, delete the commands first, followed by the activity_operation.
-                if (currentOps.getString("deviceId").equals(deviceId)) {
-                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
-                    query.whereEqualTo("opsId", opsId);
-                    query.findInBackground(new FindCallback<ParseObject>() {
-                        @Override
-                        public void done(List<ParseObject> results, ParseException e) {
-                            for (ParseObject c : results) {
-                                c.deleteInBackground();
-                            }
-                            currentOps.deleteInBackground();
-                        }
-                    });
-                } else {
-                    members = currentOps.getList("members");
-                    members.remove(callSign);
-                    currentOps.put("members", members);
-                    currentOps.saveInBackground();
-                }
+//
+//        bn_broadcast.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(OperationActivity.this, CommandsActivity.class);
+//
+//                if (currentOps.getString("deviceId").equals(deviceId)) {
+//                    intent.putExtra("isCommander", "true");
+//                } else {
+//                    intent.putExtra("isCommander", "false");
+//                }
+//
+//                intent.putExtra("opsName", opsName);
+//                startActivity(intent);
+//            }
+//        });
 
-                ParsePush.unsubscribeInBackground(currentOps.getString("opsName"));
-                mHandler.removeCallbacks(m_Runnable);
-                finish();
-            }
-        });
 
-        bn_refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                retrieveOperationMembers();
-                mHandler.removeCallbacks(m_Runnable);
-            }
-        });
+
+//        bn_endOps.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // if is the commander that is ending this activity_operation, delete the commands first, followed by the activity_operation.
+//                if (currentOps.getString("deviceId").equals(deviceId)) {
+//                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
+//                    query.whereEqualTo("opsId", opsId);
+//                    query.findInBackground(new FindCallback<ParseObject>() {
+//                        @Override
+//                        public void done(List<ParseObject> results, ParseException e) {
+//                            for (ParseObject c : results) {
+//                                c.deleteInBackground();
+//                            }
+//                            currentOps.deleteInBackground();
+//                        }
+//                    });
+//                } else {
+//                    members = currentOps.getList("members");
+//                    members.remove(callSign);
+//                    currentOps.put("members", members);
+//                    currentOps.saveInBackground();
+//                }
+//
+//                ParsePush.unsubscribeInBackground(currentOps.getString("opsName"));
+//                mHandler.removeCallbacks(m_Runnable);
+//                finish();
+//            }
+//        });
+
+
+
+
+
+
+//        bn_refresh.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                retrieveOperationMembers();
+//                mHandler.removeCallbacks(m_Runnable);
+//            }
+//        });
 
         /*
             Myo Device Start
             pre-requisite: User must be a Ground Commander
          */
-        // Create Button to check for myo connectivity
-        bn_myo = (Button) findViewById(R.id.bn_myo);
-
         // First, we initialize the Hub singleton with an application identifier.
         Hub hub = Hub.getInstance();
         if (!hub.init(this)) {
@@ -203,14 +213,14 @@ public class OperationActivity extends AppCompatActivity {
         // Initialise pose list to capture pose
         capturedPoseList = new LinkedList<>();
 
-        bn_myo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Launch the ScanActivity to scan for Myos to connect to
-                Intent intent = new Intent(getBaseContext(), ScanActivity.class);
-                startActivity(intent);
-            }
-        });
+//        bn_myo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Launch the ScanActivity to scan for Myos to connect to
+//                Intent intent = new Intent(getBaseContext(), ScanActivity.class);
+//                startActivity(intent);
+//            }
+//        });
         /*
             Myo Device End
          */
@@ -246,23 +256,21 @@ public class OperationActivity extends AppCompatActivity {
         lw_addMember.setAdapter(membersAdapter);
     }
 
-    /******************************
-     * runnable function to do the auto refresh
+    /*********************************************************************
+     * c function to do the auto refresh
      */
     private final Runnable m_Runnable = new Runnable()
     {
         public void run()
-
         {
             //retrieve the members in the ops
             retrieveOperationMembers();
-//            Toast.makeText(getBaseContext(),"runn",Toast.LENGTH_SHORT).show();
-//            Log.e("runnnnnnnnnnnnnn","runnnnnnnnnnnn");
             mHandler.postDelayed(m_Runnable, 10000);
 
         }
-
     };
+    /************* runnable end *************************************************/
+
 
     /*
         Myo Device start
@@ -275,8 +283,11 @@ public class OperationActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Myo Connected!", Toast.LENGTH_SHORT).show();
 
             // Disable myo button on page
-            bn_myo.setEnabled(false);
-            bn_myo.setText("Connected");
+//            bn_myo.setEnabled(false);
+
+//            bn_myo.setText("Connected");
+            tv_myo.setText("Myo connected");
+
 
             // Clear command list
             commandList.clear();
@@ -290,8 +301,10 @@ public class OperationActivity extends AppCompatActivity {
         public void onDisconnect(Myo myo, long timestamp) {
             Toast.makeText(getApplicationContext(), "Myo Disconnected! Please connect to a Myo Device", Toast.LENGTH_SHORT).show();
             // Enable myo button on page
-            bn_myo.setEnabled(true);
-            bn_myo.setText("Disconnected");
+//            bn_myo.setEnabled(true);
+//            bn_myo.setText("Disconnected");
+
+            tv_myo.setText("Myo not connected");
         }
 
         // onArmSync() is called whenever Myo has recognized a Sync Gesture after someone has put it on their
@@ -420,11 +433,69 @@ public class OperationActivity extends AppCompatActivity {
      */
 
 
+    /*******************broadcast command***********************************************
+     *
+     */
+    public void broadcast() {
+        Intent intent = new Intent(OperationActivity.this, CommandsActivity.class);
 
+        if (currentOps.getString("deviceId").equals(deviceId)) {
+            intent.putExtra("isCommander", "true");
+        } else {
+            intent.putExtra("isCommander", "false");
+        }
 
+        intent.putExtra("opsName", opsName);
+        startActivity(intent);
+    }
+
+    /******************* END OPS *******************************************************
+     *
+     */
+        public void endOps() {
+            // if is the commander that is ending this activity_operation, delete the commands first, followed by the activity_operation.
+            if (currentOps.getString("deviceId").equals(deviceId)) {
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
+                query.whereEqualTo("opsId", opsId);
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> results, ParseException e) {
+                        for (ParseObject c : results) {
+                            c.deleteInBackground();
+                        }
+                        currentOps.deleteInBackground();
+                    }
+                });
+            } else {
+                members = currentOps.getList("members");
+                members.remove(callSign);
+                currentOps.put("members", members);
+                currentOps.saveInBackground();
+            }
+
+            ParsePush.unsubscribeInBackground(currentOps.getString("opsName"));
+            mHandler.removeCallbacks(m_Runnable);
+            finish();
+        }
+
+    /************************* REFRESH *************************************************
+     *
+     */
+    public void refresh() {
+        retrieveOperationMembers();
+        mHandler.removeCallbacks(m_Runnable);
+    }
+
+    /************************* MYO *************************************************
+     *
+     */
+    public void myo() {
+        // Launch the ScanActivity to scan for Myos to connect to
+        Intent intent = new Intent(getBaseContext(), ScanActivity.class);
+        startActivity(intent);
+    }
 
     //actionbar stuff
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -437,19 +508,26 @@ public class OperationActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.endOps:
-
+            case R.id.myo:
+                myo();
                 return true;
-//            case R.id.action_compose:
-//                composeMessage();
-//                return true;
+            case R.id.editCmd:
+                return true;
+            case R.id.broadCastCmd:
+                broadcast();
+                return true;
+            case R.id.refresh:
+                refresh();
+                return true;
+            case R.id.viewMemLocation:
+                return true;
+            case R.id.endOps:
+                endOps();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
-
 
 
 

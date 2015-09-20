@@ -28,13 +28,4 @@
         android:layout_marginTop="10dp"
         android:maxHeight="80dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Please select an option"
-        android:id="@+id/tv_pleaseChoose"
-        android:layout_above="@+id/bn_create"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp" />
-
 </RelativeLayout>

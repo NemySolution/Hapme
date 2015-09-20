@@ -32,4 +32,5 @@ dependencies {
         }
     }
     compile 'com.thalmic:myosdk:0.10.+@aar'
+
 }

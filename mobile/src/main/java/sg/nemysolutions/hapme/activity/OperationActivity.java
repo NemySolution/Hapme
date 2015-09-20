@@ -18,15 +18,11 @@ package sg.nemysolutions.hapme.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -48,16 +44,14 @@ import com.thalmic.myo.Pose;
 import com.thalmic.myo.XDirection;
 import com.thalmic.myo.scanner.ScanActivity;
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
 import sg.nemysolutions.hapme.R;
 import sg.nemysolutions.hapme.entity.Command;
+import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 public class OperationActivity extends AppCompatActivity {
 
@@ -92,6 +86,12 @@ public class OperationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_operation);
 
+        // Check with Parse whether this user is in any channels
+        if (ParseUtils.getChannels().isEmpty()) {
+            Intent intent = new Intent(OperationActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         //auto refresh
         this.mHandler = new Handler();
@@ -230,7 +230,7 @@ public class OperationActivity extends AppCompatActivity {
                 if (object.getList("members") != null && object.getList("members").size() != 0) {
                     members = object.getList("members");
                 } else {
-                    members = new ArrayList<String>();
+                    members = new ArrayList<>();
                 }
 
                 if (!members.contains(currentOps.getString("callSign") + " (Commander)")) {
@@ -351,7 +351,7 @@ public class OperationActivity extends AppCompatActivity {
                     }
 
                     // feedback to user by Toast
-                    if (commandFound == false) {
+                    if (!commandFound) {
                         Toast.makeText(getApplicationContext(), "Command not found.", Toast.LENGTH_SHORT).show();
                     }
 
@@ -411,7 +411,7 @@ public class OperationActivity extends AppCompatActivity {
     }
 
     private ArrayList<String> convertParseListToArrayList(ParseObject parseObject) {
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         for (Object o : parseObject.getList("gestureSeq")) {
             list.add(o.toString());
         }

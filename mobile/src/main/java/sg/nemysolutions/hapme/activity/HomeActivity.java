@@ -10,9 +10,8 @@ package sg.nemysolutions.hapme.activity;
 /*********************************************/
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 
 import sg.nemysolutions.hapme.R;
+import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -27,6 +27,13 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
+        // Check with Parse whether this user is in any channels
+        if (!ParseUtils.getChannels().isEmpty()) {
+            Intent intent = new Intent(HomeActivity.this, OperationActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         Button bn_create = (Button) findViewById(R.id.bn_create);
         Button bn_join = (Button) findViewById(R.id.bn_join);

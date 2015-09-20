@@ -26,10 +26,13 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
         hashMap.put("longAlert", new long[] {0, 10000});
         hashMap.put("mediumAlert", new long[] {0, 500, 250, 500, 250, 500, 250});
         hashMap.put("shortAlert", new long[] {0, 200, 100, 200, 100, 200, 100});
-        hashMap.put("heartbeat", new long[] {0, 200, 100, 200, 500, 200, 100, 200, 500, 200, 100, 200, 500});
+        hashMap.put("heartbeat", new long[] {0, 200, 100, 200, 1000, 200, 100, 200, 1000, 200, 100, 200, 1000, 200, 100, 200});
         hashMap.put("shave", new long[] {0,100,200,100,100,100,100,100,200,100,500,100,225,100});
-        hashMap.put("tunes", new long[] {0,150,50,75,50,75,50,150,50,75,50,75,50,300});
-        hashMap.put("sos", new long[] {0, 200, 200, 200, 200, 200, 500, 500, 200, 500, 200, 500, 500, 200, 200, 200, 200, 200, 1000});
+        hashMap.put("triangle", new long[] {0,150,50,75,50,75,50,150,50,75,50,75,50,300,1000, 150,50,75,50,75,50,150,50,75,50,75,50,300});
+        hashMap.put("sos", new long[]{0, 200, 200, 200, 200, 200, 500, 500, 200, 500, 200, 500, 500, 200, 200, 200, 200, 200, 1000, 200, 200, 200, 200, 200, 500, 500, 200, 500, 200, 500, 500, 200, 200, 200, 200, 200});
+        hashMap.put("location", new long[] {0, 500});
+        hashMap.put("finalFantasy", new long[] {0,50,100,50,100,50,100,400,100,300,100,350,50,200,100,100,50,600});
+
 
         // [how long to wait before vibrating, vibrate ,sleep , vibrate, sleep ..]
 //        long[] longAlert = {0, 10000};

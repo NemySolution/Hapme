@@ -66,18 +66,14 @@ public class CreateOperationActivity extends AppCompatActivity {
 
         //button that create operations
         bn_createOps.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 if (et_opsName.getText().toString().equals("")) {
                     et_opsName.setError("Operation name required");
-                }
-                if (et_callSign.getText().toString().equals("")) {
+                } else if (et_callSign.getText().toString().equals("")) {
                     et_callSign.setError("Callsign required");
-                }
-                if (et_secretKey.getText().toString().equals("")) {
+                } else if (et_secretKey.getText().toString().equals("")) {
                     et_secretKey.setError("secret key required");
-
                 } else if (et_opsName.getText().toString().equals("default")) {
                     et_opsName.setError("default cannot be used as Ops name!");
                 } else {

@@ -8,8 +8,8 @@ package sg.nemysolutions.hapme.activity;
 /*************************************************/
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
@@ -58,6 +57,7 @@ public class CommandsActivity extends AppCompatActivity {
                         Command command = new Command();
                         command.setOpsName(c.getString("opsName"));
                         command.setCommandName(c.getString("commandName"));
+                        command.setVibrationSeq(c.getString("vibrationSeq"));
                         command.setCommandID(c.getObjectId());
 
                         commandList.add(command);
@@ -97,7 +97,7 @@ public class CommandsActivity extends AppCompatActivity {
 
             ParsePush push = new ParsePush();
             push.setChannel(command.getOpsName());
-            push.setMessage(command.getCommandName());
+            push.setMessage(command.getCommandName() + "," + command.getVibrationSeq());
             push.sendInBackground();
 
             Toast.makeText(getApplicationContext(), "Command: " + command.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();

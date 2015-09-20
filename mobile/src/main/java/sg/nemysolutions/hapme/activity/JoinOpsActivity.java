@@ -30,7 +30,6 @@ public class JoinOpsActivity extends AppCompatActivity {
     private EditText et_opsName;
     private EditText et_callSign;
     private EditText et_secretKey;
-    private Button bn_join;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,7 @@ public class JoinOpsActivity extends AppCompatActivity {
         et_callSign = (EditText) findViewById(R.id.et_callSign);
         et_secretKey = (EditText) findViewById(R.id.et_secretKey);
 
-        bn_join = (Button) findViewById(R.id.bn_join);
+        Button bn_join = (Button) findViewById(R.id.bn_join);
 
         bn_join.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,14 +60,17 @@ public class JoinOpsActivity extends AppCompatActivity {
                                 ParseInstallation installation = ParseInstallation.getCurrentInstallation();
                                 installation.put("opsId", object.getObjectId());
                                 installation.put("opsName", object.getString("opsName"));
-                                installation.put("callSign",et_callSign.getText().toString());
+                                installation.put("callSign", et_callSign.getText().toString());
                                 installation.saveInBackground();
 
                                 ParseUtils.joinOperation(et_callSign.getText().toString());
 
+                                // Needed for correct display of menu
                                 Intent intent = new Intent(JoinOpsActivity.this, OperationActivity.class);
+                                intent.putExtra("isMember", "true");
                                 startActivity(intent);
                                 finish();
+
                             } else {
                                 Log.e("ERROR", "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!");
                                 Toast.makeText(JoinOpsActivity.this, "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!", Toast.LENGTH_LONG).show();

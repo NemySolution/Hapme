@@ -93,6 +93,7 @@ public class ParseUtils {
                     public void done(ParseException e) {
                         if (e == null) {
                             Intent intent = new Intent(context, OperationActivity.class);
+                            intent.putExtra("isMember", "false");
                             context.startActivity(intent);
                             context.finish();
                         } else {
@@ -123,7 +124,7 @@ public class ParseUtils {
                 List<String> members = object.getList("members");
 
                 if (members == null) {
-                    members = new ArrayList<String>();
+                    members = new ArrayList<>();
                 }
 
                 members.add(callSign);

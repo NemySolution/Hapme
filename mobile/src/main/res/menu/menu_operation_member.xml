@@ -2,20 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="sg.nemysolutions.hapme.activity.OperationActivity">
 
-    <item android:id="@+id/myo"
-        android:title="Myo Settings"
-       />
-    <item android:id="@+id/editCmd"
-        android:title="Edit Commands"
-        />
     <item android:id="@+id/broadCastCmd"
         android:title="Broadcast Command"
         />
-    <item android:id="@+id/viewMemLocation"
-        android:title="View Member Location"
-        />
     <item android:id="@+id/endOps"
-        android:title="End Operation"
+        android:title="Quit Operation"
         />
 
 </menu>

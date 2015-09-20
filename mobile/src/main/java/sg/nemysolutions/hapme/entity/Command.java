@@ -8,7 +8,7 @@ public class Command implements Serializable {
     private String commandID;
     private String opsName;
     private String commandName;
-    private List<String> vibrationSeq;
+    private String vibrationSeq;
     private List<String> gestureSeq;
 
     public Command() {}
@@ -37,11 +37,11 @@ public class Command implements Serializable {
         this.commandName = commandName;
     }
 
-    public List<String> getVibrationSeq() {
+    public String getVibrationSeq() {
         return vibrationSeq;
     }
 
-    public void setVibrationSeq(List<String> vibrationSeq) {
+    public void setVibrationSeq(String vibrationSeq) {
         this.vibrationSeq = vibrationSeq;
     }
 

@@ -3,7 +3,6 @@ package sg.nemysolutions.hapme.receiver;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
@@ -15,26 +14,47 @@ import com.parse.ParsePushBroadcastReceiver;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import sg.nemysolutions.hapme.R;
+import java.util.HashMap;
+
 import sg.nemysolutions.hapme.activity.OperationActivity;
 
 public class CustomReceiver extends ParsePushBroadcastReceiver {
     @Override
     protected void onPushReceive(Context context, Intent intent) {
         //super.onPushReceive(context, intent);
+        HashMap<String, long[]> hashMap = new HashMap<>();
+        hashMap.put("longAlert", new long[] {0, 10000});
+        hashMap.put("mediumAlert", new long[] {0, 500, 250, 500, 250, 500, 250});
+        hashMap.put("shortAlert", new long[] {0, 200, 100, 200, 100, 200, 100});
+        hashMap.put("heartbeat", new long[] {0, 200, 100, 200, 500, 200, 100, 200, 500, 200, 100, 200, 500});
+        hashMap.put("shave", new long[] {0,100,200,100,100,100,100,100,200,100,500,100,225,100});
+        hashMap.put("tunes", new long[] {0,150,50,75,50,75,50,150,50,75,50,75,50,300});
+        hashMap.put("sos", new long[] {0, 200, 200, 200, 200, 200, 500, 500, 200, 500, 200, 500, 500, 200, 200, 200, 200, 200, 1000});
+
+        // [how long to wait before vibrating, vibrate ,sleep , vibrate, sleep ..]
+//        long[] longAlert = {0, 10000};
+//        long[] mediumAlert = {0, 500, 250, 500, 250, 500, 250};
+//        long[] shortAlert = {0, 200, 100, 200, 100, 200, 100};
+//        long[] heartbeat = {0, 200, 100, 200, 500, 200, 100, 200, 500, 200, 100, 200, 500};
+//        long[] shave = {0,100,200,100,100,100,100,100,200,100,500,100,225,100};
+//        long[] starWars = {0,500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500};
+//        long[] tunes = {0,150,50,75,50,75,50,150,50,75,50,75,50,300};
+//        long[] triangle = {0,200,50,175,50,150,50,125,50,100,50,75,50,50,50,75,50,100,50,125,50,150,50,157,50,200};
+//        long[] special = {0, 250, 200, 250, 150, 150, 75, 150, 75, 150};
+//        long[] finalFantasy = {0,50,100,50,100,50,100,400,100,300,100,350,50,200,100,100,50,600};
+//        long[] sos = {0, 200, 200, 200, 200, 200, 500, 500, 200, 500, 200, 500, 500, 200, 200, 200, 200, 200, 1000};
+
 
         try {
             JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
 
             String message = json.getString("alert");
+            String[] splitedMsg = message.split(",", 2);
 
-            Toast.makeText(context, "Message: " + message + " RECEIVED!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Message: " + splitedMsg[0] + " RECEIVED!", Toast.LENGTH_SHORT).show();
 
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                            // [how long to wait before vibrating, vibrate ,sleep , vibrate, sleep ..]
-                            .setVibrate(new long[] { 0, 2000, 1000, 2000, 1000, 2000, 3000 })
-                            .setContentTitle("ALERT!")
-                            .setContentText(message);
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context).setContentTitle("ALERT!").setContentText(message).setVibrate(hashMap.get(splitedMsg[1]));
+
             // Creates an explicit intent for an Activity in your app
                         Intent resultIntent = new Intent(context, OperationActivity.class);
 

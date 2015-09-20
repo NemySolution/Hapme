@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -76,6 +77,7 @@ public class OperationActivity extends AppCompatActivity {
     private String opsName;
     private String callSign;
     private String deviceId;
+    private String isMember = "true";
 
     private List<String> members = new ArrayList<>();
     private List<Command> commandList = new ArrayList<>();
@@ -85,13 +87,6 @@ public class OperationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_operation);
-
-        // Check with Parse whether this user is in any channels
-        if (ParseUtils.getChannels().isEmpty()) {
-            Intent intent = new Intent(OperationActivity.this, HomeActivity.class);
-            startActivity(intent);
-            finish();
-        }
 
         //auto refresh
         this.mHandler = new Handler();
@@ -103,6 +98,9 @@ public class OperationActivity extends AppCompatActivity {
         opsName = installation.getString("opsName");
         callSign = installation.getString("callSign");
 
+        Intent intent = getIntent();
+        isMember = intent.getStringExtra("isMember");
+
         //buttons //listview //edittext
 //        bn_refresh = (Button) findViewById(R.id.bn_refresh);
 //        bn_broadcast = (Button) findViewById(R.id.bn_broadcast);
@@ -113,13 +111,17 @@ public class OperationActivity extends AppCompatActivity {
         et_callSign = (EditText) findViewById(R.id.et_callSign);
         tv_myo = (TextView) findViewById(R.id.tv_myo);
 
-        et_opsName.setText(opsName);
-        et_callSign.setText(callSign);
-
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
         query.getInBackground(installation.getString("opsId"), new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 currentOps = object;
+
+                if (currentOps.getString("deviceId").equals(deviceId)) {
+                    isMember = "false";
+                }
+
+                et_opsName.setText(opsName);
+                et_callSign.setText(currentOps.getString("callSign"));
 
                 setList();
 
@@ -484,17 +486,29 @@ public class OperationActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu (Menu menu) {
+        menu.clear();
+        MenuInflater inflater = getMenuInflater();
+        if (isMember == "false") {
+            inflater.inflate(R.menu.menu_operation, menu);
+        } else {
+            inflater.inflate(R.menu.menu_operation_member, menu);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     //actionbar stuff
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_operation, menu);
+        inflater.inflate(R.menu.menu_operation_member, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.myo:
@@ -505,9 +519,6 @@ public class OperationActivity extends AppCompatActivity {
             case R.id.broadCastCmd:
                 broadcast();
                 return true;
-            case R.id.refresh:
-                refresh();
-                return true;
             case R.id.viewMemLocation:
                 return true;
             case R.id.endOps:
@@ -516,6 +527,11 @@ public class OperationActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(), "Please exit from the menu.", Toast.LENGTH_SHORT).show();
     }
 
 

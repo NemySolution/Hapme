@@ -127,8 +127,7 @@ public class AddCmdActivity extends AppCompatActivity {
                     Command cmd = new Command();
                     cmd.setCommandName(et_commandName.getText().toString());
                     cmd.setGestureSeq(gestureList);
-                    cmd.setVibrationSeq(gestureList); // dummy list. Ming Sheng will change when he is done with watch
-
+                    cmd.setVibrationSeq("shave"); // dummy list. Ming Sheng will change when he is done with watch
                     Intent intent = new Intent();
                     intent.putExtra("command", cmd);
                     setResult(RESULT_OK, intent);

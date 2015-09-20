@@ -5,6 +5,7 @@
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#8BC34A</item>
         <item name="colorAccent">#64DD17</item>
+        <item name="android:textColorHint">#BDBDBD</item>
 
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>

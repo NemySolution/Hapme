@@ -21,6 +21,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.SendCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public class CommandsActivity extends AppCompatActivity {
     List<Command> commandList = new ArrayList<>();
     ListView lw = null;
     String opsName;
+    Command command;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,17 +95,17 @@ public class CommandsActivity extends AppCompatActivity {
 
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
-        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-                                long arg3) {
-            Command command = commandList.get(position);
-
+        public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+            command = commandList.get(position);
             ParsePush push = new ParsePush();
             push.setChannel(command.getOpsName());
             push.setMessage(command.getCommandName() + "," + command.getVibrationSeq());
-            push.sendInBackground();
-
-            Toast.makeText(getApplicationContext(), "Command: " + command.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();
-            finish();
+            push.sendInBackground(new SendCallback() {
+                public void done(ParseException e) {
+                    Toast.makeText(getApplicationContext(), "Command: " + command.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
         }
     };
 }

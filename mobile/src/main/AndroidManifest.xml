@@ -27,6 +27,7 @@ android version can be change at build.gradle
         android:protectionLevel="signature" />
 
     <uses-permission android:name="sg.nemysolutions.hapme.permission.C2D_MESSAGE" />
+
     // Required for communicating with the Myo device
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />

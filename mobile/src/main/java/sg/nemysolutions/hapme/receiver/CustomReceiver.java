@@ -24,6 +24,8 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
 
     GoogleApiClient client;
     String nodeId;
+    String message;
+    String[] slicedMsg;
 
     private GoogleApiClient getGoogleApiClient(Context context) {
         return new GoogleApiClient.Builder(context)
@@ -31,32 +33,9 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
                 .build();
     }
 
-
     @Override
     protected void onPushReceive(Context context, Intent intent) {
 //        super.onPushReceive(context, intent);
-
-        client = getGoogleApiClient(context);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Log.e("MING MOBILE", "RUNNING");
-                client.blockingConnect(3000, TimeUnit.MILLISECONDS);
-                NodeApi.GetConnectedNodesResult result =
-                        Wearable.NodeApi.getConnectedNodes(client).await();
-                List<Node> nodes = result.getNodes();
-                Log.e("MING MOBILE", Integer.toString(nodes.size()));
-                if (nodes.size() > 0) {
-                    Log.e("MING MOBILE", nodes.get(0).getId() + ", " + nodes.get(0).getDisplayName());
-                    Log.e("MING MOBILE", nodes.get(1).getId() + ", " + nodes.get(1).getDisplayName());
-                    nodeId = nodes.get(1).getId();
-
-                }
-                Wearable.MessageApi.sendMessage(client, nodeId, "whatsup", null);
-                Log.e("MING MOBILE", "RUNNING");
-                client.disconnect();
-            }
-        }).start();
 
         HashMap<String, long[]> hashMap = new HashMap<>();
         hashMap.put("longAlert", new long[] {0, 10000});
@@ -74,56 +53,53 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
         try {
             JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
 
-            String message = json.getString("alert");
-            String[] splitedMsg = message.split(",", 2);
+            message = json.getString("alert");
+            slicedMsg = message.split(",", 2);
 
-            Toast.makeText(context, "Message: " + splitedMsg[0] + " RECEIVED!", Toast.LENGTH_SHORT).show();
+            /*************** Send watch message in background ***************/
+            client = getGoogleApiClient(context);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("MING MOBILE", "RUNNING");
+                    client.blockingConnect(3000, TimeUnit.MILLISECONDS);
+                    NodeApi.GetConnectedNodesResult result =
+                            Wearable.NodeApi.getConnectedNodes(client).await();
+                    List<Node> nodes = result.getNodes();
+                    Log.e("MING MOBILE", Integer.toString(nodes.size()));
+                    if (nodes.size() > 0) {
+                        Log.e("MING MOBILE", nodes.get(0).getId() + ", " + nodes.get(0).getDisplayName());
+                        Log.e("MING MOBILE", nodes.get(1).getId() + ", " + nodes.get(1).getDisplayName());
+                        nodeId = nodes.get(1).getId();
+
+                    }
+                    Wearable.MessageApi.sendMessage(client, nodeId, message, null);
+                    Log.e("MING MOBILE", "RUNNING");
+                    client.disconnect();
+                }
+            }).start();
+            /****************************************************************/
+
+            Toast.makeText(context, "Message: " + slicedMsg[0] + " RECEIVED!", Toast.LENGTH_SHORT).show();
             NotificationCompat.WearableExtender wearableExtender =
                     new NotificationCompat.WearableExtender()
                             .setHintHideIcon(true);
-
 
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
                     .setContentTitle("ALERT!")
                     .setContentText(message)
                     .extend(wearableExtender);
 
-            notificationBuilder.setVibrate(hashMap.get(splitedMsg[1]));
-
-//            // Creates an explicit intent for an Activity in your app
-//            Intent resultIntent = new Intent(context, OperationActivity.class);
-//
-//            // The stack builder object will contain an artificial back stack for the
-//            // started Activity.
-//            // This ensures that navigating backward from the Activity leads out of
-//            // your application to the Home screen.
-//            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-//            // Adds the back stack for the Intent (but not the Intent itself)
-//            stackBuilder.addParentStack(OperationActivity.class);
-//            // Adds the Intent that starts the Activity to the top of the stack
-//            stackBuilder.addNextIntent(resultIntent);
-//            PendingIntent resultPendingIntent =
-//                    stackBuilder.getPendingIntent(
-//                            0,
-//                            PendingIntent.FLAG_UPDATE_CURRENT
-//                    );
-//            mBuilder.setContentIntent(resultPendingIntent);
-
-//            NotificationManagerCompat mNotificationManager =
-//                    NotificationManagerCompat.from(context);
+            notificationBuilder.setVibrate(hashMap.get(slicedMsg[1]));
 
             NotificationManagerCompat notificationManager =
                     NotificationManagerCompat.from(context);
 
-//            NotificationManager mNotificationManager =
-//                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-//            // mId allows you to update the notification later on.
+            // mId allows you to update the notification later on.
             notificationManager.notify(100, notificationBuilder.build());
 
-
         } catch (JSONException e) {
-            Log.e("hello", "Push message json exception: " + e.getMessage());
+            Log.e("CUSTOM RECEIVER", "Push message json exception: " + e.getMessage());
         }
     }
 

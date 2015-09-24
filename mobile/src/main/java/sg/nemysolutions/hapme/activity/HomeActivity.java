@@ -71,9 +71,6 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.action_exit:
                 System.exit(0);
                 return true;
-//            case R.id.action_compose:
-//                composeMessage();
-//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

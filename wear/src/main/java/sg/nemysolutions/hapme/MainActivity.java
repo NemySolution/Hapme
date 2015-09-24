@@ -3,10 +3,8 @@ package sg.nemysolutions.hapme;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.os.Vibrator;
 import android.support.wearable.view.WatchViewStub;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -50,7 +48,6 @@ public class MainActivity extends Activity {
         mTextView.setText(msg[0]);
 
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        long[] vibrationPattern = {0, 500, 50, 500, 50, 500};
         final int indexInPatternToRepeat = -1;
         vibrator.vibrate(hashMap.get(msg[1]), indexInPatternToRepeat);
 

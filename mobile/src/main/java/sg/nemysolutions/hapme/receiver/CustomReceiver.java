@@ -67,11 +67,14 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
                             Wearable.NodeApi.getConnectedNodes(client).await();
                     List<Node> nodes = result.getNodes();
                     Log.e("MING MOBILE", Integer.toString(nodes.size()));
-                    if (nodes.size() > 0) {
+                    if (nodes.size() > 1) {
+                        for (int i = 0; i < nodes.size(); i++) {
+                            Log.e("MING MOBILE", nodes.get(i).getId() + ", " + nodes.get(i).getDisplayName());
+                            nodeId = nodes.get(i).getId();
+                        }
+                    } else {
                         Log.e("MING MOBILE", nodes.get(0).getId() + ", " + nodes.get(0).getDisplayName());
-                        Log.e("MING MOBILE", nodes.get(1).getId() + ", " + nodes.get(1).getDisplayName());
-                        nodeId = nodes.get(1).getId();
-
+                        nodeId = nodes.get(0).getId();
                     }
                     Wearable.MessageApi.sendMessage(client, nodeId, message, null);
                     Log.e("MING MOBILE", "RUNNING");

@@ -59,6 +59,7 @@ public class OperationActivity extends AppCompatActivity {
     private EditText et_opsName;
     private EditText et_callSign;
     private TextView tv_myo;
+    private TextView tv_commandList;
     private ListView lw_addMember;
     private ArrayAdapter<String> membersAdapter;
     private ParseInstallation installation;
@@ -95,6 +96,7 @@ public class OperationActivity extends AppCompatActivity {
         et_opsName = (EditText) findViewById(R.id.et_opsName);
         et_callSign = (EditText) findViewById(R.id.et_callSign);
         tv_myo = (TextView) findViewById(R.id.tv_myo);
+        tv_commandList = (TextView) findViewById(R.id.tv_commandList);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
         query.getInBackground(installation.getString("opsId"), new GetCallback<ParseObject>() {
@@ -214,6 +216,12 @@ public class OperationActivity extends AppCompatActivity {
         @Override
         public void onArmSync(Myo myo, long timestamp, Arm arm, XDirection xDirection) {
 //            messageView.setText(myo.getArm() == Arm.LEFT ? R.string.arm_left : R.string.arm_right);
+            tv_myo.setText("Myo connected, Sync-ed");
+            if (capturedPoseList.isEmpty()) {
+                tv_commandList.setText("Standby for Gestures");
+            } else {
+                tv_commandList.setText(printCommandList());
+            }
         }
 
         // onArmUnsync() is called whenever Myo has detected that it was moved from a stable position on a person's arm after
@@ -230,7 +238,7 @@ public class OperationActivity extends AppCompatActivity {
         @Override
         public void onUnlock(Myo myo, long timestamp) {
             //lockView.setText(R.string.unlocked);
-            tv_myo.setText("Myo connected, Unlocked");
+            //tv_myo.setText("Myo connected, Unlocked");
         }
 
         // onLock() is called whenever a synced Myo has been locked. Under the standard locking
@@ -238,7 +246,7 @@ public class OperationActivity extends AppCompatActivity {
         @Override
         public void onLock(Myo myo, long timestamp) {
             //lockView.setText(R.string.locked);
-            tv_myo.setText("Myo connected, Locked");
+            //tv_myo.setText("Myo connected, Locked");
         }
 
         @Override
@@ -280,24 +288,35 @@ public class OperationActivity extends AppCompatActivity {
 
                     // clear captured list
                     capturedPoseList.clear();
+
+                    tv_commandList.setText("Standby for Gestures");
                     break;
                 case FIST:
 //                    Toast.makeText(getApplicationContext(), "FIST", Toast.LENGTH_SHORT).show();
                     break;
                 case WAVE_IN:
-                    Toast.makeText(getApplicationContext(), "WAVE_IN", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "WAVE_IN", Toast.LENGTH_SHORT).show();
+                    if (capturedPoseList.size() == 3) {
+                        capturedPoseList.clear();
+                    }
                     capturedPoseList.offer("WAVE_IN");
-                    tv_myo.setText("Myo connected, " + capturedPoseList.toString());
+                    tv_commandList.setText(printCommandList());
                     break;
                 case WAVE_OUT:
-                    Toast.makeText(getApplicationContext(), "WAVE_OUT", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "WAVE_OUT", Toast.LENGTH_SHORT).show();
+                    if (capturedPoseList.size() == 3) {
+                        capturedPoseList.clear();
+                    }
                     capturedPoseList.offer("WAVE_OUT");
-                    tv_myo.setText("Myo connected, " + capturedPoseList.toString());
+                    tv_commandList.setText(printCommandList());
                     break;
                 case FINGERS_SPREAD:
-                    Toast.makeText(getApplicationContext(), "FINGERS_SPREAD", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "FINGERS_SPREAD", Toast.LENGTH_SHORT).show();
+                    if (capturedPoseList.size() == 3) {
+                        capturedPoseList.clear();
+                    }
                     capturedPoseList.offer("FINGERS_SPREAD");
-                    tv_myo.setText("Myo connected, " + capturedPoseList.toString());
+                    tv_commandList.setText(printCommandList());
                     break;
             }
 
@@ -316,6 +335,14 @@ public class OperationActivity extends AppCompatActivity {
             }
         }
     };
+
+    private String printCommandList() {
+        String formatedString = capturedPoseList.toString()
+                .replace("[", "")  //remove the right bracket
+                .replace("]", "")  //remove the left bracket
+                .trim();
+        return formatedString;
+    }
 
     private void getCommandListFromParse() {
         // Retrieve Command list from parse

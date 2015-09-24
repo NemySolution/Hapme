@@ -170,6 +170,7 @@ public class AddCmdActivity extends AppCompatActivity {
 
     // this method reads the captured pose and return numeric command
     private int getCommand(LinkedList<Pose> poseLinkedList) {
+        Log.e("ESMOND", "getCommand called");
         lockView.setText(poseLinkedList.toString());
         int command = 0;
         for (int i = 0; i < poseLinkedList.size(); i++) {

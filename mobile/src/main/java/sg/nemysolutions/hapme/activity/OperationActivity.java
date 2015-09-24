@@ -36,6 +36,7 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.SendCallback;
 import com.thalmic.myo.AbstractDeviceListener;
 import com.thalmic.myo.Arm;
 import com.thalmic.myo.DeviceListener;
@@ -264,10 +265,17 @@ public class OperationActivity extends AppCompatActivity {
                         if (Arrays.equals(c.getGestureSeq().toArray(), capturedPoseList.toArray())) {
                             ParsePush push = new ParsePush();
                             push.setChannel(c.getOpsName());
-                            push.setMessage(c.getCommandName());
-                            push.sendInBackground();
+                            push.setMessage(c.getCommandName() + "," + c.getVibrationSeq());
+                            //push.sendInBackground();
+                            Toast.makeText(getApplicationContext(), "Sending command: " + c.getCommandName(), Toast.LENGTH_SHORT).show();
+                            push.sendInBackground(new SendCallback() {
+                                public void done(ParseException e) {
+                                    Toast.makeText(getApplicationContext(), "Command SENT!", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            });
 
-                            Toast.makeText(getApplicationContext(), "Command: " + c.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Command: " + c.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();
                             commandFound = true;
                             break;
                         }

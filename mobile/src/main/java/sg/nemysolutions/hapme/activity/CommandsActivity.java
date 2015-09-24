@@ -43,7 +43,7 @@ public class CommandsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
-        String opsName = intent.getStringExtra("opsName");
+        opsName = intent.getStringExtra("opsName");
         String isCommander = intent.getStringExtra("isCommander");
 
         lw = (ListView) findViewById(R.id.lv_commands);
@@ -64,25 +64,39 @@ public class CommandsActivity extends AppCompatActivity {
 
                         commandList.add(command);
                     }
+                    Command default1 = new Command();
+                    default1.setOpsName(opsName);
+                    default1.setCommandName("Need Backup");
+                    default1.setVibrationSeq("sos");
+                    commandList.add(default1);
+                    commandTextList.add(default1.getCommandName());
+
+                    Command default2 = new Command();
+                    default2.setOpsName(opsName);
+                    default2.setCommandName("Send Location");
+                    default2.setVibrationSeq("location");
+                    commandList.add(default2);
+                    commandTextList.add(default2.getCommandName());
+                    setList();
                 }
             });
+        } else {
+            // members default commands
+            Command default1 = new Command();
+            default1.setOpsName(opsName);
+            default1.setCommandName("Need Backup");
+            default1.setVibrationSeq("sos");
+            commandList.add(default1);
+            commandTextList.add(default1.getCommandName());
+
+            Command default2 = new Command();
+            default2.setOpsName(opsName);
+            default2.setCommandName("Send Location");
+            default2.setVibrationSeq("location");
+            commandList.add(default2);
+            commandTextList.add(default2.getCommandName());
+            setList();
         }
-        // default commands for everyone
-        Command default1 = new Command();
-        default1.setOpsName(opsName);
-        default1.setCommandName("Need Backup");
-        default1.setVibrationSeq("SOS");
-        commandList.add(default1);
-        commandTextList.add(default1.getCommandName());
-
-        Command default2 = new Command();
-        default2.setOpsName(opsName);
-        default2.setCommandName("Send Location");
-        default2.setVibrationSeq("Location");
-        commandList.add(default2);
-        commandTextList.add(default2.getCommandName());
-        setList();
-
 
         lw.setOnItemClickListener(onItemClickListener);
     }

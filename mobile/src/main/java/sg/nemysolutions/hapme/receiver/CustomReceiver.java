@@ -67,16 +67,14 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
                             Wearable.NodeApi.getConnectedNodes(client).await();
                     List<Node> nodes = result.getNodes();
                     Log.e("MING MOBILE", Integer.toString(nodes.size()));
-                    if (nodes.size() > 1) {
-                        for (int i = 0; i < nodes.size(); i++) {
-                            Log.e("MING MOBILE", nodes.get(i).getId() + ", " + nodes.get(i).getDisplayName());
-                            nodeId = nodes.get(i).getId();
-                        }
-                    } else {
-                        Log.e("MING MOBILE", nodes.get(0).getId() + ", " + nodes.get(0).getDisplayName());
-                        nodeId = nodes.get(0).getId();
+
+                    for (int i = 0; i < nodes.size(); i++) {
+                        Log.e("MING MOBILE", nodes.get(i).getId() + ", " + nodes.get(i).getDisplayName());
+                        nodeId = nodes.get(i).getId();
+                        Wearable.MessageApi.sendMessage(client, nodeId, message, null);
                     }
-                    Wearable.MessageApi.sendMessage(client, nodeId, message, null);
+
+
                     Log.e("MING MOBILE", "RUNNING");
                     client.disconnect();
                 }
@@ -89,7 +87,7 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
                             .setHintHideIcon(true);
 
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
-                    .setContentTitle("ALERT!")
+                    .setContentTitle("HAPME")
                     .setContentText(message)
                     .extend(wearableExtender);
 

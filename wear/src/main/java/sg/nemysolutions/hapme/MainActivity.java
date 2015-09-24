@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 public class MainActivity extends Activity {
 
+    HashMap<String, long[]> hashMap;
     private TextView mTextView;
 
     @Override
@@ -22,7 +23,7 @@ public class MainActivity extends Activity {
         // wake the screen
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
-        HashMap<String, long[]> hashMap = new HashMap<>();
+        hashMap = new HashMap<>();
         hashMap.put("longAlert", new long[] {0, 10000});
         hashMap.put("mediumAlert", new long[] {0, 500, 250, 500, 250, 500, 250});
         hashMap.put("shortAlert", new long[] {0, 200, 100, 200, 100, 200, 100});
@@ -40,16 +41,19 @@ public class MainActivity extends Activity {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
                 mTextView = (TextView) stub.findViewById(R.id.text);
+                Intent intent = getIntent();
+                String msg = intent.getStringExtra("msg");
+                if (msg != null) {
+                    String[] slicedMsg = msg.split(",");
+                    mTextView.setText(slicedMsg[0]);
+                    Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+                    final int indexInPatternToRepeat = -1;
+                    vibrator.vibrate(hashMap.get(slicedMsg[1]), indexInPatternToRepeat);
+                }
             }
         });
 
-        Intent intent = getIntent();
-        String[] msg = intent.getStringExtra("msg").split(",");
-        mTextView.setText(msg[0]);
 
-        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        final int indexInPatternToRepeat = -1;
-        vibrator.vibrate(hashMap.get(msg[1]), indexInPatternToRepeat);
 
     }
 

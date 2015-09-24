@@ -233,6 +233,7 @@ public class OperationActivity extends AppCompatActivity {
         @Override
         public void onArmUnsync(Myo myo, long timestamp) {
             //messageView.setText("Unsync");
+            tv_myo.setText("Myo connected, Unsync");
         }
 
         // onUnlock() is called whenever a synced Myo has been unlocked. Under the standard locking
@@ -240,6 +241,7 @@ public class OperationActivity extends AppCompatActivity {
         @Override
         public void onUnlock(Myo myo, long timestamp) {
             //lockView.setText(R.string.unlocked);
+            tv_myo.setText("Myo connected, Unlocked");
         }
 
         // onLock() is called whenever a synced Myo has been locked. Under the standard locking
@@ -247,6 +249,7 @@ public class OperationActivity extends AppCompatActivity {
         @Override
         public void onLock(Myo myo, long timestamp) {
             //lockView.setText(R.string.locked);
+            tv_myo.setText("Myo connected, Locked");
         }
 
         @Override
@@ -266,12 +269,12 @@ public class OperationActivity extends AppCompatActivity {
                             ParsePush push = new ParsePush();
                             push.setChannel(c.getOpsName());
                             push.setMessage(c.getCommandName() + "," + c.getVibrationSeq());
+                            Log.e("ESMOND MYO MESSAGE", c.getCommandName() + "," + c.getVibrationSeq());
                             //push.sendInBackground();
                             Toast.makeText(getApplicationContext(), "Sending command: " + c.getCommandName(), Toast.LENGTH_SHORT).show();
                             push.sendInBackground(new SendCallback() {
                                 public void done(ParseException e) {
                                     Toast.makeText(getApplicationContext(), "Command SENT!", Toast.LENGTH_SHORT).show();
-                                    finish();
                                 }
                             });
 
@@ -290,19 +293,22 @@ public class OperationActivity extends AppCompatActivity {
                     capturedPoseList.clear();
                     break;
                 case FIST:
-                    Toast.makeText(getApplicationContext(), "FIST", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "FIST", Toast.LENGTH_SHORT).show();
                     break;
                 case WAVE_IN:
                     Toast.makeText(getApplicationContext(), "WAVE_IN", Toast.LENGTH_SHORT).show();
                     capturedPoseList.offer("WAVE_IN");
+                    tv_myo.setText("Myo connected, " + capturedPoseList.toString());
                     break;
                 case WAVE_OUT:
                     Toast.makeText(getApplicationContext(), "WAVE_OUT", Toast.LENGTH_SHORT).show();
                     capturedPoseList.offer("WAVE_OUT");
+                    tv_myo.setText("Myo connected, " + capturedPoseList.toString());
                     break;
                 case FINGERS_SPREAD:
                     Toast.makeText(getApplicationContext(), "FINGERS_SPREAD", Toast.LENGTH_SHORT).show();
                     capturedPoseList.offer("FINGERS_SPREAD");
+                    tv_myo.setText("Myo connected, " + capturedPoseList.toString());
                     break;
             }
 
@@ -335,6 +341,7 @@ public class OperationActivity extends AppCompatActivity {
                     command.setCommandName(c.getString("commandName"));
                     command.setCommandID(c.getObjectId());
                     command.setGestureSeq(convertParseListToArrayList(c));
+                    command.setVibrationSeq(c.getString("vibrationSeq"));
                     commandList.add(command);
                 }
             }

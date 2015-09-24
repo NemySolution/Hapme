@@ -62,7 +62,7 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
                 @Override
                 public void run() {
                     Log.e("MING MOBILE", "RUNNING");
-                    client.blockingConnect(3000, TimeUnit.MILLISECONDS);
+                    client.blockingConnect(1000, TimeUnit.MILLISECONDS);
                     NodeApi.GetConnectedNodesResult result =
                             Wearable.NodeApi.getConnectedNodes(client).await();
                     List<Node> nodes = result.getNodes();

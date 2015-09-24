@@ -11,25 +11,26 @@ package sg.nemysolutions.hapme.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.thalmic.myo.AbstractDeviceListener;
 import com.thalmic.myo.Arm;
 import com.thalmic.myo.DeviceListener;
 import com.thalmic.myo.Hub;
 import com.thalmic.myo.Myo;
 import com.thalmic.myo.Pose;
-
-import com.thalmic.myo.AbstractDeviceListener;
 import com.thalmic.myo.XDirection;
-import com.thalmic.myo.scanner.ScanActivity;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -54,6 +55,7 @@ public class AddCmdActivity extends AppCompatActivity {
     private EditText et_gesture2;
     private EditText et_gesture3;
     private EditText et_commandName;
+    Spinner spinner;
 
     private LinkedList<Pose> capturedPoseList;
 
@@ -82,6 +84,29 @@ public class AddCmdActivity extends AppCompatActivity {
 
         et_commandName = (EditText) findViewById(R.id.et_commandName);
 
+        spinner = (Spinner) findViewById(R.id.spinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.planets_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                Toast.makeText(getApplicationContext(), "selected " + adapter.getItem(position), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                Toast.makeText(getApplicationContext(), "nothing selected", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        Log.e("SPINNER", spinner.getSelectedItem().toString());
 
         bn_waveIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +152,7 @@ public class AddCmdActivity extends AppCompatActivity {
                     Command cmd = new Command();
                     cmd.setCommandName(et_commandName.getText().toString());
                     cmd.setGestureSeq(gestureList);
-                    cmd.setVibrationSeq("shave"); // dummy list. Ming Sheng will change when he is done with watch
+                    cmd.setVibrationSeq(spinner.getSelectedItem().toString()); // dummy list. Ming Sheng will change when he is done with watch
                     Intent intent = new Intent();
                     intent.putExtra("command", cmd);
                     setResult(RESULT_OK, intent);
@@ -289,6 +314,5 @@ public class AddCmdActivity extends AppCompatActivity {
             }
         }
     };
-
 
 }

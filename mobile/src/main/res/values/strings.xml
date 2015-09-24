@@ -38,14 +38,16 @@
     <string name="action_example">Example action</string>
 
     <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+        <item>LongAlert</item>
+        <item>MediumAlert</item>
+        <item>ShortAlert</item>
+        <item>Heartbeat</item>
+        <item>Shave</item>
+        <item>Triangle</item>
+        <item>SOS</item>
+        <item>FinalFantasy</item>
+        <item>StarWars</item>
+        <item>Special</item>
     </string-array>
 
 </resources>

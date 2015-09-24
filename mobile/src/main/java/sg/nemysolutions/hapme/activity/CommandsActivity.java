@@ -64,26 +64,25 @@ public class CommandsActivity extends AppCompatActivity {
 
                         commandList.add(command);
                     }
-                    setList();
                 }
             });
-        } else {
-            // members default commands
-            Command default1 = new Command();
-            default1.setOpsName(opsName);
-            default1.setCommandName("Need Backup");
-            default1.setVibrationSeq("sos");
-            commandList.add(default1);
-            commandTextList.add(default1.getCommandName());
-
-            Command default2 = new Command();
-            default2.setOpsName(opsName);
-            default2.setCommandName("Send Location");
-            default2.setVibrationSeq("location");
-            commandList.add(default2);
-            commandTextList.add(default2.getCommandName());
-            setList();
         }
+        // default commands for everyone
+        Command default1 = new Command();
+        default1.setOpsName(opsName);
+        default1.setCommandName("Need Backup");
+        default1.setVibrationSeq("SOS");
+        commandList.add(default1);
+        commandTextList.add(default1.getCommandName());
+
+        Command default2 = new Command();
+        default2.setOpsName(opsName);
+        default2.setCommandName("Send Location");
+        default2.setVibrationSeq("Location");
+        commandList.add(default2);
+        commandTextList.add(default2.getCommandName());
+        setList();
+
 
         lw.setOnItemClickListener(onItemClickListener);
     }

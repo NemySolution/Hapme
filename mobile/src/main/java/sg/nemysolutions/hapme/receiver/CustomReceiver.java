@@ -38,17 +38,18 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
 //        super.onPushReceive(context, intent);
 
         HashMap<String, long[]> hashMap = new HashMap<>();
-        hashMap.put("longAlert", new long[] {0, 10000});
-        hashMap.put("mediumAlert", new long[] {0, 500, 250, 500, 250, 500, 250});
-        hashMap.put("shortAlert", new long[] {0, 200, 100, 200, 100, 200, 100});
-        hashMap.put("heartbeat", new long[] {0, 200, 100, 200, 1000, 200, 100, 200, 1000, 200, 100, 200, 1000, 200, 100, 200});
-        hashMap.put("shave", new long[] {0,100,200,100,100,100,100,100,200,100,500,100,225,100});
-        hashMap.put("triangle", new long[] {0,150,50,75,50,75,50,150,50,75,50,75,50,300,1000, 150,50,75,50,75,50,150,50,75,50,75,50,300});
-        hashMap.put("sos", new long[]{0, 200, 200, 200, 200, 200, 500, 500, 200, 500, 200, 500, 500, 200, 200, 200, 200, 200, 1000, 200, 200, 200, 200, 200, 500, 500, 200, 500, 200, 500, 500, 200, 200, 200, 200, 200});
-        hashMap.put("location", new long[] {0, 500});
-        hashMap.put("finalFantasy", new long[] {0,50,100,50,100,50,100,400,100,300,100,350,50,200,100,100,50,600});
-        hashMap.put("starWars", new long[] {0,500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500});
-        hashMap.put("special", new long[] {0, 250, 200, 250, 150, 150, 75, 150, 75, 150});
+        hashMap.put("LongAlert", new long[] {0, 3000, 500, 3000, 500, 3000, 500, 3000});
+        hashMap.put("MediumAlert", new long[] {0, 500, 250, 500, 250, 500, 250, 500});
+        hashMap.put("ShortAlert", new long[] {0, 200, 100, 200, 100, 200, 100});
+        hashMap.put("Heartbeat", new long[] {0, 200, 100, 200, 1000, 200, 100, 200, 1000, 200, 100, 200, 1000, 200, 100, 200});
+        hashMap.put("Shave", new long[] {0,100,200,100,100,100,100,100,200,100,500,100,225,100});
+        hashMap.put("Triangle", new long[] {0,150,50,75,50,75,50,150,50,75,50,75,50,300,1000, 150,50,75,50,75,50,150,50,75,50,75,50,300});
+        hashMap.put("SOS", new long[]{0, 200, 200, 200, 200, 200, 500, 500, 200, 500, 200, 500, 500, 200, 200, 200, 200, 200, 1000, 200, 200, 200, 200, 200, 500, 500, 200, 500, 200, 500, 500, 200, 200, 200, 200, 200});
+        hashMap.put("FinalFantasy", new long[] {0,50,100,50,100,50,100,400,100,300,100,350,50,200,100,100,50,600});
+        hashMap.put("StarWars", new long[] {0,500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500});
+        hashMap.put("Special", new long[] {0, 250, 200, 250, 150, 150, 75, 150, 75, 150});
+        hashMap.put("Location", new long[] {0, 500});
+        hashMap.put("Backup", new long[] {0, 10000});
 
         try {
             JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
@@ -62,7 +63,7 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
                 @Override
                 public void run() {
                     Log.e("MING MOBILE", "RUNNING");
-                    client.blockingConnect(1000, TimeUnit.MILLISECONDS);
+                    client.blockingConnect(3000, TimeUnit.MILLISECONDS);
                     NodeApi.GetConnectedNodesResult result =
                             Wearable.NodeApi.getConnectedNodes(client).await();
                     List<Node> nodes = result.getNodes();
@@ -73,8 +74,6 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
                         nodeId = nodes.get(i).getId();
                         Wearable.MessageApi.sendMessage(client, nodeId, message, null);
                     }
-
-
                     Log.e("MING MOBILE", "RUNNING");
                     client.disconnect();
                 }

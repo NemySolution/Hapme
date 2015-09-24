@@ -161,10 +161,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner"
-        android:layout_below="@+id/bn_clear"
-        android:layout_centerHorizontal="true"
         android:spinnerMode="dropdown"
         android:textAlignment="center"
-        android:contentDescription="asdasdasd" />
+        android:layout_below="@+id/bn_clear"
+        android:layout_marginTop="32dp"
+        android:layout_alignStart="@+id/bn_clear" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Vibration"
+        android:id="@+id/textView9"
+        android:textSize="15dp"
+        android:layout_alignTop="@+id/spinner"
+        android:layout_toStartOf="@+id/spinner" />
 
 </RelativeLayout>

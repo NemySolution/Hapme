@@ -135,9 +135,9 @@ public class AddCmdActivity extends AppCompatActivity {
                     et_commandName.setError("Command name required");
                 }
                 else{
-                    if (et_gesture2.getText().toString() == "" && et_gesture3.getText().toString() == "") {
+                    if (et_gesture2.getText().toString().equals("") && et_gesture3.getText().toString().equals("")) {
                         gestureList = Arrays.asList(et_gesture1.getText().toString());
-                    } else if (et_gesture3.getText().toString() == "" && et_gesture2.getText().toString() != "") {
+                    } else if (et_gesture3.getText().toString().equals("") && !et_gesture2.getText().toString().equals("")) {
                         gestureList = Arrays.asList(et_gesture1.getText().toString(), et_gesture2.getText().toString());
                     } else {
                         gestureList = Arrays.asList(et_gesture1.getText().toString(), et_gesture2.getText().toString(), et_gesture3.getText().toString());

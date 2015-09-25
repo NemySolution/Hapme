@@ -2,10 +2,14 @@ package sg.nemysolutions.hapme;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.wearable.view.WatchViewStub;
+import android.util.Log;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -14,6 +18,7 @@ public class MainActivity extends Activity {
 
     HashMap<String, long[]> hashMap;
     private TextView mTextView;
+    private RelativeLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +47,22 @@ public class MainActivity extends Activity {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
                 mTextView = (TextView) stub.findViewById(R.id.text);
+                layout = (RelativeLayout) stub.findViewById(R.id.layout);
                 Intent intent = getIntent();
                 String msg = intent.getStringExtra("msg");
+
+                Vibrator vibrator2 = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+                final int indexInPatternToRepeat2 = -1;
+                vibrator2.vibrate(new long[] {0, 10000}, indexInPatternToRepeat2);
+
                 if (msg != null) {
-                    String[] slicedMsg = msg.split(",");
+                    String[] slicedMsg = msg.split(",", 3);
                     mTextView.setText(slicedMsg[0]);
+                    Resources resources = getApplicationContext().getResources();
+//                    final int resourceId = resources.getIdentifier(slicedMsg[2], "color",
+//                            getApplicationContext().getPackageName());
+                    layout.setBackgroundColor(Color.parseColor(slicedMsg[2]));
+//                    Log.e("MING WEAR COLOR", Integer.toString(resourceId));
                     Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                     final int indexInPatternToRepeat = -1;
                     vibrator.vibrate(hashMap.get(slicedMsg[1]), indexInPatternToRepeat);

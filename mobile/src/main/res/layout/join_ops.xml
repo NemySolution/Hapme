@@ -65,7 +65,8 @@
                 android:layout_marginBottom="10dp"
                 android:imeOptions="actionDone"
                 android:singleLine="true"
-                android:layout_toEndOf="@+id/textView4" />
+                android:layout_toEndOf="@+id/textView4"
+                android:inputType="numberPassword" />
 
             <TextView
                 android:layout_width="wrap_content"

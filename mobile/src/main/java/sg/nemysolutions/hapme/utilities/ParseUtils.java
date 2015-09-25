@@ -80,6 +80,7 @@ public class ParseUtils {
                     command.put("commandName", c.getCommandName());
                     command.put("vibrationSeq", c.getVibrationSeq());
                     command.put("gestureSeq", c.getGestureSeq());
+                    command.put("color", c.getColor());
 
                     command.saveInBackground();
                 }

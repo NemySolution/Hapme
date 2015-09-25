@@ -145,9 +145,18 @@ public class OperationActivity extends AppCompatActivity {
         ParseQuery<ParseObject> memberQuery = ParseQuery.getQuery("Operation");
         memberQuery.getInBackground(installation.getString("opsId"), new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
-                if (object.getList("members") != null && object.getList("members").size() != 0) {
+
+                if (object.getList("members") != null) {
+                    Log.e("MEMBERS callSign", callSign);
                     members = object.getList("members");
+                    for(int i = 0; i < members.size(); i++) {
+                        if (members.get(i).equals(callSign)) {
+                            Log.e("MEMBERS", members.get(i));
+                            members.set(i, callSign + " (You)");
+                        }
+                    }
                 } else {
+                    Log.e("MEMBERS null", "is null");
                     members = new ArrayList<>();
                 }
 
@@ -173,6 +182,11 @@ public class OperationActivity extends AppCompatActivity {
             mHandler.postDelayed(m_Runnable, 5000);
         }
     };
+
+//    public void refresh() {
+//        retrieveOperationMembers();
+//        mHandler.removeCallbacks(m_Runnable);
+//    }
     /************** AUTO REFRESH END ****************/
 
 
@@ -209,6 +223,7 @@ public class OperationActivity extends AppCompatActivity {
 //            bn_myo.setText("Disconnected");
 
             tv_myo.setText("Myo not connected");
+            tv_commandList.setText("");
         }
 
         // onArmSync() is called whenever Myo has recognized a Sync Gesture after someone has put it on their
@@ -216,12 +231,10 @@ public class OperationActivity extends AppCompatActivity {
         @Override
         public void onArmSync(Myo myo, long timestamp, Arm arm, XDirection xDirection) {
 //            messageView.setText(myo.getArm() == Arm.LEFT ? R.string.arm_left : R.string.arm_right);
-            tv_myo.setText("Myo connected, Sync-ed");
-            if (capturedPoseList.isEmpty()) {
-                tv_commandList.setText("Standby for Gestures");
-            } else {
-                tv_commandList.setText(printCommandList());
-            }
+            tv_myo.setText("Myo Connected and Sync-ed");
+            myo.lock();
+            tv_commandList.setText("Myo Locked. Fist to Unlock.");
+            capturedPoseList.clear();
         }
 
         // onArmUnsync() is called whenever Myo has detected that it was moved from a stable position on a person's arm after
@@ -230,7 +243,10 @@ public class OperationActivity extends AppCompatActivity {
         @Override
         public void onArmUnsync(Myo myo, long timestamp) {
             //messageView.setText("Unsync");
-            tv_myo.setText("Myo connected, Unsync");
+            tv_myo.setText("Myo Connected but Unsync-ed");
+            tv_commandList.setText("");
+            capturedPoseList.clear();
+            myo.lock();
         }
 
         // onUnlock() is called whenever a synced Myo has been unlocked. Under the standard locking
@@ -255,27 +271,30 @@ public class OperationActivity extends AppCompatActivity {
             // based on the pose we receive.
             switch (pose) {
                 case UNKNOWN:
+                    Log.e("ESMOND MYO MESSAGE", "unknown");
                     break;
                 case REST:
+                    Log.e("ESMOND MYO MESSAGE", "rest");
                     break;
                 case DOUBLE_TAP:
+                    Log.e("ESMOND MYO MESSAGE", "double tap");
                     // Compare pose list with command list
                     Boolean commandFound = false;
                     for (Command c : commandList) {
                         if (Arrays.equals(c.getGestureSeq().toArray(), capturedPoseList.toArray())) {
                             ParsePush push = new ParsePush();
                             push.setChannel(c.getOpsName());
-                            push.setMessage(c.getCommandName() + "," + c.getVibrationSeq());
-                            Log.e("ESMOND MYO MESSAGE", c.getCommandName() + "," + c.getVibrationSeq());
-                            //push.sendInBackground();
+                            push.setMessage(c.getCommandName() + "," + c.getVibrationSeq() + "," + c.getColor());
+                            Log.e("ESMOND MYO MESSAGE", c.getCommandName() + "," + c.getVibrationSeq()+ "," + c.getColor());
+
                             Toast.makeText(getApplicationContext(), "Sending command: " + c.getCommandName(), Toast.LENGTH_SHORT).show();
+
                             push.sendInBackground(new SendCallback() {
                                 public void done(ParseException e) {
                                     Toast.makeText(getApplicationContext(), "Command SENT!", Toast.LENGTH_SHORT).show();
                                 }
                             });
 
-                            //Toast.makeText(getApplicationContext(), "Command: " + c.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();
                             commandFound = true;
                             break;
                         }
@@ -285,14 +304,20 @@ public class OperationActivity extends AppCompatActivity {
                     if (!commandFound) {
                         Toast.makeText(getApplicationContext(), "Command not found.", Toast.LENGTH_SHORT).show();
                     }
-
                     // clear captured list
                     capturedPoseList.clear();
-
                     tv_commandList.setText("Standby for Gestures");
                     break;
                 case FIST:
-//                    Toast.makeText(getApplicationContext(), "FIST", Toast.LENGTH_SHORT).show();
+                    Log.e("ESMOND MYO MESSAGE", "fist");
+                    if (myo.isUnlocked()) {
+                        myo.lock();
+                        tv_commandList.setText("Myo Locked. Fist to Unlock.");
+                    } else {
+                        myo.unlock(Myo.UnlockType.HOLD);
+                        tv_commandList.setText("Standby for Gestures");
+                    }
+                    capturedPoseList.clear();
                     break;
                 case WAVE_IN:
                     //Toast.makeText(getApplicationContext(), "WAVE_IN", Toast.LENGTH_SHORT).show();
@@ -311,6 +336,7 @@ public class OperationActivity extends AppCompatActivity {
                     tv_commandList.setText(printCommandList());
                     break;
                 case FINGERS_SPREAD:
+                    Log.e("ESMOND MYO MESSAGE", "fingers spread");
                     //Toast.makeText(getApplicationContext(), "FINGERS_SPREAD", Toast.LENGTH_SHORT).show();
                     if (capturedPoseList.size() == 3) {
                         capturedPoseList.clear();
@@ -320,28 +346,28 @@ public class OperationActivity extends AppCompatActivity {
                     break;
             }
 
-            if (pose != Pose.UNKNOWN && pose != Pose.REST) {
-                // Tell the Myo to stay unlocked until told otherwise. We do that here so you can
-                // hold the poses without the Myo becoming locked.
-                myo.unlock(Myo.UnlockType.HOLD);
-
-                // Notify the Myo that the pose has resulted in an action, in this case changing
-                // the text on the screen. The Myo will vibrate.
-                //myo.notifyUserAction();
-            } else {
-                // Tell the Myo to stay unlocked only for a short period. This allows the Myo to
-                // stay unlocked while poses are being performed, but lock after inactivity.
-                myo.unlock(Myo.UnlockType.TIMED);
-            }
+//            if (pose == Pose.FIST) {
+//                // Tell the Myo to stay unlocked until told otherwise. We do that here so you can
+//                // hold the poses without the Myo becoming locked.
+//                myo.unlock(Myo.UnlockType.HOLD);
+//                tv_commandList.setText("Perform Gestures to Send Commands");
+//
+//                // Notify the Myo that the pose has resulted in an action, in this case changing
+//                // the text on the screen. The Myo will vibrate.
+//                //myo.notifyUserAction();
+//            } else {
+//                // Tell the Myo to stay unlocked only for a short period. This allows the Myo to
+//                // stay unlocked while poses are being performed, but lock after inactivity.
+//                myo.unlock(Myo.UnlockType.TIMED);
+//            }
         }
     };
 
     private String printCommandList() {
-        String formatedString = capturedPoseList.toString()
+        return capturedPoseList.toString()
                 .replace("[", "")  //remove the right bracket
                 .replace("]", "")  //remove the left bracket
                 .trim();
-        return formatedString;
     }
 
     private void getCommandListFromParse() {
@@ -358,6 +384,7 @@ public class OperationActivity extends AppCompatActivity {
                     command.setCommandID(c.getObjectId());
                     command.setGestureSeq(convertParseListToArrayList(c));
                     command.setVibrationSeq(c.getString("vibrationSeq"));
+                    command.setColor(c.getString("color"));
                     commandList.add(command);
                 }
             }
@@ -433,6 +460,7 @@ public class OperationActivity extends AppCompatActivity {
         }
 
         intent.putExtra("opsName", opsName);
+        intent.putExtra("callSign", callSign);
         startActivity(intent);
     }
 
@@ -452,7 +480,7 @@ public class OperationActivity extends AppCompatActivity {
             });
         } else {
             members = currentOps.getList("members");
-            members.remove(callSign);
+            members.remove(callSign + " (You)");
             currentOps.put("members", members);
             currentOps.saveInBackground();
         }
@@ -460,11 +488,6 @@ public class OperationActivity extends AppCompatActivity {
         ParsePush.unsubscribeInBackground(currentOps.getString("opsName"));
         mHandler.removeCallbacks(m_Runnable);
         finish();
-    }
-
-    public void refresh() {
-        retrieveOperationMembers();
-        mHandler.removeCallbacks(m_Runnable);
     }
 
     public void myo() {

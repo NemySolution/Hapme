@@ -10,6 +10,7 @@ public class Command implements Serializable {
     private String commandName;
     private String vibrationSeq;
     private List<String> gestureSeq;
+    private String color;
 
     public Command() {}
 
@@ -51,6 +52,14 @@ public class Command implements Serializable {
 
     public void setGestureSeq(List<String> gestureSeq) {
         this.gestureSeq = gestureSeq;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
 }

@@ -40,7 +40,6 @@ public class CommandsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.commands);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         opsName = intent.getStringExtra("opsName");
@@ -55,28 +54,31 @@ public class CommandsActivity extends AppCompatActivity {
                 @Override
                 public void done(List<ParseObject> results, ParseException e) {
                     for (ParseObject c : results) {
-                        commandTextList.add(c.getString("commandName"));
                         Command command = new Command();
                         command.setOpsName(c.getString("opsName"));
                         command.setCommandName(c.getString("commandName"));
                         command.setVibrationSeq(c.getString("vibrationSeq"));
+                        command.setColor(c.getString("color"));
                         command.setCommandID(c.getObjectId());
-
                         commandList.add(command);
+                        commandTextList.add(c.getString("commandName"));
                     }
                     Command default1 = new Command();
                     default1.setOpsName(opsName);
                     default1.setCommandName("Need Backup");
-                    default1.setVibrationSeq("sos");
+                    default1.setVibrationSeq("SOS");
+                    default1.setColor("yellow");
                     commandList.add(default1);
                     commandTextList.add(default1.getCommandName());
 
                     Command default2 = new Command();
                     default2.setOpsName(opsName);
                     default2.setCommandName("Send Location");
-                    default2.setVibrationSeq("location");
+                    default2.setVibrationSeq("Location");
+                    default2.setColor("yellow");
                     commandList.add(default2);
                     commandTextList.add(default2.getCommandName());
+
                     setList();
                 }
             });
@@ -85,14 +87,16 @@ public class CommandsActivity extends AppCompatActivity {
             Command default1 = new Command();
             default1.setOpsName(opsName);
             default1.setCommandName("Need Backup");
-            default1.setVibrationSeq("sos");
+            default1.setVibrationSeq("SOS");
+            default1.setColor("yellow");
             commandList.add(default1);
             commandTextList.add(default1.getCommandName());
 
             Command default2 = new Command();
             default2.setOpsName(opsName);
             default2.setCommandName("Send Location");
-            default2.setVibrationSeq("location");
+            default2.setVibrationSeq("Location");
+            default2.setColor("yellow");
             commandList.add(default2);
             commandTextList.add(default2.getCommandName());
             setList();
@@ -112,7 +116,7 @@ public class CommandsActivity extends AppCompatActivity {
             command = commandList.get(position);
             ParsePush push = new ParsePush();
             push.setChannel(command.getOpsName());
-            push.setMessage(command.getCommandName() + "," + command.getVibrationSeq());
+            push.setMessage(command.getCommandName() + "," + command.getVibrationSeq() + "," + command.getColor());
             push.sendInBackground(new SendCallback() {
                 public void done(ParseException e) {
                     Toast.makeText(getApplicationContext(), "Command: " + command.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();

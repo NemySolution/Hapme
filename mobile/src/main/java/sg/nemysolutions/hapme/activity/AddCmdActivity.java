@@ -16,7 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,6 +55,7 @@ public class AddCmdActivity extends AppCompatActivity {
     private EditText et_gesture3;
     private EditText et_commandName;
     Spinner spinner;
+    Spinner spinner2;
 
     private LinkedList<Pose> capturedPoseList;
 
@@ -85,28 +85,16 @@ public class AddCmdActivity extends AppCompatActivity {
         et_commandName = (EditText) findViewById(R.id.et_commandName);
 
         spinner = (Spinner) findViewById(R.id.spinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.planets_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                Toast.makeText(getApplicationContext(), "selected " + adapter.getItem(position), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                Toast.makeText(getApplicationContext(), "nothing selected", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        Log.e("SPINNER", spinner.getSelectedItem().toString());
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        final ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.colors_array, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(adapter2);
 
         bn_waveIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,18 +129,25 @@ public class AddCmdActivity extends AppCompatActivity {
         bn_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                List<String> gestureList;
                 String doneValue = et_commandName.getText().toString();
                 if(doneValue.isEmpty()){
                     et_commandName.setError("Command name required");
                 }
                 else{
-                    List<String> gestureList = Arrays.asList(et_gesture1.getText().toString(), et_gesture2.getText().toString(), et_gesture3.getText().toString());
-
+                    if (et_gesture2.getText().toString() == "" && et_gesture3.getText().toString() == "") {
+                        gestureList = Arrays.asList(et_gesture1.getText().toString());
+                    } else if (et_gesture3.getText().toString() == "" && et_gesture2.getText().toString() != "") {
+                        gestureList = Arrays.asList(et_gesture1.getText().toString(), et_gesture2.getText().toString());
+                    } else {
+                        gestureList = Arrays.asList(et_gesture1.getText().toString(), et_gesture2.getText().toString(), et_gesture3.getText().toString());
+                    }
                     //set Command object
                     Command cmd = new Command();
                     cmd.setCommandName(et_commandName.getText().toString());
                     cmd.setGestureSeq(gestureList);
-                    cmd.setVibrationSeq(spinner.getSelectedItem().toString()); // dummy list. Ming Sheng will change when he is done with watch
+                    cmd.setVibrationSeq(spinner.getSelectedItem().toString());
+                    cmd.setColor(spinner2.getSelectedItem().toString());
                     Intent intent = new Intent();
                     intent.putExtra("command", cmd);
                     setResult(RESULT_OK, intent);

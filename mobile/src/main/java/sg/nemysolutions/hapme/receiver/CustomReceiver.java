@@ -55,7 +55,7 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
             JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
 
             message = json.getString("alert");
-            slicedMsg = message.split(",", 2);
+            slicedMsg = message.split(",", 3);
 
             /*************** Send watch message in background ***************/
             client = getGoogleApiClient(context);
@@ -63,18 +63,16 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
                 @Override
                 public void run() {
                     Log.e("MING MOBILE", "RUNNING");
-                    client.blockingConnect(3000, TimeUnit.MILLISECONDS);
+                    client.blockingConnect(2000, TimeUnit.MILLISECONDS);
                     NodeApi.GetConnectedNodesResult result =
                             Wearable.NodeApi.getConnectedNodes(client).await();
                     List<Node> nodes = result.getNodes();
-                    Log.e("MING MOBILE", Integer.toString(nodes.size()));
 
                     for (int i = 0; i < nodes.size(); i++) {
                         Log.e("MING MOBILE", nodes.get(i).getId() + ", " + nodes.get(i).getDisplayName());
                         nodeId = nodes.get(i).getId();
                         Wearable.MessageApi.sendMessage(client, nodeId, message, null);
                     }
-                    Log.e("MING MOBILE", "RUNNING");
                     client.disconnect();
                 }
             }).start();

@@ -2,7 +2,6 @@ package sg.nemysolutions.hapme;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -20,6 +19,7 @@ public class MainActivity extends Activity {
     private TextView mTextView;
     private TextView tv_senderCallSign;
     private RelativeLayout layout;
+    private String msg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
                 tv_senderCallSign = (TextView) stub.findViewById(R.id.senderCallSign);
 
                 Intent intent = getIntent();
-                String msg = intent.getStringExtra("msg");
+                msg = intent.getStringExtra("msg");
 
                 Vibrator vibrator2 = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                 final int indexInPatternToRepeat2 = -1;
@@ -61,9 +61,14 @@ public class MainActivity extends Activity {
 
                 if (msg != null) {
                     String[] slicedMsg = msg.split(",", 4);
+                    String bg_color = slicedMsg[3];
+                    // Change the font color if background has the same contrast
+                    if (bg_color.equals("cyan") || bg_color.equals("yellow")) {
+                        tv_senderCallSign.setTextColor(Color.parseColor("black"));
+                        mTextView.setTextColor(Color.parseColor("black"));
+                    }
                     tv_senderCallSign.setText(slicedMsg[0]);
                     mTextView.setText(slicedMsg[1]);
-                    Resources resources = getApplicationContext().getResources();
                     layout.setBackgroundColor(Color.parseColor(slicedMsg[3]));
                     Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                     final int indexInPatternToRepeat = -1;
@@ -72,8 +77,48 @@ public class MainActivity extends Activity {
             }
         });
 
+    }
+    /*********** ONCREATE ENDS **************/
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("MING SHENG", "WATCH RESTARTED");
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        msg = data.getStringExtra("msg");
+        Log.e("MING SHENG", "WATCH RESUMED" + msg);
+        if (msg != null) {
+            String[] slicedMsg = msg.split(",", 4);
+            String bg_color = slicedMsg[3];
+            // Change the font color if background has the same contrast
+            if (bg_color.equals("cyan") || bg_color.equals("yellow")) {
+                tv_senderCallSign.setTextColor(Color.parseColor("black"));
+                mTextView.setTextColor(Color.parseColor("black"));
+            }
+            tv_senderCallSign.setText(slicedMsg[0]);
+            mTextView.setText(slicedMsg[1]);
+            layout.setBackgroundColor(Color.parseColor(slicedMsg[3]));
+            Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+            final int indexInPatternToRepeat = -1;
+            vibrator.vibrate(hashMap.get(slicedMsg[2]), indexInPatternToRepeat);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("MING SHENG", "WATCH RESUMED" + msg);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("MING SHENG", "WATCH STARTED");
+        Log.e("MING SHENG", "WATCH STARTED" + msg);
     }
 
 }

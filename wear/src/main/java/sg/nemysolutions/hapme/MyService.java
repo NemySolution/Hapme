@@ -20,6 +20,7 @@ public class MyService extends WearableListenerService {
         Log.e("MING WEAR", messageEvent.getPath());
         Intent startIntent = new Intent(this, MainActivity.class);
         startIntent.putExtra("msg", messageEvent.getPath());
+        startIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(startIntent);
     }

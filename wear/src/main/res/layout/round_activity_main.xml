@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context=".MainActivity" tools:deviceIds="wear_round"
-    android:background="@color/blue" android:id="@+id/layout">
+    android:background="@color/green" android:id="@+id/layout">
 
     <TextView android:id="@+id/text" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,5 +26,5 @@
         android:layout_alignParentEnd="true"
         android:gravity="center"
         android:typeface="sans"
-        android:text="Sender CallSign" />
+        android:text="Ready to Start" />
 </RelativeLayout>

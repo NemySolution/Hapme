@@ -50,7 +50,7 @@ public class CreateOperationActivity extends AppCompatActivity {
         et_callSign = (EditText) findViewById(R.id.et_callSign);
         et_secretKey = (EditText) findViewById(R.id.et_secretKey);
 
-        ImageButton bn_addCmd = (ImageButton) findViewById(R.id.bn_addCmd);
+        Button bn_addCmd = (Button) findViewById(R.id.bn_addCmd);
         Button bn_createOps = (Button) findViewById(R.id.bn_createOps);
 
         Common.offAutoKey(this);

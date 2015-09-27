@@ -18,7 +18,7 @@ import com.parse.ParseQuery;
 import sg.nemysolutions.hapme.R;
 import sg.nemysolutions.hapme.utilities.ParseUtils;
 
-/**************** MainActivity ******************/
+/**************** Join Operaion Activity ******************/
 /* A "login" page for all the users (GC & members)
 * for members to join_ops an activity_operation*/
 

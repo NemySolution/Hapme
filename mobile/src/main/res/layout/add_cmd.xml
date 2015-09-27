@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent" android:paddingLeft="15dp"
+    android:paddingRight="15dp"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="sg.nemysolutions.hapme.activity.AddCmdActivity">
@@ -26,7 +26,8 @@
         android:layout_below="@+id/textView8"
         android:id="@+id/linearLayoutGesture"
         android:gravity="center"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:layout_alignParentEnd="true">
 
         <EditText
             android:layout_width="wrap_content"
@@ -39,7 +40,7 @@
             android:minWidth="110dp"
             android:singleLine="false"
             android:gravity="center"
-            />
+            android:hint="Gesture 1" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -51,7 +52,8 @@
             android:layout_alignEnd="@+id/message"
             android:textSize="12dp"
             android:minWidth="110dp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:hint="Gesture 2" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -62,7 +64,8 @@
             android:layout_below="@+id/et_commandName"
             android:textSize="12dp"
             android:minWidth="110dp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:hint="Gesture 3" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,8 +75,8 @@
         android:gravity="center"
         android:padding="0dp"
         android:id="@+id/linearLayoutGestBn"
-        android:layout_below="@+id/textView5"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayoutGesture">
 
         <Button
             android:layout_width="wrap_content"
@@ -82,7 +85,10 @@
             android:id="@+id/bn_waveIn"
             android:layout_below="@+id/et_gesture2"
             android:layout_alignStart="@+id/bn_waveOut"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:background="#0277BD"
+            android:layout_margin="5dp" />
 
         <Button
             android:layout_width="wrap_content"
@@ -91,7 +97,10 @@
             android:id="@+id/bn_waveOut"
             android:layout_below="@+id/bn_waveIn"
             android:layout_toStartOf="@+id/et_gesture3"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:background="#0277BD"
+            android:layout_margin="5dp" />
 
         <Button
             android:layout_width="wrap_content"
@@ -100,7 +109,10 @@
             android:id="@+id/bn_fingerSpread"
             android:layout_below="@+id/bn_waveOut"
             android:layout_alignStart="@+id/bn_sync"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:background="#0277BD"
+            android:layout_margin="5dp" />
 
     </LinearLayout>
 
@@ -111,34 +123,30 @@
         android:id="@+id/tv_command"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Gesture&apos;s Sequence"
-        android:id="@+id/textView5"
-        android:layout_below="@+id/linearLayoutGesture"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:textSize="15dp"/>
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Clear Gesture"
         android:id="@+id/bn_clear"
         android:layout_below="@+id/linearLayoutGestBn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:background="#01579B"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="10dp"
+        android:layout_alignEnd="@+id/linearLayoutGestBn"
+        android:layout_toEndOf="@+id/tv_command" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create command"
+        android:text="Add Command"
         android:id="@+id/bn_done"
-        android:layout_marginLeft="30dp"
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/linearLayoutGestBn" />
+        android:layout_alignEnd="@+id/linearLayoutGestBn"
+        android:layout_toEndOf="@+id/tv_command"
+        android:background="#01579B"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -157,25 +165,26 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="15dp" />
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:spinnerMode="dropdown"
-        android:textAlignment="center"
-        android:layout_below="@+id/bn_clear"
-        android:layout_marginTop="32dp"
-        android:layout_toEndOf="@+id/textView8"
-        android:layout_marginBottom="10dp"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select Vibration"
         android:id="@+id/textView9"
         android:textSize="15dp"
-        android:layout_alignTop="@+id/spinner"
+        android:layout_below="@+id/bn_clear"
         android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
+        android:layout_below="@+id/textView9"
+        android:layout_alignParentStart="true"
+        android:layout_margin="20dp"
+        android:focusable="false"
+        android:layout_marginLeft="200dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -184,7 +193,7 @@
         android:id="@+id/textView10"
         android:textSize="15dp"
         android:layout_below="@+id/spinner"
-        android:layout_toStartOf="@+id/bn_clear" />
+        android:layout_toEndOf="@+id/tv_command" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -192,7 +201,11 @@
         android:id="@+id/spinner2"
         android:spinnerMode="dropdown"
         android:textAlignment="center"
-        android:layout_below="@+id/spinner"
-        android:layout_alignStart="@+id/spinner" />
+        android:layout_below="@+id/textView10"
+        android:layout_toEndOf="@+id/tv_command"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:padding="5dp"
+        android:layout_marginLeft="200dp" />
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package sg.nemysolutions.hapme.utilities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,11 +62,15 @@ public class CustomListView extends BaseAdapter implements ListAdapter {
         }
 
         //Handle TextView and display string from your list
-        TextView listItemText = (TextView)view.findViewById(R.id.list_item_string);
+        TextView listItemText = (TextView) view.findViewById(R.id.list_item_string);
         listItemText.setText(list.get(position));
 
+        // Get color for commands
+        Button bn_color = (Button) view.findViewById(R.id.bn_color);
+        bn_color.setBackgroundColor(Color.parseColor(list2.get(position).getColor()));
+
         //Handle buttons and add onClickListeners
-        ImageButton deleteBtn = (ImageButton)view.findViewById(R.id.delete_btn);
+        Button deleteBtn = (Button)view.findViewById(R.id.delete_btn);
 
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +80,7 @@ public class CustomListView extends BaseAdapter implements ListAdapter {
 
                 AlertDialog.Builder adb = new AlertDialog.Builder(context);
 
-                adb.setTitle("Delete?");
+                adb.setTitle("Remove Command?");
                 adb.setMessage("Are you sure you want to delete " + list.get(position));
 
                 adb.setNegativeButton("Cancel", null);
@@ -91,7 +96,6 @@ public class CustomListView extends BaseAdapter implements ListAdapter {
 
             }
         });
-
 
         return view;
     }

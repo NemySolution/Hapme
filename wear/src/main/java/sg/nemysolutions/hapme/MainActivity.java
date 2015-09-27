@@ -18,6 +18,7 @@ public class MainActivity extends Activity {
 
     HashMap<String, long[]> hashMap;
     private TextView mTextView;
+    private TextView tv_senderCallSign;
     private RelativeLayout layout;
 
     @Override
@@ -46,8 +47,11 @@ public class MainActivity extends Activity {
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
-                mTextView = (TextView) stub.findViewById(R.id.text);
+
                 layout = (RelativeLayout) stub.findViewById(R.id.layout);
+                mTextView = (TextView) stub.findViewById(R.id.text);
+                tv_senderCallSign = (TextView) stub.findViewById(R.id.senderCallSign);
+
                 Intent intent = getIntent();
                 String msg = intent.getStringExtra("msg");
 
@@ -56,16 +60,14 @@ public class MainActivity extends Activity {
                 vibrator2.vibrate(new long[] {0, 10000}, indexInPatternToRepeat2);
 
                 if (msg != null) {
-                    String[] slicedMsg = msg.split(",", 3);
-                    mTextView.setText(slicedMsg[0]);
+                    String[] slicedMsg = msg.split(",", 4);
+                    tv_senderCallSign.setText(slicedMsg[0]);
+                    mTextView.setText(slicedMsg[1]);
                     Resources resources = getApplicationContext().getResources();
-//                    final int resourceId = resources.getIdentifier(slicedMsg[2], "color",
-//                            getApplicationContext().getPackageName());
-                    layout.setBackgroundColor(Color.parseColor(slicedMsg[2]));
-//                    Log.e("MING WEAR COLOR", Integer.toString(resourceId));
+                    layout.setBackgroundColor(Color.parseColor(slicedMsg[3]));
                     Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                     final int indexInPatternToRepeat = -1;
-                    vibrator.vibrate(hashMap.get(slicedMsg[1]), indexInPatternToRepeat);
+                    vibrator.vibrate(hashMap.get(slicedMsg[2]), indexInPatternToRepeat);
                 }
             }
         });

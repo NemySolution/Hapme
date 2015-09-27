@@ -30,10 +30,12 @@ import sg.nemysolutions.hapme.R;
 import sg.nemysolutions.hapme.entity.Command;
 
 public class CommandsActivity extends AppCompatActivity {
+
     List<String> commandTextList  = new ArrayList<>();
     List<Command> commandList = new ArrayList<>();
     ListView lw = null;
     String opsName;
+    String senderCallSign;
     Command command;
 
     @Override
@@ -43,6 +45,7 @@ public class CommandsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         opsName = intent.getStringExtra("opsName");
+        senderCallSign = intent.getStringExtra("senderCallSign");
         String isCommander = intent.getStringExtra("isCommander");
 
         lw = (ListView) findViewById(R.id.lv_commands);
@@ -110,13 +113,14 @@ public class CommandsActivity extends AppCompatActivity {
         lw.setAdapter(arrayAdapter);
     }
 
+    // Manuel broadcast message method
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
             command = commandList.get(position);
             ParsePush push = new ParsePush();
             push.setChannel(command.getOpsName());
-            push.setMessage(command.getCommandName() + "," + command.getVibrationSeq() + "," + command.getColor());
+            push.setMessage(senderCallSign + "," + command.getCommandName() + "," + command.getVibrationSeq() + "," + command.getColor());
             push.sendInBackground(new SendCallback() {
                 public void done(ParseException e) {
                     Toast.makeText(getApplicationContext(), "Command: " + command.getCommandName() + " SENT!", Toast.LENGTH_SHORT).show();

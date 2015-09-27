@@ -55,7 +55,7 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
             JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
 
             message = json.getString("alert");
-            slicedMsg = message.split(",", 3);
+            slicedMsg = message.split(",", 4);
 
             /*************** Send watch message in background ***************/
             client = getGoogleApiClient(context);
@@ -78,7 +78,7 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
             }).start();
             /****************************************************************/
 
-            Toast.makeText(context, "Message: " + slicedMsg[0] + " RECEIVED!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, slicedMsg[0] + " sent " + slicedMsg[1] + "!", Toast.LENGTH_SHORT).show();
             NotificationCompat.WearableExtender wearableExtender =
                     new NotificationCompat.WearableExtender()
                             .setHintHideIcon(true);
@@ -88,7 +88,7 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
                     .setContentText(message)
                     .extend(wearableExtender);
 
-            notificationBuilder.setVibrate(hashMap.get(slicedMsg[1]));
+            notificationBuilder.setVibrate(hashMap.get(slicedMsg[2]));
 
             NotificationManagerCompat notificationManager =
                     NotificationManagerCompat.from(context);

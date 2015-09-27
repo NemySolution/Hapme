@@ -1,44 +1,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:weightSum="2"
-android:orientation="vertical" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="2"
+    android:orientation="vertical" >
 
-<LinearLayout android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:background="#192832">
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#192832">
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:text="Create\nOperation"
-        android:id="@+id/bn_create"
-        android:background="#03A9F4"
-        android:textColor="#FFFFFF"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:textSize="30dp" />
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Create\nOperation"
+            android:id="@+id/bn_create"
+            android:background="#03A9F4"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:textSize="30dp" />
 
-</LinearLayout>
+    </LinearLayout>
 
-<LinearLayout android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:background="#193222">
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#193222">
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:text="Join\nOperation"
-        android:id="@+id/bn_join"
-        android:background="#0277BD"
-        android:textColor="#FFFFFF"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:textSize="30dp" />
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:text="Join\nOperation"
+            android:id="@+id/bn_join"
+            android:background="#0277BD"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:textSize="30dp" />
 
-</LinearLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

@@ -16,13 +16,13 @@
     <string name="unlocked">Unlocked</string>
     <string name="locked">Locked</string>
     <string name="title_activity_home">Hapme</string>
-    <string name="title_activity_create">Create operation</string>
-    <string name="title_activity_add">Add a command</string>
+    <string name="title_activity_create">Create Operation</string>
+    <string name="title_activity_add">Add Command</string>
     <string name="title_activity_operation">Operation</string>
     <string name="title_activity_commands">Broadcast Command</string>
-    <string name="title_activity_join">Join an operation</string>
-    <string name="title_activity_add_member">add member</string>
-    <string name="title_activity_add_member_name">addMemberName</string>
+    <string name="title_activity_join">Join Operation</string>
+    <string name="title_activity_add_member">Add Member</string>
+    <string name="title_activity_add_member_name">Add Member Name</string>
 
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>

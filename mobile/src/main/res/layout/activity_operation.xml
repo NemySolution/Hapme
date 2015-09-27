@@ -14,11 +14,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Operation Name:"
+        android:text="Operation :"
         android:id="@+id/tv_operationName"
         android:layout_alignBaseline="@+id/et_opsName"
         android:layout_alignBottom="@+id/et_opsName"
-        android:layout_alignEnd="@+id/tv_commanderCallsign" />
+        android:layout_alignEnd="@+id/tv_commanderCallsign"
+        android:textSize="15dp" />
 
 
 
@@ -28,16 +29,19 @@
         android:id="@+id/et_opsName"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/tv_operationName"
-        android:focusable="false"/>
+        android:focusable="false"
+        android:gravity="center"
+        android:typeface="serif" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Commander Callsign:"
+        android:text="Commander :"
         android:id="@+id/tv_commanderCallsign"
         android:layout_alignBaseline="@+id/et_callSign"
         android:layout_alignBottom="@+id/et_callSign"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="15dp" />
 
     <EditText
         android:layout_width="fill_parent"
@@ -45,17 +49,23 @@
         android:id="@+id/et_callSign"
         android:layout_below="@+id/tv_operationName"
         android:layout_alignStart="@+id/et_opsName"
-        android:focusable="false"/>
+        android:focusable="false"
+        android:gravity="center"
+        android:typeface="serif" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="List of Members:"
+        android:text="Members"
         android:id="@+id/memberlist"
         android:layout_below="@+id/et_callSign"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="5dp"
+        android:textSize="20dp"
+        android:textIsSelectable="false"
+        android:typeface="serif"
+        android:textStyle="bold" />
 
     <ListView
         android:layout_width="fill_parent"
@@ -68,14 +78,13 @@
         android:scrollingCache="true"
         android:fadeScrollbars="false"
         android:nestedScrollingEnabled="true"
-        android:layout_marginRight="30dp"
-        android:layout_above="@+id/tv_commandList" />
+        android:layout_above="@+id/tv_commandList"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_myo"
-        android:text="myo not connected"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true" />
 

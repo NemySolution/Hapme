@@ -16,15 +16,26 @@
         android:gravity="center"
         android:textStyle="bold" />
 
-    <ImageButton
+    <Button
         style="?android:attr/buttonStyleSmall"
         android:id="@+id/delete_btn"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
-        android:background="@drawable/button_dustbin"
-        />
+        android:text="Remove"
+        android:background="#DD2C00"
+        android:textColor="#FFFFFF"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bn_color"
+        android:layout_alignTop="@+id/delete_btn"
+        android:layout_toStartOf="@+id/delete_btn"
+        android:layout_marginRight="5dp" />
 
 </RelativeLayout>

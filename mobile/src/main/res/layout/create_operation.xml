@@ -38,24 +38,26 @@
         android:background="#01579B"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/textView11"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp" />
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentEnd="true" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lv_addCmd"
         android:smoothScrollbar="false"
-        android:padding="5dp"
         android:textAlignment="center"
         android:textFilterEnabled="false"
-        android:layout_below="@+id/textView11"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/bn_addCmd"
-        android:layout_margin="10dp" />
+        android:layout_below="@+id/et_secretKey"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -83,20 +85,5 @@
         android:hint="Secret Key"
         android:password="false"
         android:inputType="numberPassword" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="List of Command"
-        android:id="@+id/textView11"
-        android:layout_below="@+id/et_secretKey"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:gravity="center"
-        android:padding="5dp"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp" />
 
 </RelativeLayout>

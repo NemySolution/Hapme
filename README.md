@@ -1,6 +1,23 @@
 # Hapme
 Haptics Communication System
 
+## To Do List
+* ~~View members in the channel in Operation page. (should auto update when a member joins)~~
+* ~~Receiver for notifications~~
+* ~~Only Commander should be able to send the commands he created (currently all members are able to send all commands)~~
+* ~~Member default commands~~
+* ~~Commander need to be able to send Commands using Myo Armband~~
+* ~~Set Vibration sequence for commands and notifications~~
+* ~~Watch App~~
+* ~~Need to make UI buttons (View Location button, Edit Operation button,'commander callsign' textview) display accordingly to the user profile (commander and members)~~
+* Commander need to be able to edit Operation details, remove members
+* Duplicate member callsign check
+- Change font color according to background for watch
+- Watch onResume needs to set vibration and replace screen
+- When end operation, need to remove all members in the operation (bug)
+- Delete command after operation ends (bug)
+- Commander need to be able to edit Operation/Command details, remove members
+
 ## Naming Conventions
 ###### (Do add on to it if you want to standardize something)
 * Buttons = bn_xxx (e.g bn_createMe)
@@ -14,7 +31,6 @@ Haptics Communication System
 #####(if there is a need to use shortform, do try to follow the list below)
 * ops - operation(s)
 * cmd - command
-* 
 
 ##Naming of activity and xml layout
 #####(its a total burden to think of which activity belong to which layout, so....)
@@ -24,25 +40,11 @@ Haptics Communication System
 * HomeActivity => home.xml
 * JoinOps => join_ops.xml
 * OperationActivity => operation.xml
-* 
 
 ##Naming of custom layout files
 #####(since there is already one)
-* cust_xxxxxxxxx
-* 
-
-## To Do List
-* ~~View members in the channel in Operation page. (should auto update when a member joins)~~
-* ~~Receiver for notifications~~
-* ~~Only Commander should be able to send the commands he created (currently all members are able to send all commands)~~
-* ~~Member default commands~~
-* ~~Commander need to be able to send Commands using Myo Armband~~
-* Set Vibration sequence for commands and notifications
-* Commander need to be able to edit Operation details, remove members
-* Watch App
-* Simple web app for Command Post to view all the commands sent, highlight to them when there is an "high alert" command sent.
-* Duplicate member callsign check
-* Need to make UI buttons (View Location button, Edit Operation button,'commander callsign' textview) display accordingly to the user profile (commander and members)
+* cust_xxx
 
 ##Future Enhancement
-* Piggyback Google maps location
+* Piggyback Google maps Location
+* Web application for Command Post to analyse commands sent + logging

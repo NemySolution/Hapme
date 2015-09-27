@@ -61,7 +61,6 @@ public class OperationActivity extends AppCompatActivity {
     private TextView tv_myo;
     private TextView tv_commandList;
     private ListView lw_addMember;
-    private ArrayAdapter<String> membersAdapter;
     private ParseInstallation installation;
     private ParseObject currentOps;
     private Handler mHandler;
@@ -69,7 +68,7 @@ public class OperationActivity extends AppCompatActivity {
     private String opsName;
     private String callSign;
     private String deviceId;
-    private String isMember = "true";
+    private String isMember;
     private List<String> members = new ArrayList<>();
     private List<Command> commandList = new ArrayList<>();
     private LinkedList<String> capturedPoseList;
@@ -89,9 +88,6 @@ public class OperationActivity extends AppCompatActivity {
         opsName = installation.getString("opsName");
         callSign = installation.getString("callSign");
 
-        Intent intent = getIntent();
-        isMember = intent.getStringExtra("isMember");
-
         lw_addMember = (ListView) findViewById(R.id.lw_addMember);
         et_opsName = (EditText) findViewById(R.id.et_opsName);
         et_callSign = (EditText) findViewById(R.id.et_callSign);
@@ -104,6 +100,7 @@ public class OperationActivity extends AppCompatActivity {
                 currentOps = object;
                 if (currentOps.getString("deviceId").equals(deviceId)) {
                     isMember = "false";
+                    tv_myo.setText("Myo Not Connected");
                 }
                 et_opsName.setText(opsName);
                 et_callSign.setText(currentOps.getString("callSign"));
@@ -170,7 +167,7 @@ public class OperationActivity extends AppCompatActivity {
     }
 
     private void setList() {
-        membersAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, members);
+        ArrayAdapter<String> membersAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, members);
         lw_addMember.setAdapter(membersAdapter);
     }
 
@@ -284,8 +281,8 @@ public class OperationActivity extends AppCompatActivity {
                         if (Arrays.equals(c.getGestureSeq().toArray(), capturedPoseList.toArray())) {
                             ParsePush push = new ParsePush();
                             push.setChannel(c.getOpsName());
-                            push.setMessage(c.getCommandName() + "," + c.getVibrationSeq() + "," + c.getColor());
-                            Log.e("ESMOND MYO MESSAGE", c.getCommandName() + "," + c.getVibrationSeq()+ "," + c.getColor());
+                            push.setMessage(callSign + "," + c.getCommandName() + "," + c.getVibrationSeq() + "," + c.getColor());
+                            Log.e("ESMOND MYO MESSAGE", callSign + "," + c.getCommandName() + "," + c.getVibrationSeq()+ "," + c.getColor());
 
                             Toast.makeText(getApplicationContext(), "Sending command: " + c.getCommandName(), Toast.LENGTH_SHORT).show();
 
@@ -406,8 +403,10 @@ public class OperationActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu (Menu menu) {
         menu.clear();
         MenuInflater inflater = getMenuInflater();
-        if (isMember == "false") {
-            inflater.inflate(R.menu.menu_operation, menu);
+        if (isMember != null) {
+            if (isMember.equals("false")) {
+                inflater.inflate(R.menu.menu_operation, menu);
+            }
         } else {
             inflater.inflate(R.menu.menu_operation_member, menu);
         }
@@ -458,9 +457,8 @@ public class OperationActivity extends AppCompatActivity {
         } else {
             intent.putExtra("isCommander", "false");
         }
-
         intent.putExtra("opsName", opsName);
-        intent.putExtra("callSign", callSign);
+        intent.putExtra("senderCallSign", callSign);
         startActivity(intent);
     }
 

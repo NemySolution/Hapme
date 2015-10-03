@@ -16,7 +16,7 @@ Haptics Communication System
 * Duplicate member call sign check
 * Watch onResume needs to set vibration and replace screen
 * When end operation, need to remove all members in the operation (bug)
-* Delete command after operation ends (bug)
+* ~~Delete command after operation ends (bug)~~
 * Commander need to be able to edit Operation/Command details, remove members
 
 ## Naming Conventions

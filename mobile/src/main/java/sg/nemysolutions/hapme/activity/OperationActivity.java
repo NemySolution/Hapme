@@ -465,8 +465,8 @@ public class OperationActivity extends AppCompatActivity {
     public void endOps() {
         // if is the commander that is ending this activity_operation, delete the commands first, followed by the activity_operation.
         if (currentOps.getString("deviceId").equals(deviceId)) {
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("Command");
-            query.whereEqualTo("opsId", opsId);
+            ParseQuery<ParseObject> query =  ParseQuery.getQuery("Command");
+            query.whereEqualTo("opsName", opsName);
             query.findInBackground(new FindCallback<ParseObject>() {
                 @Override
                 public void done(List<ParseObject> results, ParseException e) {

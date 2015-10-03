@@ -107,5 +107,13 @@
         android:layout_above="@+id/tv_myo"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/textView"
+        android:layout_below="@+id/et_callSign"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
 

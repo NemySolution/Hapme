@@ -143,16 +143,19 @@ public class OperationActivity extends AppCompatActivity {
         ParseQuery<ParseObject> memberQuery = ParseQuery.getQuery("Operation");
         memberQuery.getInBackground(installation.getString("opsId"), new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
+                 if(object!=null){
 
-                if (object.getList("members") != null) {
-                    Log.e("MEMBERS callSign", callSign);
-                    members = object.getList("members");
-                    for(int i = 0; i < members.size(); i++) {
-                        if (members.get(i).equals(callSign)) {
-                            Log.e("MEMBERS", members.get(i));
-                            members.set(i, callSign + " (You)");
-                        }
-                    }
+
+                     if (object.getList("members") != null) {
+                         Log.e("MEMBERS callSign", callSign);
+                         members = object.getList("members");
+                         for (int i = 0; i < members.size(); i++) {
+                             if (members.get(i).equals(callSign)) {
+                                 Log.e("MEMBERS", members.get(i));
+                                 members.set(i, callSign + " (You)");
+                             }
+                         }
+                     }
                 } else {
                     Log.e("MEMBERS null", "is null");
                     members = new ArrayList<>();

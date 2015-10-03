@@ -29,6 +29,8 @@ import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 public class CreateOperationActivity extends AppCompatActivity {
 
+    private static final String CMD_TEXT_LIST = "commandTextList";
+    private static final String CMD_LIST = "commandList";
     //handles the cmd that is displayed on listview
     private ArrayList<String> commandTextList = new ArrayList<>();
     //handles the command that goes to the parse db
@@ -45,6 +47,14 @@ public class CreateOperationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_operation);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    // If we have a saved state then we can restore it now
+        if (savedInstanceState != null) {
+            commandTextList = savedInstanceState.getStringArrayList(CMD_TEXT_LIST);
+            commandList = (ArrayList<Command>)savedInstanceState.get(CMD_LIST);
+
+        }
+
 
         et_opsName = (EditText) findViewById(R.id.et_opsName);
         et_callSign = (EditText) findViewById(R.id.et_callSign);
@@ -91,6 +101,7 @@ public class CreateOperationActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 Command command = (Command) data.getSerializableExtra("command");
@@ -109,4 +120,13 @@ public class CreateOperationActivity extends AppCompatActivity {
         lw_commands.setAdapter(arrayAdapter);
     }
 
+    //saving cmd list state testing
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // Make sure to call the super method so that the states of our views are saved
+        super.onSaveInstanceState(outState);
+        // Save our own state now
+        outState.putSerializable(CMD_TEXT_LIST, commandTextList);
+        outState.putSerializable(CMD_LIST, commandList);
+    }
 }

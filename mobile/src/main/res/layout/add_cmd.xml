@@ -1,211 +1,208 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="15dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="15dp"
     android:paddingRight="15dp"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="sg.nemysolutions.hapme.activity.AddCmdActivity">
 
     <EditText
+        android:id="@+id/et_commandName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/et_commandName"
-        android:hint="Enter Command Name"
-        android:gravity="center"
-        android:imeOptions="actionDone"
-        android:imeActionLabel="Close"
-        android:singleLine="true"
-        android:layout_below="@+id/textView7"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp" />
+        android:layout_below="@+id/textView7"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:hint="Enter Command Name"
+        android:imeActionLabel="Close"
+        android:imeOptions="actionDone"
+        android:singleLine="true" />
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/linearLayoutGesture"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/textView8"
-        android:id="@+id/linearLayoutGesture"
-        android:gravity="center"
         android:layout_marginTop="10dp"
-        android:layout_alignParentEnd="true">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/et_gesture1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/et_gesture1"
-            android:editable="false"
-            android:layout_toStartOf="@+id/et_gesture2"
             android:layout_below="@+id/et_commandName"
-            android:textSize="12dp"
+            android:layout_toStartOf="@+id/et_gesture2"
+            android:editable="false"
+            android:gravity="center"
+            android:hint="Gesture 1"
             android:minWidth="110dp"
             android:singleLine="false"
-            android:gravity="center"
-            android:hint="Gesture 1" />
+            android:textSize="12dp" />
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/et_gesture2"
-
-            android:editable="false"
-            android:layout_alignTop="@+id/et_gesture1"
-            android:layout_alignEnd="@+id/message"
-            android:textSize="12dp"
-            android:minWidth="110dp"
-            android:gravity="center"
-            android:hint="Gesture 2" />
-
-        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/et_gesture3"
-                      android:editable="false"
-            android:layout_toEndOf="@+id/et_gesture2"
-            android:layout_below="@+id/et_commandName"
-            android:textSize="12dp"
-            android:minWidth="110dp"
+
+            android:layout_alignEnd="@+id/message"
+            android:layout_alignTop="@+id/et_gesture1"
+            android:editable="false"
             android:gravity="center"
-            android:hint="Gesture 3" />
+            android:hint="Gesture 2"
+            android:minWidth="110dp"
+            android:textSize="12dp" />
+
+        <EditText
+            android:id="@+id/et_gesture3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_commandName"
+            android:layout_toEndOf="@+id/et_gesture2"
+            android:editable="false"
+            android:gravity="center"
+            android:hint="Gesture 3"
+            android:minWidth="110dp"
+            android:textSize="12dp" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/linearLayoutGestBn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="0dp"
-        android:id="@+id/linearLayoutGestBn"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayoutGesture">
+        android:layout_below="@+id/linearLayoutGesture"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="0dp">
 
         <Button
+            android:id="@+id/bn_waveIn"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:text="Wave In"
-            android:id="@+id/bn_waveIn"
-            android:layout_below="@+id/et_gesture2"
             android:layout_alignStart="@+id/bn_waveOut"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
+            android:layout_below="@+id/et_gesture2"
+            android:layout_margin="5dp"
             android:background="#0277BD"
-            android:layout_margin="5dp" />
+            android:gravity="center"
+            android:text="Wave In"
+            android:textColor="#FFFFFF" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Wave Out"
             android:id="@+id/bn_waveOut"
-            android:layout_below="@+id/bn_waveIn"
-            android:layout_toStartOf="@+id/et_gesture3"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
-            android:background="#0277BD"
-            android:layout_margin="5dp" />
-
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Spread"
-            android:id="@+id/bn_fingerSpread"
-            android:layout_below="@+id/bn_waveOut"
-            android:layout_alignStart="@+id/bn_sync"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
+            android:layout_below="@+id/bn_waveIn"
+            android:layout_margin="5dp"
+            android:layout_toStartOf="@+id/et_gesture3"
             android:background="#0277BD"
-            android:layout_margin="5dp" />
+            android:gravity="center"
+            android:text="Wave Out"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/bn_fingerSpread"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignStart="@+id/bn_sync"
+            android:layout_below="@+id/bn_waveOut"
+            android:layout_margin="5dp"
+            android:background="#0277BD"
+            android:gravity="center"
+            android:text="Spread"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/tv_command"
-        android:layout_alignParentStart="true" />
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clear Gesture"
+        android:layout_alignParentStart="true"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
         android:id="@+id/bn_clear"
-        android:layout_below="@+id/linearLayoutGestBn"
-        android:layout_marginTop="10dp"
-        android:background="#01579B"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="10dp"
-        android:layout_alignEnd="@+id/linearLayoutGestBn"
-        android:layout_toEndOf="@+id/tv_command" />
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Command"
-        android:id="@+id/bn_done"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
         android:layout_alignEnd="@+id/linearLayoutGestBn"
+        android:layout_below="@+id/linearLayoutGestBn"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="8px"
         android:layout_toEndOf="@+id/tv_command"
         android:background="#01579B"
+        android:text="Clear Gesture"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/bn_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/linearLayoutGestBn"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_toEndOf="@+id/tv_command"
+        android:background="#01579B"
+        android:text="Add Command"
         android:textColor="#FFFFFF" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Command Name: "
         android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/tv_command"
-        android:layout_alignParentStart="true" />
+        android:text="Command Name: " />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gesture&apos;s Sequence: "
         android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/et_commandName"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:text="Gesture&apos;s Sequence: " />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Vibration"
         android:id="@+id/textView9"
-        android:textSize="15dp"
-        android:layout_below="@+id/bn_clear"
-        android:layout_alignParentStart="true" />
-
-    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:spinnerMode="dropdown"
-        android:textAlignment="center"
-        android:layout_below="@+id/textView9"
         android:layout_alignParentStart="true"
-        android:layout_margin="20dp"
-        android:focusable="false"
-        android:layout_marginLeft="200dp" />
+        android:layout_below="@+id/bn_clear"
+        android:text="Select Vibration"
+        android:textSize="15dp"
+        android:layout_marginTop="15px" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView9"
+        android:spinnerMode="dialog"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Color"
         android:id="@+id/textView10"
-        android:textSize="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/spinner"
-        android:layout_toEndOf="@+id/tv_command" />
+        android:layout_toEndOf="@+id/tv_command"
+        android:text="Select Color"
+        android:textSize="15dp"
+        android:layout_marginTop="15px" />
 
     <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/spinner2"
-        android:spinnerMode="dropdown"
-        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/textView10"
-        android:layout_toEndOf="@+id/tv_command"
-        android:gravity="center"
-        android:layout_margin="20dp"
-        android:padding="5dp"
-        android:layout_marginLeft="200dp" />
+        android:spinnerMode="dialog"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp" />
 
 </RelativeLayout>

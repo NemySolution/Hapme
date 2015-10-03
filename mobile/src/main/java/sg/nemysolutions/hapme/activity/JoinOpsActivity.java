@@ -35,7 +35,6 @@ public class JoinOpsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.join_ops);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         et_opsName = (EditText) findViewById(R.id.et_opsName);
         et_callSign = (EditText) findViewById(R.id.et_callSign);
@@ -57,13 +56,10 @@ public class JoinOpsActivity extends AppCompatActivity {
                     query.getFirstInBackground(new GetCallback<ParseObject>() {
                         public void done(ParseObject object, ParseException e) {
                             if (e == null) {
-                                if (object.getList("members").contains(et_callSign.getText().toString())) {
-                                    Toast.makeText(JoinOpsActivity.this, "Please choose another Call Sign!!", Toast.LENGTH_LONG).show();
-                                } else {
+                                if (object.getList("members") != null) {
                                     if (object.getList("members").contains(et_callSign.getText().toString())) {
                                         Toast.makeText(JoinOpsActivity.this, "Please choose another Call Sign!!", Toast.LENGTH_LONG).show();
                                     } else {
-
                                         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
                                         installation.put("opsId", object.getObjectId());
                                         installation.put("opsName", object.getString("opsName"));
@@ -78,6 +74,20 @@ public class JoinOpsActivity extends AppCompatActivity {
                                         startActivity(intent);
                                         finish();
                                     }
+                                } else {
+                                    ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                                    installation.put("opsId", object.getObjectId());
+                                    installation.put("opsName", object.getString("opsName"));
+                                    installation.put("callSign", et_callSign.getText().toString());
+                                    installation.saveInBackground();
+
+                                    ParseUtils.joinOperation(et_callSign.getText().toString());
+
+                                    // Needed for correct display of menu
+                                    Intent intent = new Intent(JoinOpsActivity.this, OperationActivity.class);
+                                    intent.putExtra("isMember", "true");
+                                    startActivity(intent);
+                                    finish();
                                 }
                             } else {
                                 Log.e("ERROR", "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!");

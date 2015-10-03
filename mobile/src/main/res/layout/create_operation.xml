@@ -46,7 +46,7 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/lv_addCmd"
         android:smoothScrollbar="false"
         android:textAlignment="center"
@@ -85,13 +85,5 @@
         android:hint="Secret Key"
         android:password="false"
         android:inputType="numberPassword" />
-
-    <ProgressBar
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -10,7 +10,7 @@ Haptics Communication System
 * ~~Set Vibration sequence for commands and notifications~~
 * ~~Watch App~~
 * ~~Need to make UI buttons (View Location button, Edit Operation button,'commander callsign' textview) display accordingly to the user profile (commander and members)~~
-~~* Change font color according to background for watch~~
+* ~~ Change font color according to background for watch~~
 * Loading Status for Create and Join Operation
 * Commander need to be able to edit Operation details, remove members
 * ~~Duplicate member call sign check~~

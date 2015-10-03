@@ -60,19 +60,24 @@ public class JoinOpsActivity extends AppCompatActivity {
                                 if (object.getList("members").contains(et_callSign.getText().toString())) {
                                     Toast.makeText(JoinOpsActivity.this, "Please choose another Call Sign!!", Toast.LENGTH_LONG).show();
                                 } else {
-                                    ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-                                    installation.put("opsId", object.getObjectId());
-                                    installation.put("opsName", object.getString("opsName"));
-                                    installation.put("callSign", et_callSign.getText().toString());
-                                    installation.saveInBackground();
+                                    if (object.getList("members").contains(et_callSign.getText().toString())) {
+                                        Toast.makeText(JoinOpsActivity.this, "Please choose another Call Sign!!", Toast.LENGTH_LONG).show();
+                                    } else {
 
-                                    ParseUtils.joinOperation(et_callSign.getText().toString());
+                                        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                                        installation.put("opsId", object.getObjectId());
+                                        installation.put("opsName", object.getString("opsName"));
+                                        installation.put("callSign", et_callSign.getText().toString());
+                                        installation.saveInBackground();
 
-                                    // Needed for correct display of menu
-                                    Intent intent = new Intent(JoinOpsActivity.this, OperationActivity.class);
-                                    intent.putExtra("isMember", "true");
-                                    startActivity(intent);
-                                    finish();
+                                        ParseUtils.joinOperation(et_callSign.getText().toString());
+
+                                        // Needed for correct display of menu
+                                        Intent intent = new Intent(JoinOpsActivity.this, OperationActivity.class);
+                                        intent.putExtra("isMember", "true");
+                                        startActivity(intent);
+                                        finish();
+                                    }
                                 }
                             } else {
                                 Log.e("ERROR", "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!");

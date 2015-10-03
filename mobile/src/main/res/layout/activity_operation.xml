@@ -71,9 +71,7 @@
         android:paddingBottom="10dp"
         android:layout_marginTop="20dp"
         android:layout_alignParentStart="true"
-        android:startColor="#01579B"
-        android:endColor="#2a3c6f"
-        android:angle="-270"/>
+        android:background="@drawable/banner"/>
 
     <ListView
         android:layout_width="fill_parent"

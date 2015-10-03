@@ -1,9 +1,9 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Base application theme.01579B -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">#01579B</item>
-        <item name="colorPrimaryDark">#01579B</item>
+        <item name="colorPrimary">#758aa8</item>
+        <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">#01579B</item>
         <item name="android:textColorHint">#BDBDBD</item>
 

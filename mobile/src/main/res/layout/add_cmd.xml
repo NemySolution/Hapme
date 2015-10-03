@@ -127,9 +127,8 @@
 
     <Button
         android:id="@+id/bn_clear"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/linearLayoutGestBn"
         android:layout_below="@+id/linearLayoutGestBn"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="8px"
@@ -140,15 +139,12 @@
 
     <Button
         android:id="@+id/bn_done"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/linearLayoutGestBn"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        android:layout_toEndOf="@+id/tv_command"
-        android:background="#01579B"
+        android:background="#2a3c6f"
         android:text="Add Command"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:layout_alignParentBottom="true" />
 
     <TextView
         android:id="@+id/textView7"
@@ -169,7 +165,7 @@
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/bn_clear"
@@ -184,7 +180,8 @@
         android:layout_below="@+id/textView9"
         android:spinnerMode="dialog"
         android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp" />
+        android:layout_marginRight="100dp"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/textView10"
@@ -193,8 +190,8 @@
         android:layout_below="@+id/spinner"
         android:layout_toEndOf="@+id/tv_command"
         android:text="Select Color"
-        android:textSize="15dp"
-        android:layout_marginTop="15px" />
+        android:layout_marginTop="20dp"
+        android:textSize="15dp" />
 
     <Spinner
         android:id="@+id/spinner2"

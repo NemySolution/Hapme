@@ -53,13 +53,13 @@ android version can be change at build.gradle
         <activity
             android:name=".activity.CreateOperationActivity"
             android:label="@string/title_activity_create"
-            android:parentActivityName=".activity.HomeActivity"
-            android:windowSoftInputMode="adjustNothing">
+            android:parentActivityName=".activity.HomeActivity">
         </activity>
         <activity
             android:name=".activity.AddCmdActivity"
             android:label="@string/title_activity_add"
-            android:parentActivityName=".activity.CreateOperationActivity" >
+            android:parentActivityName=".activity.CreateOperationActivity"
+          >
         </activity>
         <activity
             android:name=".activity.OperationActivity"

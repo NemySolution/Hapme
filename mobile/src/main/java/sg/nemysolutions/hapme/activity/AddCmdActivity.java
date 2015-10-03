@@ -87,14 +87,13 @@ public class AddCmdActivity extends AppCompatActivity {
         spinner = (Spinner) findViewById(R.id.spinner);
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.planets_array, android.R.layout.simple_spinner_item);
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(R.layout.cust_spinner_vibration);
+        adapter.setDropDownViewResource(R.layout.cust_spinner);
         spinner.setAdapter(adapter);
 
         spinner2 = (Spinner) findViewById(R.id.spinner2);
         final ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
                 R.array.colors_array, android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter2.setDropDownViewResource(R.layout.cust_spinner);
         spinner2.setAdapter(adapter2);
 
         bn_waveIn.setOnClickListener(new View.OnClickListener() {

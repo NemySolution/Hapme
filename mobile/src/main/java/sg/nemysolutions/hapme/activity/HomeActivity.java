@@ -18,7 +18,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseInstallation;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.List;
+
 import sg.nemysolutions.hapme.R;
+import sg.nemysolutions.hapme.entity.Command;
 import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 public class HomeActivity extends AppCompatActivity {
@@ -30,9 +39,24 @@ public class HomeActivity extends AppCompatActivity {
 
         // Check with Parse whether this user is in any channels
         if (!ParseUtils.getChannels().isEmpty()) {
-            Intent intent = new Intent(HomeActivity.this, OperationActivity.class);
-            startActivity(intent);
-            finish();
+            String channel = ParseUtils.getChannels().get(0);
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Operation");
+            query.whereEqualTo("opsName", channel);
+
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> results, ParseException e) {
+                    if (results.size() > 0) {
+                        Intent intent = new Intent(HomeActivity.this, OperationActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        ParseUtils.removeChannel();
+                    }
+                }
+            });
+
+
         }
 
         Button bn_create = (Button) findViewById(R.id.bn_create);

@@ -51,6 +51,16 @@ public class ParseUtils {
         return subscribedChannels;
     }
 
+    public static void removeChannel() {
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        installation.put("channels", "[]");
+
+        installation.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+            }
+        });
+    }
+
     /**
      *
      * @param context z

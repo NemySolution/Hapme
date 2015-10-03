@@ -23,8 +23,7 @@
             android:imeOptions="flagNavigateNext"
             android:singleLine="true"
             android:layout_below="@+id/textView2"
-            android:layout_alignParentStart="true"
-            android:textSize="20dp" />
+            android:layout_alignParentStart="true" />
 
         <EditText
             android:layout_width="fill_parent"
@@ -35,8 +34,7 @@
             android:imeOptions="flagNavigateNext"
             android:singleLine="true"
             android:layout_below="@+id/textView3"
-            android:layout_alignParentStart="true"
-            android:textSize="20dp" />
+            android:layout_alignParentStart="true" />
 
         <Button
             android:layout_width="wrap_content"
@@ -59,8 +57,7 @@
             android:singleLine="true"
             android:inputType="numberPassword"
             android:layout_below="@+id/textView4"
-            android:layout_alignParentStart="true"
-            android:textSize="20dp" />
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,7 +66,6 @@
             android:id="@+id/textView2"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:textSize="15dp"
             android:layout_alignParentEnd="true" />
 
         <TextView
@@ -79,7 +75,6 @@
             android:id="@+id/textView3"
             android:layout_below="@+id/et_opsName"
             android:layout_alignParentStart="true"
-            android:textSize="15dp"
             android:layout_alignParentEnd="true" />
 
         <TextView
@@ -87,7 +82,6 @@
             android:layout_height="wrap_content"
             android:text="Secret Key: "
             android:id="@+id/textView4"
-            android:textSize="15dp"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/et_callSign"
             android:layout_alignParentStart="true" />

@@ -58,7 +58,6 @@
         android:layout_height="wrap_content"
         android:text="@string/membersUnderlined"
         android:id="@+id/memberlist"
-        android:layout_marginBottom="5dp"
         android:textSize="18dp"
         android:textIsSelectable="false"
         android:typeface="serif"
@@ -71,10 +70,10 @@
         android:paddingBottom="10dp"
         android:layout_marginTop="20dp"
         android:layout_alignParentStart="true"
-        android:background="#bfc9d4"/>
+        android:background="@drawable/banner"/>
 
     <ListView
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lw_addMember"
         android:smoothScrollbar="true"
@@ -84,10 +83,12 @@
         android:scrollingCache="true"
         android:fadeScrollbars="false"
         android:nestedScrollingEnabled="true"
-        android:layout_above="@+id/tv_commandList"
         android:layout_alignParentEnd="true"
         android:textAlignment="center"
-        android:transitionGroup="false" />
+        android:transitionGroup="false"
+        android:background="@drawable/list_view_border"
+        android:layout_above="@+id/tv_myo"
+        android:layout_marginBottom="5dp" />
 
     <TextView
         android:layout_width="wrap_content"

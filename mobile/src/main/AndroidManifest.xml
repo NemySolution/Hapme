@@ -53,7 +53,8 @@ android version can be change at build.gradle
         <activity
             android:name=".activity.CreateOperationActivity"
             android:label="@string/title_activity_create"
-            android:parentActivityName=".activity.HomeActivity">
+            android:parentActivityName=".activity.HomeActivity"
+           >
         </activity>
         <activity
             android:name=".activity.AddCmdActivity"
@@ -63,7 +64,8 @@ android version can be change at build.gradle
         </activity>
         <activity
             android:name=".activity.OperationActivity"
-            android:label="@string/title_activity_operation" >
+            android:label="@string/title_activity_operation"
+            android:parentActivityName=".activity.HomeActivity">
         </activity>
         <activity
             android:name=".activity.CommandsActivity"

@@ -78,7 +78,7 @@ public class OperationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_operation);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         // Auto Refresh
         this.mHandler = new Handler();
         this.mHandler.postDelayed(m_Runnable, 5000);

@@ -13,11 +13,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_opsName"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentTop="false"
         android:imeOptions="flagNavigateNext"
         android:singleLine="true"
         android:gravity="center"
-        android:hint="Operation Name" />
+        android:hint="Operation Name"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/textView5" />
 
     <EditText
         android:layout_width="fill_parent"
@@ -26,10 +28,22 @@
         android:imeOptions="flagNavigateNext"
         android:singleLine="true"
         android:gravity="center"
-        android:layout_below="@+id/et_opsName"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView6"
         android:hint="Call Sign"
-        android:layout_marginTop="5dp" />
+        android:layout_centerInParent="true" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_secretKey"
+        android:layout_below="@+id/textView11"
+        android:layout_alignStart="@+id/et_callSign"
+        android:singleLine="true"
+        android:gravity="center"
+        android:hint="Secret Key"
+        android:inputType="numberPassword"
+        android:layout_centerInParent="true"
+        android:imeOptions="actionDone"/>
 
     <Button
         android:layout_width="match_parent"
@@ -37,30 +51,50 @@
         android:text="Create Operation"
         android:id="@+id/bn_createOps"
         android:background="#2a3c6f"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="false"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:layout_alignParentEnd="false"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"/>
 
-    <ListView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lv_addCmd"
-        android:smoothScrollbar="false"
-        android:textAlignment="center"
-        android:textFilterEnabled="false"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/bn_addCmd"
+        android:text="Operation Name:"
+        android:id="@+id/textView5"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textSize="15dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Commander&apos;s Call Sign:"
+        android:id="@+id/textView6"
+        android:layout_below="@+id/et_opsName"
+        android:layout_alignParentStart="true"
+        android:textSize="15dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Secret Key:"
+        android:id="@+id/textView11"
+        android:layout_below="@+id/et_callSign"
+        android:layout_alignParentStart="true"
+        android:textSize="15dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Command List:"
+        android:id="@+id/textView12"
         android:layout_below="@+id/et_secretKey"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        />
+        android:layout_alignParentStart="true"
+        android:textSize="15dp" />
 
     <Button
         android:layout_width="match_parent"
@@ -69,26 +103,23 @@
         android:id="@+id/bn_addCmd"
         android:gravity="center"
         android:background="#01579B"
-        android:layout_above="@+id/bn_createOps"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentEnd="false"
         android:textColor="@android:color/white"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:layout_centerInParent="true" />
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentStart="false"
+        android:layout_below="@+id/lv_addCmd" />
 
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_secretKey"
-        android:layout_below="@+id/et_callSign"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/et_callSign"
-        android:singleLine="true"
-        android:gravity="center"
-        android:hint="Secret Key"
-        android:password="false"
-        android:inputType="numberPassword"
-        android:layout_marginTop="5dp" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/lv_addCmd"
+            android:smoothScrollbar="false"
+            android:textAlignment="center"
+            android:textFilterEnabled="false"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textView12" />
+
 
 </RelativeLayout>

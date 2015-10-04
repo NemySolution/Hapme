@@ -54,7 +54,8 @@ android version can be change at build.gradle
             android:name=".activity.CreateOperationActivity"
             android:label="@string/title_activity_create"
             android:parentActivityName=".activity.HomeActivity"
-           >
+            android:windowSoftInputMode="adjustPan"
+            >
         </activity>
         <activity
             android:name=".activity.AddCmdActivity"

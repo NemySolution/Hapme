@@ -85,14 +85,13 @@ public class AddCmdActivity extends AppCompatActivity {
         et_commandName = (EditText) findViewById(R.id.et_commandName);
 
         spinner = (Spinner) findViewById(R.id.spinner);
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.planets_array, android.R.layout.simple_spinner_item);
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.planets_array, R.layout.cust_spinner_style);
         adapter.setDropDownViewResource(R.layout.cust_spinner);
         spinner.setAdapter(adapter);
 
         spinner2 = (Spinner) findViewById(R.id.spinner2);
         final ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
-                R.array.colors_array, android.R.layout.simple_spinner_item);
+                R.array.colors_array, R.layout.cust_spinner_style);
         adapter2.setDropDownViewResource(R.layout.cust_spinner);
         spinner2.setAdapter(adapter2);
 

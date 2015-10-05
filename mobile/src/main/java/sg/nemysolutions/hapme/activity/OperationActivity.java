@@ -279,35 +279,37 @@ public class OperationActivity extends AppCompatActivity {
                     break;
                 case DOUBLE_TAP:
                     Log.e("ESMOND MYO MESSAGE", "double tap");
-                    // Compare pose list with command list
-                    Boolean commandFound = false;
-                    for (Command c : commandList) {
-                        if (Arrays.equals(c.getGestureSeq().toArray(), capturedPoseList.toArray())) {
-                            ParsePush push = new ParsePush();
-                            push.setChannel(c.getOpsName());
-                            push.setMessage(callSign + "," + c.getCommandName() + "," + c.getVibrationSeq() + "," + c.getColor());
-                            Log.e("ESMOND MYO MESSAGE", callSign + "," + c.getCommandName() + "," + c.getVibrationSeq()+ "," + c.getColor());
+                    if (myo.isUnlocked()) {
+                        // Compare pose list with command list
+                        Boolean commandFound = false;
+                        for (Command c : commandList) {
+                            if (Arrays.equals(c.getGestureSeq().toArray(), capturedPoseList.toArray())) {
+                                ParsePush push = new ParsePush();
+                                push.setChannel(c.getOpsName());
+                                push.setMessage(callSign + "," + c.getCommandName() + "," + c.getVibrationSeq() + "," + c.getColor());
+                                Log.e("ESMOND MYO MESSAGE", callSign + "," + c.getCommandName() + "," + c.getVibrationSeq() + "," + c.getColor());
 
-                            Toast.makeText(getApplicationContext(), "Sending command: " + c.getCommandName(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Sending command: " + c.getCommandName(), Toast.LENGTH_SHORT).show();
 
-                            push.sendInBackground(new SendCallback() {
-                                public void done(ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Command SENT!", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                                push.sendInBackground(new SendCallback() {
+                                    public void done(ParseException e) {
+                                        Toast.makeText(getApplicationContext(), "Command SENT!", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
 
-                            commandFound = true;
-                            break;
+                                commandFound = true;
+                                break;
+                            }
                         }
-                    }
 
-                    // feedback to user by Toast
-                    if (!commandFound) {
-                        Toast.makeText(getApplicationContext(), "Command not found.", Toast.LENGTH_SHORT).show();
+                        // feedback to user by Toast
+                        if (!commandFound) {
+                            Toast.makeText(getApplicationContext(), "Command not found.", Toast.LENGTH_SHORT).show();
+                        }
+                        // clear captured list
+                        capturedPoseList.clear();
+                        tv_commandList.setText("Standby for Gestures");
                     }
-                    // clear captured list
-                    capturedPoseList.clear();
-                    tv_commandList.setText("Standby for Gestures");
                     break;
                 case FIST:
                     Log.e("ESMOND MYO MESSAGE", "fist");
@@ -321,30 +323,36 @@ public class OperationActivity extends AppCompatActivity {
                     capturedPoseList.clear();
                     break;
                 case WAVE_IN:
-                    //Toast.makeText(getApplicationContext(), "WAVE_IN", Toast.LENGTH_SHORT).show();
-                    if (capturedPoseList.size() == 3) {
-                        capturedPoseList.clear();
+                    if (myo.isUnlocked()) {
+                        //Toast.makeText(getApplicationContext(), "WAVE_IN", Toast.LENGTH_SHORT).show();
+                        if (capturedPoseList.size() == 3) {
+                            capturedPoseList.clear();
+                        }
+                        capturedPoseList.offer("WAVE_IN");
+                        tv_commandList.setText(printCommandList());
                     }
-                    capturedPoseList.offer("WAVE_IN");
-                    tv_commandList.setText(printCommandList());
                     break;
                 case WAVE_OUT:
-                    //Toast.makeText(getApplicationContext(), "WAVE_OUT", Toast.LENGTH_SHORT).show();
-                    if (capturedPoseList.size() == 3) {
-                        capturedPoseList.clear();
+                    if (myo.isUnlocked()) {
+                        //Toast.makeText(getApplicationContext(), "WAVE_OUT", Toast.LENGTH_SHORT).show();
+                        if (capturedPoseList.size() == 3) {
+                            capturedPoseList.clear();
+                        }
+                        capturedPoseList.offer("WAVE_OUT");
+                        tv_commandList.setText(printCommandList());
                     }
-                    capturedPoseList.offer("WAVE_OUT");
-                    tv_commandList.setText(printCommandList());
                     break;
                 case FINGERS_SPREAD:
-                    Log.e("ESMOND MYO MESSAGE", "fingers spread");
-                    //Toast.makeText(getApplicationContext(), "FINGERS_SPREAD", Toast.LENGTH_SHORT).show();
-                    if (capturedPoseList.size() == 3) {
-                        capturedPoseList.clear();
+                    if (myo.isUnlocked()) {
+                        Log.e("ESMOND MYO MESSAGE", "fingers spread");
+                        //Toast.makeText(getApplicationContext(), "FINGERS_SPREAD", Toast.LENGTH_SHORT).show();
+                        if (capturedPoseList.size() == 3) {
+                            capturedPoseList.clear();
+                        }
+                        capturedPoseList.offer("FINGERS_SPREAD");
+                        tv_commandList.setText(printCommandList());
+                        break;
                     }
-                    capturedPoseList.offer("FINGERS_SPREAD");
-                    tv_commandList.setText(printCommandList());
-                    break;
             }
 
 //            if (pose == Pose.FIST) {

@@ -59,7 +59,7 @@ public class JoinOpsActivity extends AppCompatActivity {
         bn_join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (et_opsName.getText().toString().equals("") || et_secretKey.getText().toString().equals("")) {
+                if (et_opsName.getText().toString().equals("") || et_secretKey.getText().toString().equals("")|| et_callSign.getText().toString().equals("")) {
                     Toast.makeText(JoinOpsActivity.this, "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!", Toast.LENGTH_LONG).show();
                 } else {
                     et_opsName.setVisibility(View.GONE);
@@ -85,6 +85,15 @@ public class JoinOpsActivity extends AppCompatActivity {
                                 if (object.getList("members") != null) {
                                     if (object.getList("members").contains(et_callSign.getText().toString())) {
                                         Toast.makeText(JoinOpsActivity.this, "Please choose another Call Sign!!", Toast.LENGTH_LONG).show();
+                                        et_opsName.setVisibility(View.VISIBLE);
+                                        et_callSign.setVisibility(View.VISIBLE);
+                                        et_secretKey.setVisibility(View.VISIBLE);
+                                        tv_ops.setVisibility(View.VISIBLE);
+                                        tv_callSign.setVisibility(View.VISIBLE);
+                                        tv_secret_key.setVisibility(View.VISIBLE);
+                                        bn_join.setVisibility(View.VISIBLE);
+                                        spinner.setVisibility(View.GONE);
+                                        tv_load.setVisibility(View.GONE);
                                     } else {
                                         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
                                         installation.put("opsId", object.getObjectId());
@@ -118,6 +127,15 @@ public class JoinOpsActivity extends AppCompatActivity {
                             } else {
                                 Log.e("ERROR", "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!");
                                 Toast.makeText(JoinOpsActivity.this, "Either opsName wrong or secretKey wrong, Cant retrieve Operation!!", Toast.LENGTH_LONG).show();
+                                et_opsName.setVisibility(View.VISIBLE);
+                                et_callSign.setVisibility(View.VISIBLE);
+                                et_secretKey.setVisibility(View.VISIBLE);
+                                tv_ops.setVisibility(View.VISIBLE);
+                                tv_callSign.setVisibility(View.VISIBLE);
+                                tv_secret_key.setVisibility(View.VISIBLE);
+                                bn_join.setVisibility(View.VISIBLE);
+                                spinner.setVisibility(View.GONE);
+                                tv_load.setVisibility(View.GONE);
                             }
                         }
                     });

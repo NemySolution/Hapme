@@ -17,25 +17,31 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.List;
 
 import sg.nemysolutions.hapme.R;
-import sg.nemysolutions.hapme.entity.Command;
 import sg.nemysolutions.hapme.utilities.ParseUtils;
 
 public class HomeActivity extends AppCompatActivity {
+
+    RelativeLayout layout_load;
+    LinearLayout layout_home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
+        layout_load = (RelativeLayout) findViewById(R.id.layout_load);
+        layout_home = (LinearLayout) findViewById(R.id.layout_home);
 
         // Check with Parse whether this user is in any channels
         if (!ParseUtils.getChannels().isEmpty()) {
@@ -52,11 +58,15 @@ public class HomeActivity extends AppCompatActivity {
                         finish();
                     } else {
                         ParseUtils.removeChannel();
+                        layout_load.setVisibility(View.GONE);
+                        layout_home.setVisibility(View.VISIBLE);
                     }
                 }
             });
 
-
+        } else {
+            layout_load.setVisibility(View.GONE);
+            layout_home.setVisibility(View.VISIBLE);
         }
 
         Button bn_create = (Button) findViewById(R.id.bn_create);

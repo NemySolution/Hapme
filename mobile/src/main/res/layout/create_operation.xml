@@ -123,5 +123,24 @@
         android:layout_below="@+id/textView12"
         android:layout_above="@+id/bn_addCmd" />
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar2"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Creating Operations.."
+        android:id="@+id/textView14"
+        android:layout_above="@+id/progressBar2"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
+
 
 </RelativeLayout>

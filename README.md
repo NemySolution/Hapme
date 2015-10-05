@@ -14,8 +14,8 @@ Haptics Communication System
 * ~~Duplicate member call sign check~~
 * ~~When end operation, need to remove all members in the operation (bug)~~
 * ~~Delete command after operation ends (bug)~~
-* Loading Status for Create and Join Operation
-* Watch onResume needs to set vibration and replace screen
+* ~~Loading Status for Create and Join Operation~~
+* Watch onResume needs to set vibration and replace screen --> Need guide them to swipe right from watch
 
 ## Naming Conventions
 ###### (Do add on to it if you want to standardize something)
